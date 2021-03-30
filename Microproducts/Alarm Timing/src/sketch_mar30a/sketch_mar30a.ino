@@ -1,8 +1,14 @@
 #include <RTClib.h>
 RTC_DS1307 rtc;
-int set_button = 13;
+int mode_button = 13;
 int data_button = 12;
-int set_mode = 0; 
+int set_button = 11;
+int alarm_LED = 10;
+int mode = 0;
+int data = 0;
+int set = 0;
+int h1 = 0;int h2 = 0;int m1 = 0;int m2 = 0;int s1 = 0;int s2 = 0;
+int alarmHour = 0;int alarmMinute = 0;int alarmSecond= 0;
 void setup() {
   Serial.begin(9600);
   if (rtc.begin()){
@@ -13,33 +19,62 @@ void setup() {
   }
   //rtc.adjust(DateTime(2017, 7, 16, 16, 35, 20));
   showRealTime();
-  pinMode(set_button,INPUT);
-  digitalWrite(set_button,HIGH);
+  pinMode(mode_button,INPUT);
+  digitalWrite(mode_button,HIGH);
   pinMode(data_button,INPUT);
   digitalWrite(data_button,HIGH);
+  pinMode(set_button,INPUT);
+  digitalWrite(set_button,HIGH);
+  pinMode(alarm_LED,OUTPUT);
 }
 
 void loop() {
-  set_mode = set_mode + !digitalRead(set_button);
-  if (set_mode == 0){
+  DateTime now = rtc.now();
+  if (!digitalRead(mode_button)){
+    mode = mode + 1;
+    data = 0;
+  }
+  data = data + !digitalRead(data_button);
+  if (mode == 0){
     showRealTime();
   }
-  if (set_mode == 1){
-    showGivenTime(2017,2,23,8,12,23);
+  if (mode == 1){
+    h1 = data;
+    setAlarm();
   }
-  if (set_mode == 2){
-    showGivenTime(2016,2,23,8,12,23);
+  if (mode == 2){
+    h2 = data;
+    setAlarm();
   }
-  delay(300);
+  if (mode == 3){
+    m1 = data;
+    setAlarm();
+  }
+  if (mode == 4){
+    m2 = data;
+    setAlarm();
+  }
+  if (mode == 5){
+    s1 = data;
+    setAlarm();
+  }
+  if (mode == 6){
+    s2 = data;
+    setAlarm();
+  }
+  if (mode == 7){
+    mode = 0;
+  }
+  if (h1*10+h2 == now.hour() and m1*10+m2 == now.minute()){
+    digitalWrite(alarm_LED,HIGH);
+  }
+  else{
+    digitalWrite(alarm_LED,LOW);
+  }
+  delay(200);
 }
 void showRealTime(){
   DateTime now = rtc.now();
-  Serial.print(now.year(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.day(), DEC);
-  Serial.print('-');
   Serial.print(now.hour(), DEC);
   Serial.print(':');
   Serial.print(now.minute(), DEC);
@@ -47,17 +82,11 @@ void showRealTime(){
   Serial.print(now.second(), DEC);
   Serial.println();
 }
-void showGivenTime(int y,int M,int d,int h,int m,int s){
-  Serial.print(y, DEC);
-  Serial.print('/');
-  Serial.print(M, DEC);
-  Serial.print('/');
-  Serial.print(d, DEC);
-  Serial.print('-');
-  Serial.print(h, DEC);
+void setAlarm(){
+  Serial.print(h1*10+h2, DEC);
   Serial.print(':');
-  Serial.print(m, DEC);
+  Serial.print(m1*10+m2, DEC);
   Serial.print(':');
-  Serial.print(s, DEC);
+  Serial.print(s1*10+s2, DEC);
   Serial.println();
 }
