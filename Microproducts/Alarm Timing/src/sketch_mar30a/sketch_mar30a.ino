@@ -11,13 +11,6 @@ int h1 = 0;int h2 = 0;int m1 = 0;int m2 = 0;int s1 = 0;int s2 = 0;
 int alarmHour = 0;int alarmMinute = 0;int alarmSecond= 0;
 void setup() {
   Serial.begin(9600);
-  if (rtc.begin()){
-    Serial.println("RTC is connected");
-  }
-  else{
-    Serial.println("RTC is not connected");
-  }
-  //rtc.adjust(DateTime(2017, 7, 16, 16, 35, 20));
   showRealTime();
   pinMode(mode_button,INPUT);
   digitalWrite(mode_button,HIGH);
@@ -35,40 +28,18 @@ void loop() {
     data = 0;
   }
   data = data + !digitalRead(data_button);
-  if (mode == 0){
-    showRealTime();
-  }
-  if (mode == 1){
-    h1 = data;
-    setAlarm();
-  }
-  if (mode == 2){
-    h2 = data;
-    setAlarm();
-  }
-  if (mode == 3){
-    m1 = data;
-    setAlarm();
-  }
-  if (mode == 4){
-    m2 = data;
-    setAlarm();
-  }
-  if (mode == 5){
-    s1 = data;
-    setAlarm();
-  }
-  if (mode == 6){
-    s2 = data;
-    setAlarm();
-  }
-  if (mode == 7){
-    mode = 0;
-  }
-  if (h1*10+h2 == now.hour() and m1*10+m2 == now.minute()){
+  if (mode == 0){showRealTime();}
+  if (mode == 1){h1 = data;setAlarm();}
+  if (mode == 2){h2 = data;setAlarm();}
+  if (mode == 3){m1 = data;setAlarm();}
+  if (mode == 4){m2 = data;setAlarm();}
+  if (mode == 5){s1 = data;setAlarm();}
+  if (mode == 6){s2 = data;setAlarm();}
+  if (mode == 7){mode = 0;}
+  if (((h1*10+h2) == now.hour() and m1*10+m2 == now.minute()) and s1*10+s2 == now.second()){
     digitalWrite(alarm_LED,HIGH);
   }
-  else{
+  if (((h1*10+h2) == now.hour() and m1*10+m2+1 == now.minute()) and s1*10+s2 == now.second()){
     digitalWrite(alarm_LED,LOW);
   }
   delay(200);
