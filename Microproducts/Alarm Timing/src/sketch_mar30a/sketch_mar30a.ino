@@ -6,7 +6,7 @@ int set_button = 11;
 int alarm_LED = 10;
 int mode = 0;
 int data = 0;
-int set = 0;
+int set = 0;int isAlarm = 0;int isTime = 0;
 int h1 = 0;int h2 = 0;int m1 = 0;int m2 = 0;int s1 = 0;int s2 = 0;
 int alarmHour = 0;int alarmMinute = 0;int alarmSecond= 0;
 void setup() {
@@ -23,25 +23,50 @@ void setup() {
 
 void loop() {
   DateTime now = rtc.now();
-  if (!digitalRead(mode_button)){
+  if (!digitalRead(mode_button) and !set==0){
     mode = mode + 1;
     data = 0;
   }
   data = data + !digitalRead(data_button);
+  if (!digitalRead(set_button)){
+    set = set + 1;
+    mode = 0;
+  }
+  Serial.print(set);
+  Serial.println(mode);
   if (mode == 0){showRealTime();}
-  if (mode == 1){h1 = data;setAlarm();}
-  if (mode == 2){h2 = data;setAlarm();}
-  if (mode == 3){m1 = data;setAlarm();}
-  if (mode == 4){m2 = data;setAlarm();}
-  if (mode == 5){s1 = data;setAlarm();}
-  if (mode == 6){s2 = data;setAlarm();}
-  if (mode == 7){mode = 0;}
-  if (((h1*10+h2) == now.hour() and m1*10+m2 == now.minute()) and s1*10+s2 == now.second()){
-    digitalWrite(alarm_LED,HIGH);
+  if (mode == 1 and !set==0){h1 = data;setAlarm();}
+  if (mode == 2 and !set==0){h2 = data;setAlarm();}
+  if (mode == 3 and !set==0){m1 = data;setAlarm();}
+  if (mode == 4 and !set==0){m2 = data;setAlarm();}
+  if (mode == 5 and !set==0){s1 = data;setAlarm();}
+  if (mode == 6 and !set==0){s2 = data;setAlarm();}
+  if (mode == 7 and !set==0){
+    if (set==1){
+      isAlarm = 1;
+    }
+    if (set==2){
+      isTime = 1;
+    }
+    mode = 0;set = 0;
   }
-  if (((h1*10+h2) == now.hour() and m1*10+m2+1 == now.minute()) and s1*10+s2 == now.second()){
-    digitalWrite(alarm_LED,LOW);
+
+  if (isAlarm){
+      if (((h1*10+h2) == now.hour() and m1*10+m2 == now.minute()) and s1*10+s2 == now.second()){
+        digitalWrite(alarm_LED,HIGH);
+      }
+      else if (((h1*10+h2) == now.hour() and m1*10+m2+1 == now.minute()) and s1*10+s2 == now.second()){
+        digitalWrite(alarm_LED,LOW);
+        isAlarm = 0;
+        clearVariables();
+      }
   }
+   if (isTime){
+      rtc.adjust(DateTime(now.year(), now.month(), now.day(), h1*10+h2,m1*10+m2,s1*10+s2));
+      isTime=0;
+      clearVariables();
+    }
+  
   delay(200);
 }
 void showRealTime(){
@@ -60,4 +85,7 @@ void setAlarm(){
   Serial.print(':');
   Serial.print(s1*10+s2, DEC);
   Serial.println();
+}
+void clearVariables(){
+  h1 = 0;h2 = 0;m1 = 0;m2 = 0;s1 = 0;s2 = 0;
 }
