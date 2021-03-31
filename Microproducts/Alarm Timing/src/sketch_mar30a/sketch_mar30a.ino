@@ -1,8 +1,8 @@
 #include <RTClib.h>
 RTC_DS1307 rtc;
-int mode_button = 13;
+int set_button = 13;
 int data_button = 12;
-int set_button = 11;
+int mode_button = 11;
 int alarm_LED = 10;
 int mode = 0;
 int data = 0;
@@ -23,29 +23,28 @@ void setup() {
 
 void loop() {
   DateTime now = rtc.now();
-  if (!digitalRead(mode_button) and !set==0){
-    mode = mode + 1;
+  if (!digitalRead(set_button) and !mode==0){
+    set = set + 1;
     data = 0;
   }
   data = data + !digitalRead(data_button);
-  if (!digitalRead(set_button)){
-    set = set + 1;
-    mode = 0;
+  if (!digitalRead(mode_button)){
+    mode = mode + 1;
+    set = 0;
+    clearVariables();
   }
-  Serial.print(set);
-  Serial.println(mode);
-  if (mode == 0){showRealTime();}
-  if (mode == 1 and !set==0){h1 = data;setAlarm();}
-  if (mode == 2 and !set==0){h2 = data;setAlarm();}
-  if (mode == 3 and !set==0){m1 = data;setAlarm();}
-  if (mode == 4 and !set==0){m2 = data;setAlarm();}
-  if (mode == 5 and !set==0){s1 = data;setAlarm();}
-  if (mode == 6 and !set==0){s2 = data;setAlarm();}
-  if (mode == 7 and !set==0){
-    if (set==1){
+  if (set == 0){showRealTime();}
+  if (set == 1){h1 = data;setAlarm();}
+  if (set == 2){h2 = data;setAlarm();}
+  if (set == 3){m1 = data;setAlarm();}
+  if (set == 4){m2 = data;setAlarm();}
+  if (set == 5){s1 = data;setAlarm();}
+  if (set == 6){s2 = data;setAlarm();}
+  if (set == 7){
+    if (mode==1){
       isAlarm = 1;
     }
-    if (set==2){
+    if (mode==2){
       isTime = 1;
     }
     mode = 0;set = 0;
