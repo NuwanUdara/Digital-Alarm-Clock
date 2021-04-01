@@ -1,70 +1,111 @@
 #include "pitches.h"
 #include "melodies.h"
 
-int pinIn=13;
+int playbutton=13;
 int value=0;
 int value2=0;
-int pinIn2=12;
+int changenextsong=12;
+int interruptPin = 2;
 int buzzer=8;
 int songnumber=1;
 
 
-int tempo=tempos[songnumber];
-
-int notes = sizeof(melody0[songnumber]) / sizeof(melody0[songnumber][0]) / 2;
-
-int wholenote = (60000 * 4) / tempo;
-
-int divider = 0, noteDuration = 0;
-
 void setup() {
-   pinMode(pinIn, INPUT);
-   pinMode(pinIn2, INPUT);
-   
-   
+   pinMode(playbutton, INPUT);
+   pinMode(changenextsong, INPUT);
+   Serial.begin(9600);
+   attachInterrupt(digitalPinToInterrupt(interruptPin),playtone , RISING);// Will be used to stop tune from playing
   }
 
-void loop() {
-  delay(100);
-    value=digitalRead(pinIn);
-    value2=digitalRead(pinIn2);
+void playtone(){
+  tone(8, NOTE_C5, 600);
+}
 
+void changesong(){
+  delay(500);
+  if (songnumber==3){
+    songnumber=0;
+  }
+  
+  else{
+    songnumber++;
+    
+    }
+    
+    }
+int tempochoose(int number){
+  if (number==0){
+    return tempos[0];
+    }
+   else if (number==1){
+    return tempos[1];
+    
+    }
+   else if (number==2){
+    return tempos[2];
+    }
+    else{
+      return tempos[3];
+      }  
+  }
+
+void play(int number){
+
+  int tempo=tempochoose(number);
+  int notes = sizeof(melody0[number]) / sizeof(melody0[number][0]) / 2;
+  int wholenote = (60000 * 4) / tempo;
+
+  int divider = 0, noteDuration = 0;
+
+  for (int thisNote = 0; thisNote < notes *2 ; thisNote = thisNote + 2) {
+    if (digitalRead(interruptPin) == HIGH)
+    {
+      break;
+    }
+    // calculates the duration of each note
+    divider = pgm_read_word_near(melody0[number]+thisNote + 1);
+    
+    
+    if (divider > 0) {
+      // regular note, just proceed
+      
+      noteDuration = (wholenote) / divider;
+      } 
+    
+    else if (divider < 0) {
+      // dotted notes are represented with negative durations
+      
+      noteDuration = (wholenote) / abs(divider);
+      noteDuration *= 1.5; // increases the duration in half for dotted notes
+      }
+    else if (divider==0){ //to stop when the useful notes end
+      return;
+      
+      } 
+     
+      // we only play the note for 90% of the duration, leaving 10% as a pause
+      tone(buzzer, pgm_read_word_near(melody0[number]+thisNote), noteDuration * 0.9);
+ 
+      // Wait for the specief duration before playing the next note.
+      delay(noteDuration);
+      
+      // stop the waveform generation before the next note.
+      noTone(buzzer);
+      }
+}
+void loop() {
+  
+    value=digitalRead(playbutton);
+    value2=digitalRead(changenextsong);
     
     if (value==HIGH){
-        for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
-
-          // calculates the duration of each note
-          divider = pgm_read_word_near(melody0[songnumber]+thisNote + 1);
-          if (divider > 0) {
-            // regular note, just proceed
-            noteDuration = (wholenote) / divider;
-          } 
-          else if (divider < 0) {
-            // dotted notes are represented with negative durations!!
-            noteDuration = (wholenote) / abs(divider);
-            noteDuration *= 1.5; // increases the duration in half for dotted notes
-           }
-
-           // we only play the note for 90% of the duration, leaving 10% as a pause
-           tone(buzzer, pgm_read_word_near(melody0[songnumber]+thisNote), noteDuration * 0.9);
-
-           // Wait for the specief duration before playing the next note.
-          delay(noteDuration);
-
-          // stop the waveform generation before the next note.
-          noTone(buzzer);
-          
+      tone(buzzer,NOTE_D5,100);
+      delay(500);
+      play(songnumber);
           }
-          }
-          
-         //else if (value2==HIGH){
-          //delay(1000);
-          //if (songnumber==3){
-            //songnumber=0;
-            //}
-          //else{
-            //songnumber=songnumber+1;
-            //}
-            //}
-            
+    if(value2==HIGH){
+      tone(buzzer,NOTE_F5 ,100);
+      delay(500);
+      changesong();
+      } 
             }
