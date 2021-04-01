@@ -1,9 +1,10 @@
 #include "pitches.h"
-#include "medodies.h"
+#include "melodies.h"
 int tempo = 120;
 
 int pinIn=13;
 int value=0;
+int value2=0;
 int pinIn2=12;
 int buzzer=8;
 int songnumber=0;
