@@ -12,12 +12,9 @@ int alarmHour = 0;int alarmMinute = 0;int alarmSecond= 0;
 void setup() {
   Serial.begin(9600);
   showRealTime();
-  pinMode(mode_button,INPUT);
-  digitalWrite(mode_button,HIGH);
-  pinMode(data_button,INPUT);
-  digitalWrite(data_button,HIGH);
-  pinMode(set_button,INPUT);
-  digitalWrite(set_button,HIGH);
+  pinMode(mode_button,INPUT);digitalWrite(mode_button,HIGH);
+  pinMode(data_button,INPUT);digitalWrite(data_button,HIGH);
+  pinMode(set_button,INPUT);digitalWrite(set_button,HIGH);
   pinMode(alarm_LED,OUTPUT);
 }
 
@@ -34,12 +31,12 @@ void loop() {
     clearVariables();
   }
   if (set == 0){showRealTime();}
-  if (set == 1){h1 = data;setAlarm();}
-  if (set == 2){h2 = data;setAlarm();}
-  if (set == 3){m1 = data;setAlarm();}
-  if (set == 4){m2 = data;setAlarm();}
-  if (set == 5){s1 = data;setAlarm();}
-  if (set == 6){s2 = data;setAlarm();}
+  if (set == 1){h1 = data;addTime();}
+  if (set == 2){h2 = data;addTime();}
+  if (set == 3){m1 = data;addTime();}
+  if (set == 4){m2 = data;addTime();}
+  if (set == 5){s1 = data;addTime();}
+  if (set == 6){s2 = data;addTime();}
   if (set == 7){
     if (mode==1){
       isAlarm = 1;
@@ -77,7 +74,7 @@ void showRealTime(){
   Serial.print(now.second(), DEC);
   Serial.println();
 }
-void setAlarm(){
+void addTime(){
   Serial.print(h1*10+h2, DEC);
   Serial.print(':');
   Serial.print(m1*10+m2, DEC);
