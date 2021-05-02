@@ -8,17 +8,19 @@ int changenextsong=12;
 int interruptPin = 2;
 int buzzer=8;
 int songnumber=1;
+volatile byte sp = LOW;// this is used to stop song from playing
+
 
 
 void setup() {
    pinMode(playbutton, INPUT);
    pinMode(changenextsong, INPUT);
-   Serial.begin(9600);
    attachInterrupt(digitalPinToInterrupt(interruptPin),playtone , RISING);// Will be used to stop tune from playing
   }
 
 void playtone(){
-  tone(8, NOTE_C5, 600);
+  sp=!sp; // force to stop
+  tone(8, NOTE_C5, 500);
 }
 
 void changesong(){
@@ -29,7 +31,6 @@ void changesong(){
   
   else{
     songnumber++;
-    
     }
     
     }
@@ -50,7 +51,6 @@ int tempochoose(int number){
   }
 
 void play(int number){
-
   int tempo=tempochoose(number);
   int notes = sizeof(melody0[number]) / sizeof(melody0[number][0]) / 2;
   int wholenote = (60000 * 4) / tempo;
@@ -58,13 +58,9 @@ void play(int number){
   int divider = 0, noteDuration = 0;
 
   for (int thisNote = 0; thisNote < notes *2 ; thisNote = thisNote + 2) {
-    if (digitalRead(interruptPin) == HIGH)
-    {
-      break;
-    }
     // calculates the duration of each note
+    if (sp==HIGH){
     divider = pgm_read_word_near(melody0[number]+thisNote + 1);
-    
     
     if (divider > 0) {
       // regular note, just proceed
@@ -92,13 +88,17 @@ void play(int number){
       // stop the waveform generation before the next note.
       noTone(buzzer);
       }
+     else {
+      break;
+      }
+  }
 }
 void loop() {
-  
     value=digitalRead(playbutton);
     value2=digitalRead(changenextsong);
     
     if (value==HIGH){
+      sp=HIGH;
       tone(buzzer,NOTE_D5,100);
       delay(500);
       play(songnumber);
