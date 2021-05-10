@@ -1,15 +1,26 @@
 #ifndef DS1307_H
 #define DS1307_H
-#include "ds1307.h"
+
 #include <avr/io.h>
+#include "ds1307.h"
 #include "i2cmaster.h"
+#include "util/delay.h"
 #define DS1307_ADDRESS 0xD0
+
+//#ifndef F_CPU
+#define F_CPU 8000000UL
+//#endif
+
 
 uint8_t ds1307_dec2bcd(uint8_t val) {
 	return val + 6 * (val / 10);
 }
 uint8_t ds1307_bcd2dec(uint8_t val) {
 	return val - 6 * (val >> 4);
+}
+void ds1307_init() {
+	i2c_init();
+	_delay_us(10);
 }
 void ds1307_setdate(uint8_t year, uint8_t month, uint8_t day, uint8_t dayofweek, uint8_t hour, uint8_t minute, uint8_t second) {
 	
