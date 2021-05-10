@@ -14,8 +14,10 @@
 int main(void)
 {
     /* Replace with your application code */
+	DDRB = 1<<PORTB0;
     while (1) 
     {
+		PORTB = 1<<PORTB0;
     }
 }
 
