@@ -7,9 +7,9 @@
 #include "util/delay.h"
 #define DS1307_ADDRESS 0xD0
 
-//#ifndef F_CPU
+#ifndef F_CPU
 #define F_CPU 8000000UL
-//#endif
+#endif
 
 
 uint8_t ds1307_dec2bcd(uint8_t val) {
@@ -37,7 +37,7 @@ void ds1307_setdate(uint8_t year, uint8_t month, uint8_t day, uint8_t dayofweek,
 	i2c_write(0x00);
 	i2c_stop();
 }
-void ds1307_getdate(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *dayofweek, uint8_t *hour, uint8_t *minute, uint8_t *second) {
+void ds1307_getdate(uint8_t *year, uint8_t *month, uint8_t *day,uint8_t *dayofweek, uint8_t *hour, uint8_t *minute, uint8_t *second) {
 	i2c_start_wait(DS1307_ADDRESS | I2C_WRITE);
 	i2c_write(0x00);
 	i2c_stop();
