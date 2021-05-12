@@ -9,17 +9,29 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+int key1,key2;
+void keypad();
 
 int main(void)
 {
-	DDRB = 0xFF;  /* Make all pins of PORTB as output pins */
-	
-	while (1)     /* Blink PORTB infinitely */
+	while (1)
 	{
-		PORTB = 0x08;
-		_delay_ms(500);   /* Delay of 500 Milli second */
-		PORTB = 0x00;
-		_delay_ms(500);
+		
 	}
 }
+
+void keypad(){
+	DDRD = 0b011111111;   /* Make all pins of PORTD as output pins */
+	
+	DDRB = 0b01111111;
+	PORTB = 0b01111000;
+	
+	key1 = PINB & 0b00000111;
+	_delay_us(5);
+	
+	DDRB = 0b01111111;
+	PORTB = 0b00000111;
+	
+	key2 = PINB & 0b01111000;
+	_delay_us(5);
 
