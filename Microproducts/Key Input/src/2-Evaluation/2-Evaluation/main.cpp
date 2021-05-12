@@ -16,7 +16,7 @@ int main(void)
 {
 	while (1)
 	{
-		keypad()
+		keypad();
 	}
 }
 
@@ -36,4 +36,6 @@ void keypad(){
 	_delay_us(5);
 	
 	if (key1 == 0b00000100 && key2 == 0b00001000) { PORTD = 0b00100000; }
+		
+}
 
