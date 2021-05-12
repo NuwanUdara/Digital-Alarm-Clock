@@ -26,7 +26,7 @@ void keypad(){
 	DDRB = 0b01111111;
 	PORTB = 0b01111000;
 	
-	key1 = PINB & 0b00000111;
+	key1 = PINB & 0b00000111;     /*get the pressed key*/
 	_delay_us(5);
 	
 	DDRB = 0b01111111;
