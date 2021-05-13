@@ -33,4 +33,15 @@ void ringAlarm(){
 }
 void setAlarm(int alarm_time){
 	alarmArray[numberOfAlarms] = alarm_time;
+	numberOfAlarms++;
+}
+void checkAlarm(int m , int s){
+	if (numberOfAlarms != 0){
+		for (int i = 0; i <= numberOfAlarms;i++){
+			if (alarmArray[i]/100 == m && alarmArray[i]%100 == s){
+				ringAlarm();
+			}
+		}
+		
+	}
 }
