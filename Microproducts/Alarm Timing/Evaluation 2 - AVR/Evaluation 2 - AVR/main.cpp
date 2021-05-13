@@ -24,14 +24,13 @@ int main(void)
 	uint8_t minute = 0;
 	uint8_t second = 0;
 	ds1307_init();
-	ds1307_setdate(12, 12, 31, 3, 23, 59, 45);
+	ds1307_setdate(12, 12, 31, 3, 23, 54, 45);
+	setAlarm(2355);
 	
     while (1) 
     {
 		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
-		if (second == 55){
-			ringAlarm();
-		}
+		checkAlarm(hour,minute);
 		//_delay_ms(10);	
 	}
 }

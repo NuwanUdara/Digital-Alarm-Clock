@@ -30,6 +30,6 @@ private:
 }; //Alarm
 extern void ringAlarm();
 extern void setAlarm(int alarm_time);
-extern void checkAlarm(int m , int s);
+extern void checkAlarm(int h , int m);
 
 #endif //__ALARM_H__
