@@ -23,14 +23,13 @@ int main(void)
 	uint8_t minute = 0;
 	uint8_t second = 0;
 	DDRB = 1<<PORTB0;
-	DDRD = 0<<PORTD0;
 	ds1307_init();
 	ds1307_setdate(12, 12, 31, 3, 23, 59, 45);
 	
     while (1) 
     {
 		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
-		if (PIND == 0b00000001){
+		if (PIND == 1<<PIND0){
 			PORTB = 0b00000001;
 		}
 		else{
