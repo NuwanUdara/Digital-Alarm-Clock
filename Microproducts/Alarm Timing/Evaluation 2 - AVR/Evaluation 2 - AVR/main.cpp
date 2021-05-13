@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "ds1307.h"
+#include "Alarm.h"
 #include "util/delay.h"
 
 
@@ -22,18 +23,14 @@ int main(void)
 	uint8_t hour = 0;
 	uint8_t minute = 0;
 	uint8_t second = 0;
-	DDRB = 1<<PORTB0;
 	ds1307_init();
 	ds1307_setdate(12, 12, 31, 3, 23, 59, 45);
 	
     while (1) 
     {
 		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
-		if (PIND == 1<<PIND0){
-			PORTB = 0b00000001;
-		}
-		else{
-			PORTB = 0;
+		if (second == 55){
+			ringAlarm();
 		}
 		//_delay_ms(10);	
 	}

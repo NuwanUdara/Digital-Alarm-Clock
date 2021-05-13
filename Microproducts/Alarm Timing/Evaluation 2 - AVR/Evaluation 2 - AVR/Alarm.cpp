@@ -7,6 +7,8 @@
 
 
 #include "Alarm.h"
+#include "util/delay.h"
+#include <avr/io.h>
 
 // default constructor
 Alarm::Alarm()
@@ -17,3 +19,9 @@ Alarm::Alarm()
 Alarm::~Alarm()
 {
 } //~Alarm
+void ringAlarm(){
+	DDRB = 1<<PORTB0;
+	PORTB = 1<<PORTB0;
+	_delay_ms(4000);
+	PORTB = 0<<PORTB0;
+}

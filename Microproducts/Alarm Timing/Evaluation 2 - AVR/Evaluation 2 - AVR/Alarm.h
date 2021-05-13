@@ -27,5 +27,6 @@ private:
 	Alarm& operator=( const Alarm &c );
 
 }; //Alarm
+extern void ringAlarm();
 
 #endif //__ALARM_H__
