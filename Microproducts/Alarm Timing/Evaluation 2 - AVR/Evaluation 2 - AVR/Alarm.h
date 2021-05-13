@@ -21,6 +21,7 @@ private:
 public:
 	Alarm();
 	~Alarm();
+	
 protected:
 private:
 	Alarm( const Alarm &c );
@@ -28,5 +29,6 @@ private:
 
 }; //Alarm
 extern void ringAlarm();
+extern void setAlarm();
 
 #endif //__ALARM_H__
