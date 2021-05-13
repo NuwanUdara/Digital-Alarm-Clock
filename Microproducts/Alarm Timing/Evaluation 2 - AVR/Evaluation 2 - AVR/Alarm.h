@@ -31,5 +31,6 @@ private:
 extern void ringAlarm();
 extern void setAlarm(int alarm_time);
 extern void checkAlarm(int h , int m);
+extern void updateAlarmArray(int removeAlarm);
 
 #endif //__ALARM_H__

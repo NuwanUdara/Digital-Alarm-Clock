@@ -35,11 +35,22 @@ void setAlarm(int alarm_time){
 	alarmArray[numberOfAlarms] = alarm_time;
 	numberOfAlarms++;
 }
+void updateAlarmArray(int removeAlarm){
+	for (int i=0;i<numberOfAlarms;i++){
+		if (i<removeAlarm){
+			alarmArray[i] = alarmArray[i];
+		}
+		else{
+			alarmArray[i] = alarmArray[i+1];
+		}
+	}
+}
 void checkAlarm(int h , int m){
 	if (numberOfAlarms != 0){
 		for (int i = 0; i <= numberOfAlarms;i++){
 			if (alarmArray[i]/100 == h && alarmArray[i]%100 == m){
 				ringAlarm();
+				updateAlarmArray(i);
 				numberOfAlarms--;
 			}
 		}

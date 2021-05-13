@@ -24,7 +24,8 @@ int main(void)
 	uint8_t minute = 0;
 	uint8_t second = 0;
 	ds1307_init();
-	ds1307_setdate(12, 12, 31, 3, 23, 54, 45);
+	ds1307_setdate(12, 12, 31, 3, 23, 54, 55);
+	setAlarm(2356);
 	setAlarm(2355);
 	
     while (1) 
