@@ -19,13 +19,19 @@ int main(void)
 	
 	ds1307_init();
 	ds1307_setdate(12, 12, 31, 3, 23, 54, 55);
-	setAlarm(2356);
-	setAlarm(2355);
-	
+	//setAlarm(2356);
+	//setAlarm(2355);
+	int mode = 0;
     while (1) 
     {
 		checkAlarm();
-		//_delay_ms(10);	
+		if (isPress(PIND0)){
+			mode++;
+			_delay_ms(500);
+		}
+		if (mode == 3){
+			ringAlarm();
+		}	
 	}
 }
 

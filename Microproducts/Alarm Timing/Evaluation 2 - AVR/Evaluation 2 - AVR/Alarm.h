@@ -28,7 +28,9 @@ private:
 	Alarm& operator=( const Alarm &c );
 
 }; //Alarm
-extern bool ifpress(uint8_t prt);
+extern bool isPress(uint8_t prt);
+extern int powerOf(int base, int power);
+extern void getAlarmTime();
 extern void ringAlarm();
 extern void setAlarm(int alarm_time);
 extern void checkAlarm();
