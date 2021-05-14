@@ -16,13 +16,7 @@
 int main(void)
 {
     /* Replace with your application code */
-	uint8_t year = 0;
-	uint8_t month = 0;
-	uint8_t day = 0;
-	uint8_t dayofweek = 0;
-	uint8_t hour = 0;
-	uint8_t minute = 0;
-	uint8_t second = 0;
+	
 	ds1307_init();
 	ds1307_setdate(12, 12, 31, 3, 23, 54, 55);
 	setAlarm(2356);
@@ -30,8 +24,7 @@ int main(void)
 	
     while (1) 
     {
-		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
-		checkAlarm(hour,minute);
+		checkAlarm();
 		//_delay_ms(10);	
 	}
 }

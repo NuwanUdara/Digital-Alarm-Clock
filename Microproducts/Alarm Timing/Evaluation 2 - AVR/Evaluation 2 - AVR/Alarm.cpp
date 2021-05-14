@@ -9,6 +9,7 @@
 #include "Alarm.h"
 #include "util/delay.h"
 #include <avr/io.h>
+#include "ds1307.h"
 
 #ifndef F_CPU
 #define F_CPU 8000000UL
@@ -25,6 +26,13 @@ Alarm::~Alarm()
 } //~Alarm
 int numberOfAlarms = 0;
 int alarmArray[10];
+uint8_t year = 0;
+uint8_t month = 0;
+uint8_t day = 0;
+uint8_t dayofweek = 0;
+uint8_t hour = 0;
+uint8_t minute = 0;
+uint8_t second = 0;
 void ringAlarm(){
 	DDRB = 1<<PORTB0;
 	PORTB = 1<<PORTB0;
@@ -45,10 +53,11 @@ void updateAlarmArray(int removeAlarm){
 		}
 	}
 }
-void checkAlarm(int h , int m){
+void checkAlarm(){
 	if (numberOfAlarms != 0){
+		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
 		for (int i = 0; i <= numberOfAlarms;i++){
-			if (alarmArray[i]/100 == h && alarmArray[i]%100 == m){
+			if (alarmArray[i]/100 == hour && alarmArray[i]%100 == minute){
 				ringAlarm();
 				updateAlarmArray(i);
 				numberOfAlarms--;
