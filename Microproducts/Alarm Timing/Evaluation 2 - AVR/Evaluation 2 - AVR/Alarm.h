@@ -8,7 +8,7 @@
 
 #ifndef __ALARM_H__
 #define __ALARM_H__
-
+#include <avr/io.h>
 
 class Alarm
 {
@@ -28,6 +28,7 @@ private:
 	Alarm& operator=( const Alarm &c );
 
 }; //Alarm
+extern bool ifpress(uint8_t prt);
 extern void ringAlarm();
 extern void setAlarm(int alarm_time);
 extern void checkAlarm();

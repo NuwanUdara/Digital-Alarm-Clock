@@ -33,6 +33,14 @@ uint8_t dayofweek = 0;
 uint8_t hour = 0;
 uint8_t minute = 0;
 uint8_t second = 0;
+bool ifpress(uint8_t prt){
+	if (PIND == 1<< prt){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 void ringAlarm(){
 	DDRB = 1<<PORTB0;
 	PORTB = 1<<PORTB0;
