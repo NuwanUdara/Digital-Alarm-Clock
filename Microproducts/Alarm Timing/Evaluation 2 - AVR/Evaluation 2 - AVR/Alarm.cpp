@@ -10,7 +10,6 @@
 #include "util/delay.h"
 #include <avr/io.h>
 #include "ds1307.h"
-#define button_delay 500
 #ifndef F_CPU
 #define F_CPU 8000000UL
 #endif
@@ -26,9 +25,6 @@ Alarm::~Alarm()
 } //~Alarm
 int numberOfAlarms = 0;
 int alarmArray[10];
-int data = 0;
-int state = 3;
-int alarmTime = 0;
 uint8_t year = 0;
 uint8_t month = 0;
 uint8_t day = 0;
@@ -37,6 +33,12 @@ uint8_t hour = 0;
 uint8_t minute = 0;
 uint8_t second = 0;
 int powerOf(int base, int power){
+	int result = 1;
+	while(power!=0){
+		result*=base;
+		power--;
+	}
+	return result;
 	
 }
 bool isPress(uint8_t prt){
@@ -45,15 +47,6 @@ bool isPress(uint8_t prt){
 	}
 	else{
 		return false;
-	}
-}
-void getAlarmTime(){
-	if (isPress(PORTD1)){
-		data++;
-		_delay_ms(button_delay);
-	}
-	if (isPress(PORTD2)){
-		//alarmTime += data*
 	}
 }
 void ringAlarm(){

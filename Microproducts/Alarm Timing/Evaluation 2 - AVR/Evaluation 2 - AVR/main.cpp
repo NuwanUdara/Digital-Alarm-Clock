@@ -11,8 +11,28 @@
 #include "ds1307.h"
 #include "Alarm.h"
 #include "util/delay.h"
+#define button_delay 500
 
-
+int mode = 0;
+int data = 0;
+int state = 3;
+int alarmTime = 0;
+void getAlarmTime(){
+	if (isPress(PORTD1)){
+		data++;
+		_delay_ms(button_delay);
+	}
+	if (isPress(PORTD2)){
+		alarmTime += data*powerOf(10,state);
+		state--;
+		data=0;
+	}
+	if (state == -1){
+		setAlarm(alarmTime);
+		state = 3;
+		mode = 0;
+	}
+}
 int main(void)
 {
     /* Replace with your application code */
@@ -21,16 +41,15 @@ int main(void)
 	ds1307_setdate(12, 12, 31, 3, 23, 54, 55);
 	//setAlarm(2356);
 	//setAlarm(2355);
-	int mode = 0;
     while (1) 
     {
 		checkAlarm();
 		if (isPress(PIND0)){
 			mode++;
-			_delay_ms(500);
+			_delay_ms(button_delay);
 		}
-		if (mode == 3){
-			ringAlarm();
+		if (mode == 1){
+			getAlarmTime();
 		}	
 	}
 }
