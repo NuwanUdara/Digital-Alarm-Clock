@@ -36,12 +36,10 @@ void getAlarmTime(){
 	}
 }
 int main(void)
-{
-    /* Replace with your application code */
+
+{	//ds1307_setdate(12,12,12,3,11,54,37);
+	setClockTime(1212123115437);
 	ds1307_init();
-	ds1307_setdate(12, 12, 31, 3, 23, 54, 55);
-	//setAlarm(2356);
-	//setAlarm(2355);
     while (1) 
     {
 		checkAlarm();
@@ -51,13 +49,6 @@ int main(void)
 		}
 		if (mode == 1){
 			getAlarmTime();
-		}
-		if (mode == 0){
-			DDRB |=1<<PORTB1;
-			PORTB |= 1<<PORTB1;
-		}
-		else{
-			PORTB =0;
 		}	
 	}
 }
