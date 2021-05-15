@@ -50,10 +50,10 @@ bool isPress(uint8_t prt){
 	}
 }
 void ringAlarm(){
-	DDRB = 1<<PORTB0;
-	PORTB = 1<<PORTB0;
+	DDRB |= 1<<PORTB0;
+	PORTB |= 1<<PORTB0;
 	_delay_ms(6000);
-	PORTB = 0<<PORTB0;
+	PORTB = 0;
 }
 void setAlarm(int alarm_time){
 	alarmArray[numberOfAlarms] = alarm_time;

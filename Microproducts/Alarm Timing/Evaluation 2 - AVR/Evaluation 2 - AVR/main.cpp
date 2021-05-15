@@ -18,25 +18,26 @@ int data = 0;
 int state = 3;
 int alarmTime = 0;
 void getAlarmTime(){
-	if (isPress(PORTD1)){
+	if (isPress(PIND1)){
 		data++;
 		_delay_ms(button_delay);
 	}
-	if (isPress(PORTD2)){
+	if (isPress(PIND2)){
 		alarmTime += data*powerOf(10,state);
 		state--;
 		data=0;
+		_delay_ms(button_delay);
 	}
 	if (state == -1){
 		setAlarm(alarmTime);
 		state = 3;
 		mode = 0;
+		_delay_ms(button_delay);
 	}
 }
 int main(void)
 {
     /* Replace with your application code */
-	
 	ds1307_init();
 	ds1307_setdate(12, 12, 31, 3, 23, 54, 55);
 	//setAlarm(2356);
@@ -50,6 +51,13 @@ int main(void)
 		}
 		if (mode == 1){
 			getAlarmTime();
+		}
+		if (mode == 0){
+			DDRB |=1<<PORTB1;
+			PORTB |= 1<<PORTB1;
+		}
+		else{
+			PORTB =0;
 		}	
 	}
 }
