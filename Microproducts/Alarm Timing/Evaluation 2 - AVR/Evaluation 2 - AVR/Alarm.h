@@ -35,7 +35,7 @@ extern void ringAlarm();
 extern void setAlarm(int alarm_time);
 extern void checkAlarm();
 extern void updateAlarmArray(int removeAlarm);
-extern void setClockTime(unsigned long long clockTime);
+extern void setClockTime(int clockTime[6]);
 extern int getDay(int y, int m, int d);
 
 #endif //__ALARM_H__

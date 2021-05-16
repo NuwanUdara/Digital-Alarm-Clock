@@ -83,14 +83,14 @@ void checkAlarm(){
 		
 	}
 }
-void setClockTime(unsigned long long clockTime){
-	int y = clockTime/10000000000;
-	int m = (clockTime/100000000)%100;
-	int d = (clockTime/1000000)%100;
+void setClockTime(int clockTime[6]){
+	int y = clockTime[0];
+	int m = clockTime[1];
+	int d = clockTime[2];
 	int D = getDay(y,m,d);
-	int h = (clockTime/10000)%100;
-	int M = (clockTime/100)%100;
-	int s = clockTime%100;
+	int h = clockTime[3];
+	int M = clockTime[4];
+	int s = clockTime[5];
 	ds1307_setdate(y, m, d, D, h, M, s);
 }
 int getDay(int y, int m, int d){

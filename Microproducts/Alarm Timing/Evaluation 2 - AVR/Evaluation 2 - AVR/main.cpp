@@ -16,9 +16,9 @@
 int mode = 0;
 int data = 0;
 int AlarmState = 3;
-int ClockState = 11;
+int ClockState = 0;
 int alarmTime = 0;
-int clockTime =0;
+int clockTime[6];
 void getAlarmTime(){
 	if (isPress(PIND1)){
 		data++;
@@ -43,21 +43,22 @@ void getClockTime(){
 		_delay_ms(button_delay);
 	}
 	if (isPress(PIND2)){
-		clockTime += data*powerOf(10,ClockState);
-		ClockState--;
+		clockTime[ClockState] = data;
+		ClockState++;
 		data=0;
 		_delay_ms(button_delay);
 	}
-	if (ClockState == -1){
+	if (ClockState == 6){
 		setClockTime(clockTime);
-		ClockState = 11;
+		ClockState = 0;
 		mode = 0;
 		_delay_ms(button_delay);
 	}
 }
 int main(void)
-
-{	ds1307_init();
+{	int s[6] = {11,00,00,00,00,55};
+	setClockTime(s);
+	ds1307_init();
     while (1) 
     {
 		checkAlarm();
