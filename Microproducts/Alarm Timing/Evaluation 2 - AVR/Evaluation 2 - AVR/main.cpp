@@ -34,6 +34,7 @@ void getAlarmTime(){
 	if (AlarmState == -1){
 		setAlarm(alarmTime);
 		AlarmState = 3;
+		alarmTime = 0;
 		mode = 0;
 		_delay_ms(button_delay);
 	}
