@@ -25,6 +25,7 @@ Alarm::~Alarm()
 } //~Alarm
 int numberOfAlarms = 0;
 int alarmArray[10];
+int monthsDays[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 uint8_t year = 0;
 uint8_t month = 0;
 uint8_t day = 0;
@@ -91,4 +92,26 @@ void setClockTime(unsigned long long clockTime){
 	int M = (clockTime/100)%100;
 	int s = clockTime%100;
 	ds1307_setdate(y, m, d, D, h, M, s);
+}
+int getDay(int y, int m, int d){
+	int days = 0;
+	for (int i = 1;i<=y;i++){
+		if (i%4 == 0){
+			days+= 366;
+		}
+		else{
+			days+= 365;
+		}
+		
+	}
+	for (int j = 0;j<m-1;j++){
+		if ((y%4==0) & (j == 1)){
+			days+=monthsDays[j];
+			days+=1;
+		}
+		else{
+			days +=monthsDays[j];
+		}
+	}
+	return (days+d+5)%7;
 }

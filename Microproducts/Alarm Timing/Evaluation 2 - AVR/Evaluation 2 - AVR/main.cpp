@@ -37,8 +37,7 @@ void getAlarmTime(){
 }
 int main(void)
 
-{	//ds1307_setdate(12,12,12,3,11,54,37);
-	setClockTime(1212123115437);
+{	setClockTime(1212123115437);
 	ds1307_init();
     while (1) 
     {
