@@ -14,17 +14,34 @@ char keys[4][3] = {{'1','2','3'},
 	{'4','5','6'},
 	{'7','8','9'},
 	{'*','0','#'}} ;
-void keypad();
+char keypad();
+char key;
 
 int main(void)
 {
 	while (1)
 	{
-		keypad();
+		key = keypad();
+		if (key == '1') { PORTD = 0b00100010; }
+		if (key == '2') { PORTD = 0b00011111; }
+		if (key == '3') { PORTD = 0b00110111; }
+		if (key == '4') { PORTD = 0b01100110; }
+		if (key == '5') { PORTD = 0b01110101; }
+		if (key == '6') { PORTD = 0b01111101; }
+		if (key == '7') { PORTD = 0b00100011; }
+		if (key == '8') { PORTD = 0b01111111; }
+		if (key == '9') { PORTD = 0b01100111; }
+		if (key == '*' || key =='#'){
+			PORTD = 0b00000000;
+			for(i=0;i<7;i++){
+			PORTD |= (1<<i);
+			_delay_ms(100);}
+		}
+		if (key == '0') { PORTD = 0b01111011; }
 	}
 }
 
-void keypad(){
+char keypad(){
 	DDRD = 0b011111111;   /* Make all pins of PORTD as output pins */
 	
 	DDRB = 0b01111111;
