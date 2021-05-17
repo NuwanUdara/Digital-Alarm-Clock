@@ -9,7 +9,11 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-int key1,key2,i;
+int key1,key2,i,rowloc,colloc;
+char keys[4][3] = {{'1','2','3'},
+	{'4','5','6'},
+	{'7','8','9'},
+	{'*','0','#'}} ;
 void keypad();
 
 int main(void)
