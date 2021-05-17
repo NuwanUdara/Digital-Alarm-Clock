@@ -19,6 +19,7 @@ char key;
 
 int main(void)
 {
+	DDRD = 0b011111111;   /* Make all pins of PORTD as output pins */
 	while (1)
 	{
 		key = keypad();
@@ -42,8 +43,6 @@ int main(void)
 }
 
 char keypad(){
-	DDRD = 0b011111111;   /* Make all pins of PORTD as output pins */
-	
 	DDRB = 0b01111111;
 	PORTB = 0b01111000;
 	
