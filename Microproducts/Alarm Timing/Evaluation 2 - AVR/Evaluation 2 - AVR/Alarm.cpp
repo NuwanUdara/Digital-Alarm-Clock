@@ -57,8 +57,10 @@ void ringAlarm(){
 	PORTB = 0;
 }
 void setAlarm(int alarm_time){
-	alarmArray[numberOfAlarms] = alarm_time;
-	numberOfAlarms++;
+	if (alarm_time<2400){
+		alarmArray[numberOfAlarms] = alarm_time;
+		numberOfAlarms++;
+	}
 }
 void updateAlarmArray(int removeAlarm){
 	for (int i=0;i<numberOfAlarms;i++){
@@ -91,7 +93,9 @@ void setClockTime(int clockTime[6]){
 	int h = clockTime[3];
 	int M = clockTime[4];
 	int s = clockTime[5];
-	ds1307_setdate(y, m, d, D, h, M, s);
+	if ((0<y) & (y<99) & (0<m)&(m<13) & (0<d)&(d<32) & (0<=h)&(h<24) & (0<=M)&(M<60) & (0<=s)&(s<60)){
+		ds1307_setdate(y, m, d, D, h, M, s);
+	}
 }
 int getDay(int y, int m, int d){
 	int days = 0;
