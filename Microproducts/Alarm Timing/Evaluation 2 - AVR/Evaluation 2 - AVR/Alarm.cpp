@@ -53,7 +53,7 @@ bool isPress(uint8_t prt){
 void ringAlarm(){
 	DDRB |= 1<<PORTB0;
 	PORTB |= 1<<PORTB0;
-	_delay_ms(60000);
+	_delay_ms(30000);
 	PORTB = 0;
 }
 void setAlarm(int alarm_time){
