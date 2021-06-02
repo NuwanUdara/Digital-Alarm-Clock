@@ -1,0 +1,1479 @@
+
+Evaluation 2 - AVR.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001a  00800100  000008fc  00000990  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000008fc  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000033  0080011a  0080011a  000009aa  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000009aa  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000009dc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000130  00000000  00000000  00000a1c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000017a3  00000000  00000000  00000b4c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000c09  00000000  00000000  000022ef  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000b37  00000000  00000000  00002ef8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000002d8  00000000  00000000  00003a30  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000084c  00000000  00000000  00003d08  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000b82  00000000  00000000  00004554  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000108  00000000  00000000  000050d6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ec ef       	ldi	r30, 0xFC	; 252
+  7c:	f8 e0       	ldi	r31, 0x08	; 8
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 31       	cpi	r26, 0x1A	; 26
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	aa e1       	ldi	r26, 0x1A	; 26
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	ad 34       	cpi	r26, 0x4D	; 77
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 28 04 	call	0x850	; 0x850 <main>
+  9e:	0c 94 7c 04 	jmp	0x8f8	; 0x8f8 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <_Z7powerOfii>:
+uint8_t day = 0;
+uint8_t dayofweek = 0;
+uint8_t hour = 0;
+uint8_t minute = 0;
+uint8_t second = 0;
+int powerOf(int base, int power){
+  a6:	9c 01       	movw	r18, r24
+	int result = 1;
+  a8:	81 e0       	ldi	r24, 0x01	; 1
+  aa:	90 e0       	ldi	r25, 0x00	; 0
+	while(power!=0){
+  ac:	61 15       	cp	r22, r1
+  ae:	71 05       	cpc	r23, r1
+  b0:	59 f0       	breq	.+22     	; 0xc8 <_Z7powerOfii+0x22>
+		result*=base;
+  b2:	ac 01       	movw	r20, r24
+  b4:	42 9f       	mul	r20, r18
+  b6:	c0 01       	movw	r24, r0
+  b8:	43 9f       	mul	r20, r19
+  ba:	90 0d       	add	r25, r0
+  bc:	52 9f       	mul	r21, r18
+  be:	90 0d       	add	r25, r0
+  c0:	11 24       	eor	r1, r1
+		power--;
+  c2:	61 50       	subi	r22, 0x01	; 1
+  c4:	71 09       	sbc	r23, r1
+uint8_t hour = 0;
+uint8_t minute = 0;
+uint8_t second = 0;
+int powerOf(int base, int power){
+	int result = 1;
+	while(power!=0){
+  c6:	f2 cf       	rjmp	.-28     	; 0xac <_Z7powerOfii+0x6>
+		result*=base;
+		power--;
+	}
+	return result;
+	
+}
+  c8:	08 95       	ret
+
+000000ca <_Z7isPressh>:
+bool isPress(uint8_t prt){
+	if (PIND == 1<< prt){
+  ca:	49 b1       	in	r20, 0x09	; 9
+  cc:	50 e0       	ldi	r21, 0x00	; 0
+  ce:	21 e0       	ldi	r18, 0x01	; 1
+  d0:	30 e0       	ldi	r19, 0x00	; 0
+  d2:	02 c0       	rjmp	.+4      	; 0xd8 <_Z7isPressh+0xe>
+  d4:	22 0f       	add	r18, r18
+  d6:	33 1f       	adc	r19, r19
+  d8:	8a 95       	dec	r24
+  da:	e2 f7       	brpl	.-8      	; 0xd4 <_Z7isPressh+0xa>
+  dc:	42 17       	cp	r20, r18
+  de:	53 07       	cpc	r21, r19
+  e0:	11 f4       	brne	.+4      	; 0xe6 <_Z7isPressh+0x1c>
+		return true;
+  e2:	81 e0       	ldi	r24, 0x01	; 1
+  e4:	08 95       	ret
+	}
+	else{
+		return false;
+  e6:	80 e0       	ldi	r24, 0x00	; 0
+	}
+}
+  e8:	08 95       	ret
+
+000000ea <_Z9ringAlarmv>:
+void ringAlarm(){
+	DDRB |= 1<<PORTB0;
+  ea:	84 b1       	in	r24, 0x04	; 4
+  ec:	81 60       	ori	r24, 0x01	; 1
+  ee:	84 b9       	out	0x04, r24	; 4
+	PORTB |= 1<<PORTB0;
+  f0:	85 b1       	in	r24, 0x05	; 5
+  f2:	81 60       	ori	r24, 0x01	; 1
+  f4:	85 b9       	out	0x05, r24	; 5
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  f6:	2f ef       	ldi	r18, 0xFF	; 255
+  f8:	8a e1       	ldi	r24, 0x1A	; 26
+  fa:	97 eb       	ldi	r25, 0xB7	; 183
+  fc:	21 50       	subi	r18, 0x01	; 1
+  fe:	80 40       	sbci	r24, 0x00	; 0
+ 100:	90 40       	sbci	r25, 0x00	; 0
+ 102:	e1 f7       	brne	.-8      	; 0xfc <_Z9ringAlarmv+0x12>
+ 104:	00 c0       	rjmp	.+0      	; 0x106 <_Z9ringAlarmv+0x1c>
+ 106:	00 00       	nop
+	_delay_ms(60000);
+	PORTB = 0;
+ 108:	15 b8       	out	0x05, r1	; 5
+ 10a:	08 95       	ret
+
+0000010c <_Z8setAlarmi>:
+}
+void setAlarm(int alarm_time){
+	if (alarm_time<2400){
+ 10c:	80 36       	cpi	r24, 0x60	; 96
+ 10e:	29 e0       	ldi	r18, 0x09	; 9
+ 110:	92 07       	cpc	r25, r18
+ 112:	8c f4       	brge	.+34     	; 0x136 <_Z8setAlarmi+0x2a>
+		alarmArray[numberOfAlarms] = alarm_time;
+ 114:	20 91 35 01 	lds	r18, 0x0135	; 0x800135 <numberOfAlarms>
+ 118:	30 91 36 01 	lds	r19, 0x0136	; 0x800136 <numberOfAlarms+0x1>
+ 11c:	f9 01       	movw	r30, r18
+ 11e:	ee 0f       	add	r30, r30
+ 120:	ff 1f       	adc	r31, r31
+ 122:	ef 5d       	subi	r30, 0xDF	; 223
+ 124:	fe 4f       	sbci	r31, 0xFE	; 254
+ 126:	91 83       	std	Z+1, r25	; 0x01
+ 128:	80 83       	st	Z, r24
+		numberOfAlarms++;
+ 12a:	2f 5f       	subi	r18, 0xFF	; 255
+ 12c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 12e:	30 93 36 01 	sts	0x0136, r19	; 0x800136 <numberOfAlarms+0x1>
+ 132:	20 93 35 01 	sts	0x0135, r18	; 0x800135 <numberOfAlarms>
+ 136:	08 95       	ret
+
+00000138 <_Z16updateAlarmArrayi>:
+	}
+}
+void updateAlarmArray(int removeAlarm){
+	for (int i=0;i<numberOfAlarms;i++){
+ 138:	20 e0       	ldi	r18, 0x00	; 0
+ 13a:	30 e0       	ldi	r19, 0x00	; 0
+ 13c:	40 91 35 01 	lds	r20, 0x0135	; 0x800135 <numberOfAlarms>
+ 140:	50 91 36 01 	lds	r21, 0x0136	; 0x800136 <numberOfAlarms+0x1>
+ 144:	24 17       	cp	r18, r20
+ 146:	35 07       	cpc	r19, r21
+ 148:	ac f4       	brge	.+42     	; 0x174 <_Z16updateAlarmArrayi+0x3c>
+		if (i<removeAlarm){
+ 14a:	28 17       	cp	r18, r24
+ 14c:	39 07       	cpc	r19, r25
+ 14e:	7c f0       	brlt	.+30     	; 0x16e <_Z16updateAlarmArrayi+0x36>
+			alarmArray[i] = alarmArray[i];
+		}
+		else{
+			alarmArray[i] = alarmArray[i+1];
+ 150:	f9 01       	movw	r30, r18
+ 152:	31 96       	adiw	r30, 0x01	; 1
+ 154:	ee 0f       	add	r30, r30
+ 156:	ff 1f       	adc	r31, r31
+ 158:	ef 5d       	subi	r30, 0xDF	; 223
+ 15a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 15c:	40 81       	ld	r20, Z
+ 15e:	51 81       	ldd	r21, Z+1	; 0x01
+ 160:	f9 01       	movw	r30, r18
+ 162:	ee 0f       	add	r30, r30
+ 164:	ff 1f       	adc	r31, r31
+ 166:	ef 5d       	subi	r30, 0xDF	; 223
+ 168:	fe 4f       	sbci	r31, 0xFE	; 254
+ 16a:	51 83       	std	Z+1, r21	; 0x01
+ 16c:	40 83       	st	Z, r20
+		alarmArray[numberOfAlarms] = alarm_time;
+		numberOfAlarms++;
+	}
+}
+void updateAlarmArray(int removeAlarm){
+	for (int i=0;i<numberOfAlarms;i++){
+ 16e:	2f 5f       	subi	r18, 0xFF	; 255
+ 170:	3f 4f       	sbci	r19, 0xFF	; 255
+ 172:	e4 cf       	rjmp	.-56     	; 0x13c <_Z16updateAlarmArrayi+0x4>
+ 174:	08 95       	ret
+
+00000176 <_Z10checkAlarmv>:
+		else{
+			alarmArray[i] = alarmArray[i+1];
+		}
+	}
+}
+void checkAlarm(){
+ 176:	cf 92       	push	r12
+ 178:	df 92       	push	r13
+ 17a:	ef 92       	push	r14
+ 17c:	ff 92       	push	r15
+ 17e:	0f 93       	push	r16
+ 180:	1f 93       	push	r17
+ 182:	cf 93       	push	r28
+ 184:	df 93       	push	r29
+	if (numberOfAlarms != 0){
+ 186:	80 91 35 01 	lds	r24, 0x0135	; 0x800135 <numberOfAlarms>
+ 18a:	90 91 36 01 	lds	r25, 0x0136	; 0x800136 <numberOfAlarms+0x1>
+ 18e:	89 2b       	or	r24, r25
+ 190:	09 f4       	brne	.+2      	; 0x194 <_Z10checkAlarmv+0x1e>
+ 192:	4e c0       	rjmp	.+156    	; 0x230 <_Z10checkAlarmv+0xba>
+		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
+ 194:	0f 2e       	mov	r0, r31
+ 196:	fa e1       	ldi	r31, 0x1A	; 26
+ 198:	cf 2e       	mov	r12, r31
+ 19a:	f1 e0       	ldi	r31, 0x01	; 1
+ 19c:	df 2e       	mov	r13, r31
+ 19e:	f0 2d       	mov	r31, r0
+ 1a0:	0f 2e       	mov	r0, r31
+ 1a2:	fb e1       	ldi	r31, 0x1B	; 27
+ 1a4:	ef 2e       	mov	r14, r31
+ 1a6:	f1 e0       	ldi	r31, 0x01	; 1
+ 1a8:	ff 2e       	mov	r15, r31
+ 1aa:	f0 2d       	mov	r31, r0
+ 1ac:	0c e1       	ldi	r16, 0x1C	; 28
+ 1ae:	11 e0       	ldi	r17, 0x01	; 1
+ 1b0:	2d e1       	ldi	r18, 0x1D	; 29
+ 1b2:	31 e0       	ldi	r19, 0x01	; 1
+ 1b4:	4e e1       	ldi	r20, 0x1E	; 30
+ 1b6:	51 e0       	ldi	r21, 0x01	; 1
+ 1b8:	6f e1       	ldi	r22, 0x1F	; 31
+ 1ba:	71 e0       	ldi	r23, 0x01	; 1
+ 1bc:	80 e2       	ldi	r24, 0x20	; 32
+ 1be:	91 e0       	ldi	r25, 0x01	; 1
+ 1c0:	0e 94 5a 02 	call	0x4b4	; 0x4b4 <_Z14ds1307_getdatePhS_S_S_S_S_S_>
+		for (int i = 0; i <= numberOfAlarms;i++){
+ 1c4:	c0 e0       	ldi	r28, 0x00	; 0
+ 1c6:	d0 e0       	ldi	r29, 0x00	; 0
+ 1c8:	80 91 35 01 	lds	r24, 0x0135	; 0x800135 <numberOfAlarms>
+ 1cc:	90 91 36 01 	lds	r25, 0x0136	; 0x800136 <numberOfAlarms+0x1>
+ 1d0:	8c 17       	cp	r24, r28
+ 1d2:	9d 07       	cpc	r25, r29
+ 1d4:	6c f1       	brlt	.+90     	; 0x230 <_Z10checkAlarmv+0xba>
+			if (alarmArray[i]/100 == hour && alarmArray[i]%100 == minute){
+ 1d6:	fe 01       	movw	r30, r28
+ 1d8:	ee 0f       	add	r30, r30
+ 1da:	ff 1f       	adc	r31, r31
+ 1dc:	ef 5d       	subi	r30, 0xDF	; 223
+ 1de:	fe 4f       	sbci	r31, 0xFE	; 254
+ 1e0:	20 81       	ld	r18, Z
+ 1e2:	31 81       	ldd	r19, Z+1	; 0x01
+ 1e4:	c9 01       	movw	r24, r18
+ 1e6:	64 e6       	ldi	r22, 0x64	; 100
+ 1e8:	70 e0       	ldi	r23, 0x00	; 0
+ 1ea:	0e 94 54 04 	call	0x8a8	; 0x8a8 <__divmodhi4>
+ 1ee:	80 91 1c 01 	lds	r24, 0x011C	; 0x80011c <hour>
+ 1f2:	90 e0       	ldi	r25, 0x00	; 0
+ 1f4:	68 17       	cp	r22, r24
+ 1f6:	79 07       	cpc	r23, r25
+ 1f8:	c9 f4       	brne	.+50     	; 0x22c <_Z10checkAlarmv+0xb6>
+ 1fa:	c9 01       	movw	r24, r18
+ 1fc:	64 e6       	ldi	r22, 0x64	; 100
+ 1fe:	70 e0       	ldi	r23, 0x00	; 0
+ 200:	0e 94 54 04 	call	0x8a8	; 0x8a8 <__divmodhi4>
+ 204:	20 91 1b 01 	lds	r18, 0x011B	; 0x80011b <minute>
+ 208:	30 e0       	ldi	r19, 0x00	; 0
+ 20a:	82 17       	cp	r24, r18
+ 20c:	93 07       	cpc	r25, r19
+ 20e:	71 f4       	brne	.+28     	; 0x22c <_Z10checkAlarmv+0xb6>
+				ringAlarm();
+ 210:	0e 94 75 00 	call	0xea	; 0xea <_Z9ringAlarmv>
+				updateAlarmArray(i);
+ 214:	ce 01       	movw	r24, r28
+ 216:	0e 94 9c 00 	call	0x138	; 0x138 <_Z16updateAlarmArrayi>
+				numberOfAlarms--;
+ 21a:	80 91 35 01 	lds	r24, 0x0135	; 0x800135 <numberOfAlarms>
+ 21e:	90 91 36 01 	lds	r25, 0x0136	; 0x800136 <numberOfAlarms+0x1>
+ 222:	01 97       	sbiw	r24, 0x01	; 1
+ 224:	90 93 36 01 	sts	0x0136, r25	; 0x800136 <numberOfAlarms+0x1>
+ 228:	80 93 35 01 	sts	0x0135, r24	; 0x800135 <numberOfAlarms>
+	}
+}
+void checkAlarm(){
+	if (numberOfAlarms != 0){
+		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
+		for (int i = 0; i <= numberOfAlarms;i++){
+ 22c:	21 96       	adiw	r28, 0x01	; 1
+ 22e:	cc cf       	rjmp	.-104    	; 0x1c8 <_Z10checkAlarmv+0x52>
+				numberOfAlarms--;
+			}
+		}
+		
+	}
+}
+ 230:	df 91       	pop	r29
+ 232:	cf 91       	pop	r28
+ 234:	1f 91       	pop	r17
+ 236:	0f 91       	pop	r16
+ 238:	ff 90       	pop	r15
+ 23a:	ef 90       	pop	r14
+ 23c:	df 90       	pop	r13
+ 23e:	cf 90       	pop	r12
+ 240:	08 95       	ret
+
+00000242 <_Z6getDayiii>:
+	int s = clockTime[5];
+	if ((0<y) & (y<99) & (0<m)&(m<13) & (0<d)&(d<32) & (0<=h)&(h<24) & (0<=M)&(M<60) & (0<=s)&(s<60)){
+		ds1307_setdate(y, m, d, D, h, M, s);
+	}
+}
+int getDay(int y, int m, int d){
+ 242:	cf 93       	push	r28
+ 244:	df 93       	push	r29
+ 246:	ec 01       	movw	r28, r24
+	int days = 0;
+	for (int i = 1;i<=y;i++){
+ 248:	21 e0       	ldi	r18, 0x01	; 1
+ 24a:	30 e0       	ldi	r19, 0x00	; 0
+	if ((0<y) & (y<99) & (0<m)&(m<13) & (0<d)&(d<32) & (0<=h)&(h<24) & (0<=M)&(M<60) & (0<=s)&(s<60)){
+		ds1307_setdate(y, m, d, D, h, M, s);
+	}
+}
+int getDay(int y, int m, int d){
+	int days = 0;
+ 24c:	e0 e0       	ldi	r30, 0x00	; 0
+ 24e:	f0 e0       	ldi	r31, 0x00	; 0
+	for (int i = 1;i<=y;i++){
+ 250:	c2 17       	cp	r28, r18
+ 252:	d3 07       	cpc	r29, r19
+ 254:	6c f0       	brlt	.+26     	; 0x270 <_Z6getDayiii+0x2e>
+		if (i%4 == 0){
+ 256:	c9 01       	movw	r24, r18
+ 258:	83 70       	andi	r24, 0x03	; 3
+ 25a:	99 27       	eor	r25, r25
+ 25c:	89 2b       	or	r24, r25
+ 25e:	19 f4       	brne	.+6      	; 0x266 <_Z6getDayiii+0x24>
+			days+= 366;
+ 260:	e2 59       	subi	r30, 0x92	; 146
+ 262:	fe 4f       	sbci	r31, 0xFE	; 254
+ 264:	02 c0       	rjmp	.+4      	; 0x26a <_Z6getDayiii+0x28>
+		}
+		else{
+			days+= 365;
+ 266:	e3 59       	subi	r30, 0x93	; 147
+ 268:	fe 4f       	sbci	r31, 0xFE	; 254
+		ds1307_setdate(y, m, d, D, h, M, s);
+	}
+}
+int getDay(int y, int m, int d){
+	int days = 0;
+	for (int i = 1;i<=y;i++){
+ 26a:	2f 5f       	subi	r18, 0xFF	; 255
+ 26c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 26e:	f0 cf       	rjmp	.-32     	; 0x250 <_Z6getDayiii+0xe>
+ 270:	20 e0       	ldi	r18, 0x00	; 0
+ 272:	30 e0       	ldi	r19, 0x00	; 0
+		else{
+			days+= 365;
+		}
+		
+	}
+	for (int j = 0;j<m-1;j++){
+ 274:	db 01       	movw	r26, r22
+ 276:	11 97       	sbiw	r26, 0x01	; 1
+ 278:	2a 17       	cp	r18, r26
+ 27a:	3b 07       	cpc	r19, r27
+ 27c:	3c f5       	brge	.+78     	; 0x2cc <_Z6getDayiii+0x8a>
+		if ((y%4==0) & (j == 1)){
+ 27e:	91 e0       	ldi	r25, 0x01	; 1
+ 280:	de 01       	movw	r26, r28
+ 282:	a3 70       	andi	r26, 0x03	; 3
+ 284:	bb 27       	eor	r27, r27
+ 286:	ab 2b       	or	r26, r27
+ 288:	09 f0       	breq	.+2      	; 0x28c <_Z6getDayiii+0x4a>
+ 28a:	90 e0       	ldi	r25, 0x00	; 0
+ 28c:	99 23       	and	r25, r25
+ 28e:	91 f0       	breq	.+36     	; 0x2b4 <_Z6getDayiii+0x72>
+ 290:	91 e0       	ldi	r25, 0x01	; 1
+ 292:	21 30       	cpi	r18, 0x01	; 1
+ 294:	31 05       	cpc	r19, r1
+ 296:	09 f0       	breq	.+2      	; 0x29a <_Z6getDayiii+0x58>
+ 298:	90 e0       	ldi	r25, 0x00	; 0
+ 29a:	99 23       	and	r25, r25
+ 29c:	59 f0       	breq	.+22     	; 0x2b4 <_Z6getDayiii+0x72>
+			days+=monthsDays[j];
+ 29e:	d9 01       	movw	r26, r18
+ 2a0:	aa 0f       	add	r26, r26
+ 2a2:	bb 1f       	adc	r27, r27
+ 2a4:	a0 50       	subi	r26, 0x00	; 0
+ 2a6:	bf 4f       	sbci	r27, 0xFF	; 255
+ 2a8:	8d 91       	ld	r24, X+
+ 2aa:	9c 91       	ld	r25, X
+ 2ac:	e8 0f       	add	r30, r24
+ 2ae:	f9 1f       	adc	r31, r25
+			days+=1;
+ 2b0:	31 96       	adiw	r30, 0x01	; 1
+ 2b2:	09 c0       	rjmp	.+18     	; 0x2c6 <_Z6getDayiii+0x84>
+		}
+		else{
+			days +=monthsDays[j];
+ 2b4:	d9 01       	movw	r26, r18
+ 2b6:	aa 0f       	add	r26, r26
+ 2b8:	bb 1f       	adc	r27, r27
+ 2ba:	a0 50       	subi	r26, 0x00	; 0
+ 2bc:	bf 4f       	sbci	r27, 0xFF	; 255
+ 2be:	8d 91       	ld	r24, X+
+ 2c0:	9c 91       	ld	r25, X
+ 2c2:	e8 0f       	add	r30, r24
+ 2c4:	f9 1f       	adc	r31, r25
+		else{
+			days+= 365;
+		}
+		
+	}
+	for (int j = 0;j<m-1;j++){
+ 2c6:	2f 5f       	subi	r18, 0xFF	; 255
+ 2c8:	3f 4f       	sbci	r19, 0xFF	; 255
+ 2ca:	d4 cf       	rjmp	.-88     	; 0x274 <_Z6getDayiii+0x32>
+		}
+		else{
+			days +=monthsDays[j];
+		}
+	}
+	return (days+d+5)%7;
+ 2cc:	4e 0f       	add	r20, r30
+ 2ce:	5f 1f       	adc	r21, r31
+ 2d0:	ca 01       	movw	r24, r20
+ 2d2:	05 96       	adiw	r24, 0x05	; 5
+ 2d4:	67 e0       	ldi	r22, 0x07	; 7
+ 2d6:	70 e0       	ldi	r23, 0x00	; 0
+ 2d8:	0e 94 54 04 	call	0x8a8	; 0x8a8 <__divmodhi4>
+ 2dc:	df 91       	pop	r29
+ 2de:	cf 91       	pop	r28
+ 2e0:	08 95       	ret
+
+000002e2 <_Z12setClockTimePi>:
+			}
+		}
+		
+	}
+}
+void setClockTime(int clockTime[6]){
+ 2e2:	6f 92       	push	r6
+ 2e4:	7f 92       	push	r7
+ 2e6:	8f 92       	push	r8
+ 2e8:	9f 92       	push	r9
+ 2ea:	af 92       	push	r10
+ 2ec:	bf 92       	push	r11
+ 2ee:	cf 92       	push	r12
+ 2f0:	df 92       	push	r13
+ 2f2:	ef 92       	push	r14
+ 2f4:	ff 92       	push	r15
+ 2f6:	0f 93       	push	r16
+ 2f8:	1f 93       	push	r17
+ 2fa:	cf 93       	push	r28
+ 2fc:	df 93       	push	r29
+ 2fe:	ec 01       	movw	r28, r24
+	int y = clockTime[0];
+ 300:	88 80       	ld	r8, Y
+ 302:	99 80       	ldd	r9, Y+1	; 0x01
+	int m = clockTime[1];
+ 304:	aa 80       	ldd	r10, Y+2	; 0x02
+ 306:	bb 80       	ldd	r11, Y+3	; 0x03
+	int d = clockTime[2];
+ 308:	6c 80       	ldd	r6, Y+4	; 0x04
+ 30a:	7d 80       	ldd	r7, Y+5	; 0x05
+	int D = getDay(y,m,d);
+ 30c:	a3 01       	movw	r20, r6
+ 30e:	b5 01       	movw	r22, r10
+ 310:	c4 01       	movw	r24, r8
+ 312:	0e 94 21 01 	call	0x242	; 0x242 <_Z6getDayiii>
+	int h = clockTime[3];
+ 316:	0e 81       	ldd	r16, Y+6	; 0x06
+ 318:	1f 81       	ldd	r17, Y+7	; 0x07
+	int M = clockTime[4];
+ 31a:	e8 84       	ldd	r14, Y+8	; 0x08
+ 31c:	f9 84       	ldd	r15, Y+9	; 0x09
+	int s = clockTime[5];
+ 31e:	ca 84       	ldd	r12, Y+10	; 0x0a
+ 320:	db 84       	ldd	r13, Y+11	; 0x0b
+	if ((0<y) & (y<99) & (0<m)&(m<13) & (0<d)&(d<32) & (0<=h)&(h<24) & (0<=M)&(M<60) & (0<=s)&(s<60)){
+ 322:	94 01       	movw	r18, r8
+ 324:	21 50       	subi	r18, 0x01	; 1
+ 326:	31 09       	sbc	r19, r1
+ 328:	c1 e0       	ldi	r28, 0x01	; 1
+ 32a:	22 36       	cpi	r18, 0x62	; 98
+ 32c:	31 05       	cpc	r19, r1
+ 32e:	08 f0       	brcs	.+2      	; 0x332 <_Z12setClockTimePi+0x50>
+ 330:	c0 e0       	ldi	r28, 0x00	; 0
+ 332:	21 e0       	ldi	r18, 0x01	; 1
+ 334:	1a 14       	cp	r1, r10
+ 336:	1b 04       	cpc	r1, r11
+ 338:	0c f0       	brlt	.+2      	; 0x33c <_Z12setClockTimePi+0x5a>
+ 33a:	20 e0       	ldi	r18, 0x00	; 0
+ 33c:	61 e0       	ldi	r22, 0x01	; 1
+ 33e:	9d e0       	ldi	r25, 0x0D	; 13
+ 340:	a9 16       	cp	r10, r25
+ 342:	b1 04       	cpc	r11, r1
+ 344:	0c f0       	brlt	.+2      	; 0x348 <_Z12setClockTimePi+0x66>
+ 346:	60 e0       	ldi	r22, 0x00	; 0
+ 348:	71 e0       	ldi	r23, 0x01	; 1
+ 34a:	16 14       	cp	r1, r6
+ 34c:	17 04       	cpc	r1, r7
+ 34e:	0c f0       	brlt	.+2      	; 0x352 <_Z12setClockTimePi+0x70>
+ 350:	70 e0       	ldi	r23, 0x00	; 0
+ 352:	51 e0       	ldi	r21, 0x01	; 1
+ 354:	90 e2       	ldi	r25, 0x20	; 32
+ 356:	69 16       	cp	r6, r25
+ 358:	71 04       	cpc	r7, r1
+ 35a:	0c f0       	brlt	.+2      	; 0x35e <_Z12setClockTimePi+0x7c>
+ 35c:	50 e0       	ldi	r21, 0x00	; 0
+ 35e:	31 2f       	mov	r19, r17
+ 360:	30 95       	com	r19
+ 362:	33 1f       	adc	r19, r19
+ 364:	33 27       	eor	r19, r19
+ 366:	33 1f       	adc	r19, r19
+ 368:	41 e0       	ldi	r20, 0x01	; 1
+ 36a:	08 31       	cpi	r16, 0x18	; 24
+ 36c:	11 05       	cpc	r17, r1
+ 36e:	0c f0       	brlt	.+2      	; 0x372 <_Z12setClockTimePi+0x90>
+ 370:	40 e0       	ldi	r20, 0x00	; 0
+ 372:	af 2d       	mov	r26, r15
+ 374:	a0 95       	com	r26
+ 376:	aa 1f       	adc	r26, r26
+ 378:	aa 27       	eor	r26, r26
+ 37a:	aa 1f       	adc	r26, r26
+ 37c:	b1 e0       	ldi	r27, 0x01	; 1
+ 37e:	9c e3       	ldi	r25, 0x3C	; 60
+ 380:	e9 16       	cp	r14, r25
+ 382:	f1 04       	cpc	r15, r1
+ 384:	0c f0       	brlt	.+2      	; 0x388 <_Z12setClockTimePi+0xa6>
+ 386:	b0 e0       	ldi	r27, 0x00	; 0
+ 388:	9d 2d       	mov	r25, r13
+ 38a:	90 95       	com	r25
+ 38c:	e9 2f       	mov	r30, r25
+ 38e:	ee 1f       	adc	r30, r30
+ 390:	ee 27       	eor	r30, r30
+ 392:	ee 1f       	adc	r30, r30
+ 394:	f1 e0       	ldi	r31, 0x01	; 1
+ 396:	9c e3       	ldi	r25, 0x3C	; 60
+ 398:	c9 16       	cp	r12, r25
+ 39a:	d1 04       	cpc	r13, r1
+ 39c:	0c f0       	brlt	.+2      	; 0x3a0 <_Z12setClockTimePi+0xbe>
+ 39e:	f0 e0       	ldi	r31, 0x00	; 0
+ 3a0:	2c 23       	and	r18, r28
+ 3a2:	62 23       	and	r22, r18
+ 3a4:	67 23       	and	r22, r23
+ 3a6:	56 23       	and	r21, r22
+ 3a8:	95 2f       	mov	r25, r21
+ 3aa:	93 23       	and	r25, r19
+ 3ac:	49 23       	and	r20, r25
+ 3ae:	4a 23       	and	r20, r26
+ 3b0:	94 2f       	mov	r25, r20
+ 3b2:	9b 23       	and	r25, r27
+ 3b4:	9e 23       	and	r25, r30
+ 3b6:	41 f0       	breq	.+16     	; 0x3c8 <_Z12setClockTimePi+0xe6>
+ 3b8:	ff 23       	and	r31, r31
+ 3ba:	31 f0       	breq	.+12     	; 0x3c8 <_Z12setClockTimePi+0xe6>
+		ds1307_setdate(y, m, d, D, h, M, s);
+ 3bc:	28 2f       	mov	r18, r24
+ 3be:	46 2d       	mov	r20, r6
+ 3c0:	6a 2d       	mov	r22, r10
+ 3c2:	88 2d       	mov	r24, r8
+ 3c4:	0e 94 19 02 	call	0x432	; 0x432 <_Z14ds1307_setdatehhhhhhh>
+	}
+}
+ 3c8:	df 91       	pop	r29
+ 3ca:	cf 91       	pop	r28
+ 3cc:	1f 91       	pop	r17
+ 3ce:	0f 91       	pop	r16
+ 3d0:	ff 90       	pop	r15
+ 3d2:	ef 90       	pop	r14
+ 3d4:	df 90       	pop	r13
+ 3d6:	cf 90       	pop	r12
+ 3d8:	bf 90       	pop	r11
+ 3da:	af 90       	pop	r10
+ 3dc:	9f 90       	pop	r9
+ 3de:	8f 90       	pop	r8
+ 3e0:	7f 90       	pop	r7
+ 3e2:	6f 90       	pop	r6
+ 3e4:	08 95       	ret
+
+000003e6 <_Z14ds1307_dec2bcdh>:
+#define F_CPU 8000000UL
+#endif
+
+
+uint8_t ds1307_dec2bcd(uint8_t val) {
+	return val + 6 * (val / 10);
+ 3e6:	9d ec       	ldi	r25, 0xCD	; 205
+ 3e8:	89 9f       	mul	r24, r25
+ 3ea:	91 2d       	mov	r25, r1
+ 3ec:	11 24       	eor	r1, r1
+ 3ee:	96 95       	lsr	r25
+ 3f0:	96 95       	lsr	r25
+ 3f2:	96 95       	lsr	r25
+ 3f4:	29 2f       	mov	r18, r25
+ 3f6:	22 0f       	add	r18, r18
+ 3f8:	92 0f       	add	r25, r18
+ 3fa:	29 2f       	mov	r18, r25
+ 3fc:	22 0f       	add	r18, r18
+}
+ 3fe:	82 0f       	add	r24, r18
+ 400:	08 95       	ret
+
+00000402 <_Z14ds1307_bcd2dech>:
+uint8_t ds1307_bcd2dec(uint8_t val) {
+	return val - 6 * (val >> 4);
+ 402:	28 2f       	mov	r18, r24
+ 404:	30 e0       	ldi	r19, 0x00	; 0
+ 406:	35 95       	asr	r19
+ 408:	27 95       	ror	r18
+ 40a:	35 95       	asr	r19
+ 40c:	27 95       	ror	r18
+ 40e:	35 95       	asr	r19
+ 410:	27 95       	ror	r18
+ 412:	35 95       	asr	r19
+ 414:	27 95       	ror	r18
+ 416:	92 2f       	mov	r25, r18
+ 418:	99 0f       	add	r25, r25
+ 41a:	29 0f       	add	r18, r25
+ 41c:	92 2f       	mov	r25, r18
+ 41e:	99 0f       	add	r25, r25
+}
+ 420:	89 1b       	sub	r24, r25
+ 422:	08 95       	ret
+
+00000424 <_Z11ds1307_initv>:
+void ds1307_init() {
+	i2c_init();
+ 424:	0e 94 b2 02 	call	0x564	; 0x564 <_Z8i2c_initv>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 428:	83 e0       	ldi	r24, 0x03	; 3
+ 42a:	8a 95       	dec	r24
+ 42c:	f1 f7       	brne	.-4      	; 0x42a <_Z11ds1307_initv+0x6>
+ 42e:	00 00       	nop
+ 430:	08 95       	ret
+
+00000432 <_Z14ds1307_setdatehhhhhhh>:
+	_delay_us(10);
+}
+void ds1307_setdate(uint8_t year, uint8_t month, uint8_t day, uint8_t dayofweek, uint8_t hour, uint8_t minute, uint8_t second) {
+ 432:	cf 92       	push	r12
+ 434:	ef 92       	push	r14
+ 436:	ff 92       	push	r15
+ 438:	0f 93       	push	r16
+ 43a:	1f 93       	push	r17
+ 43c:	cf 93       	push	r28
+ 43e:	df 93       	push	r29
+ 440:	c8 2f       	mov	r28, r24
+ 442:	d6 2f       	mov	r29, r22
+ 444:	14 2f       	mov	r17, r20
+ 446:	f2 2e       	mov	r15, r18
+	
+
+	i2c_start_wait(DS1307_ADDRESS | I2C_WRITE);
+ 448:	80 ed       	ldi	r24, 0xD0	; 208
+ 44a:	0e 94 de 02 	call	0x5bc	; 0x5bc <_Z14i2c_start_waith>
+	i2c_write(0x00);
+ 44e:	80 e0       	ldi	r24, 0x00	; 0
+ 450:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(second));
+ 454:	8c 2d       	mov	r24, r12
+ 456:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 45a:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(minute));
+ 45e:	8e 2d       	mov	r24, r14
+ 460:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 464:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(hour));
+ 468:	80 2f       	mov	r24, r16
+ 46a:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 46e:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(dayofweek));
+ 472:	8f 2d       	mov	r24, r15
+ 474:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 478:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(day));
+ 47c:	81 2f       	mov	r24, r17
+ 47e:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 482:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(month));
+ 486:	8d 2f       	mov	r24, r29
+ 488:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 48c:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(ds1307_dec2bcd(year));
+ 490:	8c 2f       	mov	r24, r28
+ 492:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <_Z14ds1307_dec2bcdh>
+ 496:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_write(0x00);
+ 49a:	80 e0       	ldi	r24, 0x00	; 0
+ 49c:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_stop();
+ 4a0:	0e 94 08 03 	call	0x610	; 0x610 <_Z8i2c_stopv>
+}
+ 4a4:	df 91       	pop	r29
+ 4a6:	cf 91       	pop	r28
+ 4a8:	1f 91       	pop	r17
+ 4aa:	0f 91       	pop	r16
+ 4ac:	ff 90       	pop	r15
+ 4ae:	ef 90       	pop	r14
+ 4b0:	cf 90       	pop	r12
+ 4b2:	08 95       	ret
+
+000004b4 <_Z14ds1307_getdatePhS_S_S_S_S_S_>:
+void ds1307_getdate(uint8_t *year, uint8_t *month, uint8_t *day,uint8_t *dayofweek, uint8_t *hour, uint8_t *minute, uint8_t *second) {
+ 4b4:	6f 92       	push	r6
+ 4b6:	7f 92       	push	r7
+ 4b8:	8f 92       	push	r8
+ 4ba:	9f 92       	push	r9
+ 4bc:	af 92       	push	r10
+ 4be:	bf 92       	push	r11
+ 4c0:	cf 92       	push	r12
+ 4c2:	df 92       	push	r13
+ 4c4:	ef 92       	push	r14
+ 4c6:	ff 92       	push	r15
+ 4c8:	0f 93       	push	r16
+ 4ca:	1f 93       	push	r17
+ 4cc:	cf 93       	push	r28
+ 4ce:	df 93       	push	r29
+ 4d0:	ec 01       	movw	r28, r24
+ 4d2:	3b 01       	movw	r6, r22
+ 4d4:	5a 01       	movw	r10, r20
+ 4d6:	49 01       	movw	r8, r18
+	i2c_start_wait(DS1307_ADDRESS | I2C_WRITE);
+ 4d8:	80 ed       	ldi	r24, 0xD0	; 208
+ 4da:	0e 94 de 02 	call	0x5bc	; 0x5bc <_Z14i2c_start_waith>
+	i2c_write(0x00);
+ 4de:	80 e0       	ldi	r24, 0x00	; 0
+ 4e0:	0e 94 10 03 	call	0x620	; 0x620 <_Z9i2c_writeh>
+	i2c_stop();
+ 4e4:	0e 94 08 03 	call	0x610	; 0x610 <_Z8i2c_stopv>
+
+	i2c_rep_start(DS1307_ADDRESS | I2C_READ);
+ 4e8:	81 ed       	ldi	r24, 0xD1	; 209
+ 4ea:	0e 94 05 03 	call	0x60a	; 0x60a <_Z13i2c_rep_starth>
+	*second = ds1307_bcd2dec(i2c_readAck() & 0x7F);
+ 4ee:	0e 94 22 03 	call	0x644	; 0x644 <_Z11i2c_readAckv>
+ 4f2:	8f 77       	andi	r24, 0x7F	; 127
+ 4f4:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 4f8:	f6 01       	movw	r30, r12
+ 4fa:	80 83       	st	Z, r24
+	*minute = ds1307_bcd2dec(i2c_readAck());
+ 4fc:	0e 94 22 03 	call	0x644	; 0x644 <_Z11i2c_readAckv>
+ 500:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 504:	f7 01       	movw	r30, r14
+ 506:	80 83       	st	Z, r24
+	*hour = ds1307_bcd2dec(i2c_readAck());
+ 508:	0e 94 22 03 	call	0x644	; 0x644 <_Z11i2c_readAckv>
+ 50c:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 510:	f8 01       	movw	r30, r16
+ 512:	80 83       	st	Z, r24
+	*dayofweek = ds1307_bcd2dec(i2c_readAck());
+ 514:	0e 94 22 03 	call	0x644	; 0x644 <_Z11i2c_readAckv>
+ 518:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 51c:	f4 01       	movw	r30, r8
+ 51e:	80 83       	st	Z, r24
+	*day = ds1307_bcd2dec(i2c_readAck());
+ 520:	0e 94 22 03 	call	0x644	; 0x644 <_Z11i2c_readAckv>
+ 524:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 528:	f5 01       	movw	r30, r10
+ 52a:	80 83       	st	Z, r24
+	*month = ds1307_bcd2dec(i2c_readAck());
+ 52c:	0e 94 22 03 	call	0x644	; 0x644 <_Z11i2c_readAckv>
+ 530:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 534:	f3 01       	movw	r30, r6
+ 536:	80 83       	st	Z, r24
+	*year = ds1307_bcd2dec(i2c_readNak());
+ 538:	0e 94 2c 03 	call	0x658	; 0x658 <_Z11i2c_readNakv>
+ 53c:	0e 94 01 02 	call	0x402	; 0x402 <_Z14ds1307_bcd2dech>
+ 540:	88 83       	st	Y, r24
+	i2c_stop();
+ 542:	0e 94 08 03 	call	0x610	; 0x610 <_Z8i2c_stopv>
+}
+ 546:	df 91       	pop	r29
+ 548:	cf 91       	pop	r28
+ 54a:	1f 91       	pop	r17
+ 54c:	0f 91       	pop	r16
+ 54e:	ff 90       	pop	r15
+ 550:	ef 90       	pop	r14
+ 552:	df 90       	pop	r13
+ 554:	cf 90       	pop	r12
+ 556:	bf 90       	pop	r11
+ 558:	af 90       	pop	r10
+ 55a:	9f 90       	pop	r9
+ 55c:	8f 90       	pop	r8
+ 55e:	7f 90       	pop	r7
+ 560:	6f 90       	pop	r6
+ 562:	08 95       	ret
+
+00000564 <_Z8i2c_initv>:
+*************************************************************************/
+void i2c_init(void)
+{
+  /* initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1 */
+  
+  TWSR = 0;                         /* no prescaler */
+ 564:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+  TWBR = ((F_CPU/SCL_CLOCK)-16)/2;  /* must be > 10 for stable operation */
+ 568:	80 e2       	ldi	r24, 0x20	; 32
+ 56a:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7f80b8>
+ 56e:	08 95       	ret
+
+00000570 <_Z9i2c_starth>:
+unsigned char i2c_start(unsigned char address)
+{
+    uint8_t   twst;
+
+	// send START condition
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 570:	94 ea       	ldi	r25, 0xA4	; 164
+ 572:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+
+	// wait until transmission completed
+	while(!(TWCR & (1<<TWINT)));
+ 576:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 57a:	99 23       	and	r25, r25
+ 57c:	e4 f7       	brge	.-8      	; 0x576 <_Z9i2c_starth+0x6>
+
+	// check value of TWI Status Register. Mask prescaler bits.
+	twst = TW_STATUS & 0xF8;
+ 57e:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 582:	98 7f       	andi	r25, 0xF8	; 248
+	if ( (twst != TW_START) && (twst != TW_REP_START)) return 1;
+ 584:	98 30       	cpi	r25, 0x08	; 8
+ 586:	11 f0       	breq	.+4      	; 0x58c <_Z9i2c_starth+0x1c>
+ 588:	90 31       	cpi	r25, 0x10	; 16
+ 58a:	91 f4       	brne	.+36     	; 0x5b0 <_Z9i2c_starth+0x40>
+
+	// send device address
+	TWDR = address;
+ 58c:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 590:	84 e8       	ldi	r24, 0x84	; 132
+ 592:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+
+	// wail until transmission completed and ACK/NACK has been received
+	while(!(TWCR & (1<<TWINT)));
+ 596:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 59a:	88 23       	and	r24, r24
+ 59c:	e4 f7       	brge	.-8      	; 0x596 <_Z9i2c_starth+0x26>
+
+	// check value of TWI Status Register. Mask prescaler bits.
+	twst = TW_STATUS & 0xF8;
+ 59e:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 5a2:	88 7f       	andi	r24, 0xF8	; 248
+	if ( (twst != TW_MT_SLA_ACK) && (twst != TW_MR_SLA_ACK) ) return 1;
+ 5a4:	88 31       	cpi	r24, 0x18	; 24
+ 5a6:	31 f0       	breq	.+12     	; 0x5b4 <_Z9i2c_starth+0x44>
+ 5a8:	80 34       	cpi	r24, 0x40	; 64
+ 5aa:	31 f4       	brne	.+12     	; 0x5b8 <_Z9i2c_starth+0x48>
+
+	return 0;
+ 5ac:	80 e0       	ldi	r24, 0x00	; 0
+ 5ae:	08 95       	ret
+	// wait until transmission completed
+	while(!(TWCR & (1<<TWINT)));
+
+	// check value of TWI Status Register. Mask prescaler bits.
+	twst = TW_STATUS & 0xF8;
+	if ( (twst != TW_START) && (twst != TW_REP_START)) return 1;
+ 5b0:	81 e0       	ldi	r24, 0x01	; 1
+ 5b2:	08 95       	ret
+
+	// check value of TWI Status Register. Mask prescaler bits.
+	twst = TW_STATUS & 0xF8;
+	if ( (twst != TW_MT_SLA_ACK) && (twst != TW_MR_SLA_ACK) ) return 1;
+
+	return 0;
+ 5b4:	80 e0       	ldi	r24, 0x00	; 0
+ 5b6:	08 95       	ret
+	// wail until transmission completed and ACK/NACK has been received
+	while(!(TWCR & (1<<TWINT)));
+
+	// check value of TWI Status Register. Mask prescaler bits.
+	twst = TW_STATUS & 0xF8;
+	if ( (twst != TW_MT_SLA_ACK) && (twst != TW_MR_SLA_ACK) ) return 1;
+ 5b8:	81 e0       	ldi	r24, 0x01	; 1
+
+	return 0;
+
+}/* i2c_start */
+ 5ba:	08 95       	ret
+
+000005bc <_Z14i2c_start_waith>:
+
+
+    while ( 1 )
+    {
+	    // send START condition
+	    TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 5bc:	94 ea       	ldi	r25, 0xA4	; 164
+ 5be:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+    
+    	// wait until transmission completed
+    	while(!(TWCR & (1<<TWINT)));
+ 5c2:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 5c6:	99 23       	and	r25, r25
+ 5c8:	e4 f7       	brge	.-8      	; 0x5c2 <_Z14i2c_start_waith+0x6>
+    
+    	// check value of TWI Status Register. Mask prescaler bits.
+    	twst = TW_STATUS & 0xF8;
+ 5ca:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 5ce:	98 7f       	andi	r25, 0xF8	; 248
+    	if ( (twst != TW_START) && (twst != TW_REP_START)) continue;
+ 5d0:	98 30       	cpi	r25, 0x08	; 8
+ 5d2:	11 f0       	breq	.+4      	; 0x5d8 <_Z14i2c_start_waith+0x1c>
+ 5d4:	90 31       	cpi	r25, 0x10	; 16
+ 5d6:	91 f7       	brne	.-28     	; 0x5bc <_Z14i2c_start_waith>
+    
+    	// send device address
+    	TWDR = address;
+ 5d8:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+    	TWCR = (1<<TWINT) | (1<<TWEN);
+ 5dc:	94 e8       	ldi	r25, 0x84	; 132
+ 5de:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+    
+    	// wail until transmission completed
+    	while(!(TWCR & (1<<TWINT)));
+ 5e2:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 5e6:	99 23       	and	r25, r25
+ 5e8:	e4 f7       	brge	.-8      	; 0x5e2 <_Z14i2c_start_waith+0x26>
+    
+    	// check value of TWI Status Register. Mask prescaler bits.
+    	twst = TW_STATUS & 0xF8;
+ 5ea:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 5ee:	98 7f       	andi	r25, 0xF8	; 248
+    	if ( (twst == TW_MT_SLA_NACK )||(twst ==TW_MR_DATA_NACK) ) 
+ 5f0:	90 32       	cpi	r25, 0x20	; 32
+ 5f2:	11 f0       	breq	.+4      	; 0x5f8 <_Z14i2c_start_waith+0x3c>
+ 5f4:	98 35       	cpi	r25, 0x58	; 88
+ 5f6:	41 f4       	brne	.+16     	; 0x608 <_Z14i2c_start_waith+0x4c>
+    	{    	    
+    	    /* device busy, send stop condition to terminate write operation */
+	        TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 5f8:	94 e9       	ldi	r25, 0x94	; 148
+ 5fa:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+	        
+	        // wait until stop condition is executed and bus released
+	        while(TWCR & (1<<TWSTO));
+ 5fe:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 602:	94 fd       	sbrc	r25, 4
+ 604:	fc cf       	rjmp	.-8      	; 0x5fe <_Z14i2c_start_waith+0x42>
+ 606:	da cf       	rjmp	.-76     	; 0x5bc <_Z14i2c_start_waith>
+ 608:	08 95       	ret
+
+0000060a <_Z13i2c_rep_starth>:
+ Return:  0 device accessible
+          1 failed to access device
+*************************************************************************/
+unsigned char i2c_rep_start(unsigned char address)
+{
+    return i2c_start( address );
+ 60a:	0e 94 b8 02 	call	0x570	; 0x570 <_Z9i2c_starth>
+
+}/* i2c_rep_start */
+ 60e:	08 95       	ret
+
+00000610 <_Z8i2c_stopv>:
+ Terminates the data transfer and releases the I2C bus
+*************************************************************************/
+void i2c_stop(void)
+{
+    /* send stop condition */
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 610:	84 e9       	ldi	r24, 0x94	; 148
+ 612:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+	
+	// wait until stop condition is executed and bus released
+	while(TWCR & (1<<TWSTO));
+ 616:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 61a:	84 fd       	sbrc	r24, 4
+ 61c:	fc cf       	rjmp	.-8      	; 0x616 <_Z8i2c_stopv+0x6>
+
+}/* i2c_stop */
+ 61e:	08 95       	ret
+
+00000620 <_Z9i2c_writeh>:
+unsigned char i2c_write( unsigned char data )
+{	
+    uint8_t   twst;
+    
+	// send data to the previously addressed device
+	TWDR = data;
+ 620:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 624:	84 e8       	ldi	r24, 0x84	; 132
+ 626:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+
+	// wait until transmission completed
+	while(!(TWCR & (1<<TWINT)));
+ 62a:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 62e:	88 23       	and	r24, r24
+ 630:	e4 f7       	brge	.-8      	; 0x62a <_Z9i2c_writeh+0xa>
+
+	// check value of TWI Status Register. Mask prescaler bits
+	twst = TW_STATUS & 0xF8;
+ 632:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 636:	88 7f       	andi	r24, 0xF8	; 248
+	if( twst != TW_MT_DATA_ACK) return 1;
+ 638:	88 32       	cpi	r24, 0x28	; 40
+ 63a:	11 f0       	breq	.+4      	; 0x640 <_Z9i2c_writeh+0x20>
+ 63c:	81 e0       	ldi	r24, 0x01	; 1
+ 63e:	08 95       	ret
+	return 0;
+ 640:	80 e0       	ldi	r24, 0x00	; 0
+
+}/* i2c_write */
+ 642:	08 95       	ret
+
+00000644 <_Z11i2c_readAckv>:
+ 
+ Return:  byte read from I2C device
+*************************************************************************/
+unsigned char i2c_readAck(void)
+{
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
+ 644:	84 ec       	ldi	r24, 0xC4	; 196
+ 646:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+	while(!(TWCR & (1<<TWINT)));    
+ 64a:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 64e:	88 23       	and	r24, r24
+ 650:	e4 f7       	brge	.-8      	; 0x64a <_Z11i2c_readAckv+0x6>
+
+    return TWDR;
+ 652:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+
+}/* i2c_readAck */
+ 656:	08 95       	ret
+
+00000658 <_Z11i2c_readNakv>:
+ 
+ Return:  byte read from I2C device
+*************************************************************************/
+unsigned char i2c_readNak(void)
+{
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 658:	84 e8       	ldi	r24, 0x84	; 132
+ 65a:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+	while(!(TWCR & (1<<TWINT)));
+ 65e:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 662:	88 23       	and	r24, r24
+ 664:	e4 f7       	brge	.-8      	; 0x65e <_Z11i2c_readNakv+0x6>
+	
+    return TWDR;
+ 666:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+
+}/* i2c_readNak */
+ 66a:	08 95       	ret
+
+0000066c <_Z12getAlarmTimev>:
+int ClockState = 0;
+int temp = 0;
+int alarmTime = 0;
+int clockTime[6];
+void getAlarmTime(){
+	if (isPress(PIND1)){
+ 66c:	81 e0       	ldi	r24, 0x01	; 1
+ 66e:	0e 94 65 00 	call	0xca	; 0xca <_Z7isPressh>
+ 672:	88 23       	and	r24, r24
+ 674:	91 f0       	breq	.+36     	; 0x69a <_Z12getAlarmTimev+0x2e>
+		data++;
+ 676:	80 91 49 01 	lds	r24, 0x0149	; 0x800149 <data>
+ 67a:	90 91 4a 01 	lds	r25, 0x014A	; 0x80014a <data+0x1>
+ 67e:	01 96       	adiw	r24, 0x01	; 1
+ 680:	90 93 4a 01 	sts	0x014A, r25	; 0x80014a <data+0x1>
+ 684:	80 93 49 01 	sts	0x0149, r24	; 0x800149 <data>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 688:	2f e9       	ldi	r18, 0x9F	; 159
+ 68a:	46 e8       	ldi	r20, 0x86	; 134
+ 68c:	51 e0       	ldi	r21, 0x01	; 1
+ 68e:	21 50       	subi	r18, 0x01	; 1
+ 690:	40 40       	sbci	r20, 0x00	; 0
+ 692:	50 40       	sbci	r21, 0x00	; 0
+ 694:	e1 f7       	brne	.-8      	; 0x68e <_Z12getAlarmTimev+0x22>
+ 696:	00 c0       	rjmp	.+0      	; 0x698 <_Z12getAlarmTimev+0x2c>
+ 698:	00 00       	nop
+		_delay_ms(button_delay);
+	}
+	if (isPress(PIND2)){
+ 69a:	82 e0       	ldi	r24, 0x02	; 2
+ 69c:	0e 94 65 00 	call	0xca	; 0xca <_Z7isPressh>
+ 6a0:	88 23       	and	r24, r24
+ 6a2:	a1 f1       	breq	.+104    	; 0x70c <_Z12getAlarmTimev+0xa0>
+		alarmTime += data*powerOf(10,AlarmState);
+ 6a4:	60 91 18 01 	lds	r22, 0x0118	; 0x800118 <AlarmState>
+ 6a8:	70 91 19 01 	lds	r23, 0x0119	; 0x800119 <AlarmState+0x1>
+ 6ac:	8a e0       	ldi	r24, 0x0A	; 10
+ 6ae:	90 e0       	ldi	r25, 0x00	; 0
+ 6b0:	0e 94 53 00 	call	0xa6	; 0xa6 <_Z7powerOfii>
+ 6b4:	20 91 49 01 	lds	r18, 0x0149	; 0x800149 <data>
+ 6b8:	30 91 4a 01 	lds	r19, 0x014A	; 0x80014a <data+0x1>
+ 6bc:	ac 01       	movw	r20, r24
+ 6be:	42 9f       	mul	r20, r18
+ 6c0:	c0 01       	movw	r24, r0
+ 6c2:	43 9f       	mul	r20, r19
+ 6c4:	90 0d       	add	r25, r0
+ 6c6:	52 9f       	mul	r21, r18
+ 6c8:	90 0d       	add	r25, r0
+ 6ca:	11 24       	eor	r1, r1
+ 6cc:	20 91 43 01 	lds	r18, 0x0143	; 0x800143 <alarmTime>
+ 6d0:	30 91 44 01 	lds	r19, 0x0144	; 0x800144 <alarmTime+0x1>
+ 6d4:	82 0f       	add	r24, r18
+ 6d6:	93 1f       	adc	r25, r19
+ 6d8:	90 93 44 01 	sts	0x0144, r25	; 0x800144 <alarmTime+0x1>
+ 6dc:	80 93 43 01 	sts	0x0143, r24	; 0x800143 <alarmTime>
+		AlarmState--;
+ 6e0:	80 91 18 01 	lds	r24, 0x0118	; 0x800118 <AlarmState>
+ 6e4:	90 91 19 01 	lds	r25, 0x0119	; 0x800119 <AlarmState+0x1>
+ 6e8:	01 97       	sbiw	r24, 0x01	; 1
+ 6ea:	90 93 19 01 	sts	0x0119, r25	; 0x800119 <AlarmState+0x1>
+ 6ee:	80 93 18 01 	sts	0x0118, r24	; 0x800118 <AlarmState>
+		data=0;
+ 6f2:	10 92 4a 01 	sts	0x014A, r1	; 0x80014a <data+0x1>
+ 6f6:	10 92 49 01 	sts	0x0149, r1	; 0x800149 <data>
+ 6fa:	5f e9       	ldi	r21, 0x9F	; 159
+ 6fc:	86 e8       	ldi	r24, 0x86	; 134
+ 6fe:	91 e0       	ldi	r25, 0x01	; 1
+ 700:	51 50       	subi	r21, 0x01	; 1
+ 702:	80 40       	sbci	r24, 0x00	; 0
+ 704:	90 40       	sbci	r25, 0x00	; 0
+ 706:	e1 f7       	brne	.-8      	; 0x700 <_Z12getAlarmTimev+0x94>
+ 708:	00 c0       	rjmp	.+0      	; 0x70a <_Z12getAlarmTimev+0x9e>
+ 70a:	00 00       	nop
+		_delay_ms(button_delay);
+	}
+	if (AlarmState == -1){
+ 70c:	80 91 18 01 	lds	r24, 0x0118	; 0x800118 <AlarmState>
+ 710:	90 91 19 01 	lds	r25, 0x0119	; 0x800119 <AlarmState+0x1>
+ 714:	01 96       	adiw	r24, 0x01	; 1
+ 716:	e9 f4       	brne	.+58     	; 0x752 <_Z12getAlarmTimev+0xe6>
+		setAlarm(alarmTime);
+ 718:	80 91 43 01 	lds	r24, 0x0143	; 0x800143 <alarmTime>
+ 71c:	90 91 44 01 	lds	r25, 0x0144	; 0x800144 <alarmTime+0x1>
+ 720:	0e 94 86 00 	call	0x10c	; 0x10c <_Z8setAlarmi>
+		AlarmState = 3;
+ 724:	83 e0       	ldi	r24, 0x03	; 3
+ 726:	90 e0       	ldi	r25, 0x00	; 0
+ 728:	90 93 19 01 	sts	0x0119, r25	; 0x800119 <AlarmState+0x1>
+ 72c:	80 93 18 01 	sts	0x0118, r24	; 0x800118 <AlarmState>
+		alarmTime = 0;
+ 730:	10 92 44 01 	sts	0x0144, r1	; 0x800144 <alarmTime+0x1>
+ 734:	10 92 43 01 	sts	0x0143, r1	; 0x800143 <alarmTime>
+		mode = 0;
+ 738:	10 92 4c 01 	sts	0x014C, r1	; 0x80014c <mode+0x1>
+ 73c:	10 92 4b 01 	sts	0x014B, r1	; 0x80014b <mode>
+ 740:	4f e9       	ldi	r20, 0x9F	; 159
+ 742:	56 e8       	ldi	r21, 0x86	; 134
+ 744:	81 e0       	ldi	r24, 0x01	; 1
+ 746:	41 50       	subi	r20, 0x01	; 1
+ 748:	50 40       	sbci	r21, 0x00	; 0
+ 74a:	80 40       	sbci	r24, 0x00	; 0
+ 74c:	e1 f7       	brne	.-8      	; 0x746 <_Z12getAlarmTimev+0xda>
+ 74e:	00 c0       	rjmp	.+0      	; 0x750 <_Z12getAlarmTimev+0xe4>
+ 750:	00 00       	nop
+ 752:	08 95       	ret
+
+00000754 <_Z12getClockTimev>:
+		_delay_ms(button_delay);
+	}
+}
+void getClockTime(){
+	if (isPress(PIND1)){
+ 754:	81 e0       	ldi	r24, 0x01	; 1
+ 756:	0e 94 65 00 	call	0xca	; 0xca <_Z7isPressh>
+ 75a:	88 23       	and	r24, r24
+ 75c:	91 f0       	breq	.+36     	; 0x782 <_Z12getClockTimev+0x2e>
+		data++;
+ 75e:	80 91 49 01 	lds	r24, 0x0149	; 0x800149 <data>
+ 762:	90 91 4a 01 	lds	r25, 0x014A	; 0x80014a <data+0x1>
+ 766:	01 96       	adiw	r24, 0x01	; 1
+ 768:	90 93 4a 01 	sts	0x014A, r25	; 0x80014a <data+0x1>
+ 76c:	80 93 49 01 	sts	0x0149, r24	; 0x800149 <data>
+ 770:	2f e9       	ldi	r18, 0x9F	; 159
+ 772:	86 e8       	ldi	r24, 0x86	; 134
+ 774:	91 e0       	ldi	r25, 0x01	; 1
+ 776:	21 50       	subi	r18, 0x01	; 1
+ 778:	80 40       	sbci	r24, 0x00	; 0
+ 77a:	90 40       	sbci	r25, 0x00	; 0
+ 77c:	e1 f7       	brne	.-8      	; 0x776 <_Z12getClockTimev+0x22>
+ 77e:	00 c0       	rjmp	.+0      	; 0x780 <_Z12getClockTimev+0x2c>
+ 780:	00 00       	nop
+		_delay_ms(button_delay);
+	}
+	if (isPress(PIND2)){
+ 782:	82 e0       	ldi	r24, 0x02	; 2
+ 784:	0e 94 65 00 	call	0xca	; 0xca <_Z7isPressh>
+ 788:	88 23       	and	r24, r24
+ 78a:	09 f4       	brne	.+2      	; 0x78e <_Z12getClockTimev+0x3a>
+ 78c:	45 c0       	rjmp	.+138    	; 0x818 <__DATA_REGION_LENGTH__+0x18>
+		if (temp == 0){
+ 78e:	80 91 45 01 	lds	r24, 0x0145	; 0x800145 <temp>
+ 792:	90 91 46 01 	lds	r25, 0x0146	; 0x800146 <temp+0x1>
+ 796:	89 2b       	or	r24, r25
+ 798:	d1 f4       	brne	.+52     	; 0x7ce <_Z12getClockTimev+0x7a>
+			data*=10;
+ 79a:	80 91 49 01 	lds	r24, 0x0149	; 0x800149 <data>
+ 79e:	90 91 4a 01 	lds	r25, 0x014A	; 0x80014a <data+0x1>
+ 7a2:	9c 01       	movw	r18, r24
+ 7a4:	22 0f       	add	r18, r18
+ 7a6:	33 1f       	adc	r19, r19
+ 7a8:	88 0f       	add	r24, r24
+ 7aa:	99 1f       	adc	r25, r25
+ 7ac:	88 0f       	add	r24, r24
+ 7ae:	99 1f       	adc	r25, r25
+ 7b0:	88 0f       	add	r24, r24
+ 7b2:	99 1f       	adc	r25, r25
+ 7b4:	82 0f       	add	r24, r18
+ 7b6:	93 1f       	adc	r25, r19
+ 7b8:	90 93 4a 01 	sts	0x014A, r25	; 0x80014a <data+0x1>
+ 7bc:	80 93 49 01 	sts	0x0149, r24	; 0x800149 <data>
+			temp = 1;
+ 7c0:	81 e0       	ldi	r24, 0x01	; 1
+ 7c2:	90 e0       	ldi	r25, 0x00	; 0
+ 7c4:	90 93 46 01 	sts	0x0146, r25	; 0x800146 <temp+0x1>
+ 7c8:	80 93 45 01 	sts	0x0145, r24	; 0x800145 <temp>
+ 7cc:	1c c0       	rjmp	.+56     	; 0x806 <__DATA_REGION_LENGTH__+0x6>
+		}
+		else{
+			clockTime[ClockState] = data;
+ 7ce:	80 91 47 01 	lds	r24, 0x0147	; 0x800147 <ClockState>
+ 7d2:	90 91 48 01 	lds	r25, 0x0148	; 0x800148 <ClockState+0x1>
+ 7d6:	fc 01       	movw	r30, r24
+ 7d8:	ee 0f       	add	r30, r30
+ 7da:	ff 1f       	adc	r31, r31
+ 7dc:	e9 5c       	subi	r30, 0xC9	; 201
+ 7de:	fe 4f       	sbci	r31, 0xFE	; 254
+ 7e0:	20 91 49 01 	lds	r18, 0x0149	; 0x800149 <data>
+ 7e4:	30 91 4a 01 	lds	r19, 0x014A	; 0x80014a <data+0x1>
+ 7e8:	31 83       	std	Z+1, r19	; 0x01
+ 7ea:	20 83       	st	Z, r18
+			ClockState++;
+ 7ec:	01 96       	adiw	r24, 0x01	; 1
+ 7ee:	90 93 48 01 	sts	0x0148, r25	; 0x800148 <ClockState+0x1>
+ 7f2:	80 93 47 01 	sts	0x0147, r24	; 0x800147 <ClockState>
+			data=0;
+ 7f6:	10 92 4a 01 	sts	0x014A, r1	; 0x80014a <data+0x1>
+ 7fa:	10 92 49 01 	sts	0x0149, r1	; 0x800149 <data>
+			temp = 0;
+ 7fe:	10 92 46 01 	sts	0x0146, r1	; 0x800146 <temp+0x1>
+ 802:	10 92 45 01 	sts	0x0145, r1	; 0x800145 <temp>
+ 806:	2f e9       	ldi	r18, 0x9F	; 159
+ 808:	86 e8       	ldi	r24, 0x86	; 134
+ 80a:	91 e0       	ldi	r25, 0x01	; 1
+ 80c:	21 50       	subi	r18, 0x01	; 1
+ 80e:	80 40       	sbci	r24, 0x00	; 0
+ 810:	90 40       	sbci	r25, 0x00	; 0
+ 812:	e1 f7       	brne	.-8      	; 0x80c <__DATA_REGION_LENGTH__+0xc>
+ 814:	00 c0       	rjmp	.+0      	; 0x816 <__DATA_REGION_LENGTH__+0x16>
+ 816:	00 00       	nop
+		}
+		_delay_ms(button_delay);
+	}
+	if (ClockState == 6){
+ 818:	80 91 47 01 	lds	r24, 0x0147	; 0x800147 <ClockState>
+ 81c:	90 91 48 01 	lds	r25, 0x0148	; 0x800148 <ClockState+0x1>
+ 820:	06 97       	sbiw	r24, 0x06	; 6
+ 822:	a9 f4       	brne	.+42     	; 0x84e <__DATA_REGION_LENGTH__+0x4e>
+		setClockTime(clockTime);
+ 824:	87 e3       	ldi	r24, 0x37	; 55
+ 826:	91 e0       	ldi	r25, 0x01	; 1
+ 828:	0e 94 71 01 	call	0x2e2	; 0x2e2 <_Z12setClockTimePi>
+		ClockState = 0;
+ 82c:	10 92 48 01 	sts	0x0148, r1	; 0x800148 <ClockState+0x1>
+ 830:	10 92 47 01 	sts	0x0147, r1	; 0x800147 <ClockState>
+		mode = 0;
+ 834:	10 92 4c 01 	sts	0x014C, r1	; 0x80014c <mode+0x1>
+ 838:	10 92 4b 01 	sts	0x014B, r1	; 0x80014b <mode>
+ 83c:	2f e9       	ldi	r18, 0x9F	; 159
+ 83e:	86 e8       	ldi	r24, 0x86	; 134
+ 840:	91 e0       	ldi	r25, 0x01	; 1
+ 842:	21 50       	subi	r18, 0x01	; 1
+ 844:	80 40       	sbci	r24, 0x00	; 0
+ 846:	90 40       	sbci	r25, 0x00	; 0
+ 848:	e1 f7       	brne	.-8      	; 0x842 <__DATA_REGION_LENGTH__+0x42>
+ 84a:	00 c0       	rjmp	.+0      	; 0x84c <__DATA_REGION_LENGTH__+0x4c>
+ 84c:	00 00       	nop
+ 84e:	08 95       	ret
+
+00000850 <main>:
+		_delay_ms(button_delay);
+	}
+}
+int main(void)
+{	
+	ds1307_init();
+ 850:	0e 94 12 02 	call	0x424	; 0x424 <_Z11ds1307_initv>
+    while (1) 
+    {
+		checkAlarm();
+ 854:	0e 94 bb 00 	call	0x176	; 0x176 <_Z10checkAlarmv>
+		if (isPress(PIND0)){
+ 858:	80 e0       	ldi	r24, 0x00	; 0
+ 85a:	0e 94 65 00 	call	0xca	; 0xca <_Z7isPressh>
+ 85e:	88 23       	and	r24, r24
+ 860:	91 f0       	breq	.+36     	; 0x886 <main+0x36>
+			mode++;
+ 862:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <mode>
+ 866:	90 91 4c 01 	lds	r25, 0x014C	; 0x80014c <mode+0x1>
+ 86a:	01 96       	adiw	r24, 0x01	; 1
+ 86c:	90 93 4c 01 	sts	0x014C, r25	; 0x80014c <mode+0x1>
+ 870:	80 93 4b 01 	sts	0x014B, r24	; 0x80014b <mode>
+ 874:	2f e9       	ldi	r18, 0x9F	; 159
+ 876:	86 e8       	ldi	r24, 0x86	; 134
+ 878:	91 e0       	ldi	r25, 0x01	; 1
+ 87a:	21 50       	subi	r18, 0x01	; 1
+ 87c:	80 40       	sbci	r24, 0x00	; 0
+ 87e:	90 40       	sbci	r25, 0x00	; 0
+ 880:	e1 f7       	brne	.-8      	; 0x87a <main+0x2a>
+ 882:	00 c0       	rjmp	.+0      	; 0x884 <main+0x34>
+ 884:	00 00       	nop
+			_delay_ms(button_delay);
+		}
+		if (mode == 1){
+ 886:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <mode>
+ 88a:	90 91 4c 01 	lds	r25, 0x014C	; 0x80014c <mode+0x1>
+ 88e:	01 97       	sbiw	r24, 0x01	; 1
+ 890:	11 f4       	brne	.+4      	; 0x896 <main+0x46>
+			getAlarmTime();
+ 892:	0e 94 36 03 	call	0x66c	; 0x66c <_Z12getAlarmTimev>
+		}
+		if (mode == 2){
+ 896:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <mode>
+ 89a:	90 91 4c 01 	lds	r25, 0x014C	; 0x80014c <mode+0x1>
+ 89e:	02 97       	sbiw	r24, 0x02	; 2
+ 8a0:	c9 f6       	brne	.-78     	; 0x854 <main+0x4>
+			getClockTime();
+ 8a2:	0e 94 aa 03 	call	0x754	; 0x754 <_Z12getClockTimev>
+ 8a6:	d6 cf       	rjmp	.-84     	; 0x854 <main+0x4>
+
+000008a8 <__divmodhi4>:
+ 8a8:	97 fb       	bst	r25, 7
+ 8aa:	07 2e       	mov	r0, r23
+ 8ac:	16 f4       	brtc	.+4      	; 0x8b2 <__divmodhi4+0xa>
+ 8ae:	00 94       	com	r0
+ 8b0:	07 d0       	rcall	.+14     	; 0x8c0 <__divmodhi4_neg1>
+ 8b2:	77 fd       	sbrc	r23, 7
+ 8b4:	09 d0       	rcall	.+18     	; 0x8c8 <__divmodhi4_neg2>
+ 8b6:	0e 94 68 04 	call	0x8d0	; 0x8d0 <__udivmodhi4>
+ 8ba:	07 fc       	sbrc	r0, 7
+ 8bc:	05 d0       	rcall	.+10     	; 0x8c8 <__divmodhi4_neg2>
+ 8be:	3e f4       	brtc	.+14     	; 0x8ce <__divmodhi4_exit>
+
+000008c0 <__divmodhi4_neg1>:
+ 8c0:	90 95       	com	r25
+ 8c2:	81 95       	neg	r24
+ 8c4:	9f 4f       	sbci	r25, 0xFF	; 255
+ 8c6:	08 95       	ret
+
+000008c8 <__divmodhi4_neg2>:
+ 8c8:	70 95       	com	r23
+ 8ca:	61 95       	neg	r22
+ 8cc:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000008ce <__divmodhi4_exit>:
+ 8ce:	08 95       	ret
+
+000008d0 <__udivmodhi4>:
+ 8d0:	aa 1b       	sub	r26, r26
+ 8d2:	bb 1b       	sub	r27, r27
+ 8d4:	51 e1       	ldi	r21, 0x11	; 17
+ 8d6:	07 c0       	rjmp	.+14     	; 0x8e6 <__udivmodhi4_ep>
+
+000008d8 <__udivmodhi4_loop>:
+ 8d8:	aa 1f       	adc	r26, r26
+ 8da:	bb 1f       	adc	r27, r27
+ 8dc:	a6 17       	cp	r26, r22
+ 8de:	b7 07       	cpc	r27, r23
+ 8e0:	10 f0       	brcs	.+4      	; 0x8e6 <__udivmodhi4_ep>
+ 8e2:	a6 1b       	sub	r26, r22
+ 8e4:	b7 0b       	sbc	r27, r23
+
+000008e6 <__udivmodhi4_ep>:
+ 8e6:	88 1f       	adc	r24, r24
+ 8e8:	99 1f       	adc	r25, r25
+ 8ea:	5a 95       	dec	r21
+ 8ec:	a9 f7       	brne	.-22     	; 0x8d8 <__udivmodhi4_loop>
+ 8ee:	80 95       	com	r24
+ 8f0:	90 95       	com	r25
+ 8f2:	bc 01       	movw	r22, r24
+ 8f4:	cd 01       	movw	r24, r26
+ 8f6:	08 95       	ret
+
+000008f8 <_exit>:
+ 8f8:	f8 94       	cli
+
+000008fa <__stop_program>:
+ 8fa:	ff cf       	rjmp	.-2      	; 0x8fa <__stop_program>
