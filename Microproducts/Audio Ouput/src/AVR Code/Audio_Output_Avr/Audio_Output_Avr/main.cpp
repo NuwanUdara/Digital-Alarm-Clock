@@ -66,7 +66,7 @@ ISR (INT0_vect)          //External interrupt Stop button ISR
 
 void changesong(){
 	_delay_ms(500);
-	if (songnumber==3){songnumber=0;}
+	if (songnumber==4){songnumber=0;}
 	else{songnumber++;}
 }
 
