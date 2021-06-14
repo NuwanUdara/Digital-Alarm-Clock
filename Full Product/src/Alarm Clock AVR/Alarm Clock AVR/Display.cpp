@@ -106,12 +106,15 @@ void LCD_Home(int r){
 
 int clkTime = 0;
 int num = 0;
-int p = 3;
+signed int p = 3;
 char clkTimeS[10];
 void LCD_SetAlarm(char key,int state){
 	LCD_Home(0);
+	if (clkTime==0){
+		LCD_String("0000");
+	}
 	//LCD_String("0000");
-	if (int(key)>47 & int(key)<58 & state ==2){
+	if (int(key)>47 & int(key)<58 & state ==2 & p!=-1){
 		LCD_Home(0);
 		clkTime += (int(key)-48)*powerOf(10,p);
 		itoa(clkTime,clkTimeS,10);
@@ -135,18 +138,17 @@ void LCD_SetAlarm(char key,int state){
 
 char menu_List[3][10] = {"SET ALARM","SET TIME ","SET TONE "};
 int menu_Var = 0;
-
 void LCD_Menu(char key,int state){
 	LCD_Home(0);
 	if (key=='8' & state==1){
 		menu_Var++;
 		//LCD_Clear();
-		_delay_ms(400);
+		_delay_ms(800);
 	}
 	if (key=='2' & state ==1){
 		menu_Var--;
 		//LCD_Clear();
-		_delay_ms(400);
+		_delay_ms(800);
 	}
 	if (menu_Var>2){
 		menu_Var=0;
