@@ -117,7 +117,7 @@ void LCD_SetAlarm(char key,int state){
 		itoa(clkTime,clkTimeS,10);
 		LCD_String(clkTimeS);
 		p--;
-		_delay_ms(100);
+		_delay_ms(400);
 	}
 	if (state==3){
 		setAlarm(clkTime);
@@ -126,7 +126,7 @@ void LCD_SetAlarm(char key,int state){
 		LCD_Home(1);
 		LCD_String(clkTimeS);
 		clkTime=0;num=0;p=3;
-		_delay_ms(500);
+		_delay_ms(2000);
 		LCD_Clear();
 	}
 
@@ -141,12 +141,12 @@ void LCD_Menu(char key,int state){
 	if (key=='8' & state==1){
 		menu_Var++;
 		//LCD_Clear();
-		_delay_ms(10);
+		_delay_ms(400);
 	}
 	if (key=='2' & state ==1){
 		menu_Var--;
 		//LCD_Clear();
-		_delay_ms(10);
+		_delay_ms(400);
 	}
 	if (menu_Var>2){
 		menu_Var=0;

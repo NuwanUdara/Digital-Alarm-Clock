@@ -37,7 +37,7 @@ int main()
 			menu = 0;
 		}
 		if (key=='#'){
-			_delay_ms(100);
+			_delay_ms(400);
 			menu --;
 			LCD_Clear();
 		}
