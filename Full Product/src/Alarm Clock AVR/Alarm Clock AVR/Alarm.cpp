@@ -7,6 +7,7 @@ using namespace std;
 #include "util/delay.h"
 #include <avr/io.h>
 #include "ds1307.h"
+#include "Buzzer.h" //This is used to play the tone with the speaker
 #ifndef F_CPU
 #define F_CPU 1000000UL
 #endif
@@ -49,6 +50,7 @@ bool isPress(uint8_t prt){
 void ringAlarm(){
 	LCD_Clear();
 	LCD_String("RING!!");
+	play(0);				//Trigger buzzer. Can be interrupted by the int1 button.
 	_delay_ms(2000);
 }
 void setAlarm(int alarm_time){
