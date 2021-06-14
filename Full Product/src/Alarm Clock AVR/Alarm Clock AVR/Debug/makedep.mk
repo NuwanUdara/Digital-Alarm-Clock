@@ -4,6 +4,8 @@
 
 Alarm.cpp
 
+Buzzer.cpp
+
 Display.cpp
 
 ds1307.cpp
