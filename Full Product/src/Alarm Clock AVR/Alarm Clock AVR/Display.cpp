@@ -117,7 +117,7 @@ void LCD_SetAlarm(char key,int state){
 		itoa(clkTime,clkTimeS,10);
 		LCD_String(clkTimeS);
 		p--;
-		_delay_ms(400);
+		_delay_ms(800);
 	}
 	if (state==3){
 		setAlarm(clkTime);

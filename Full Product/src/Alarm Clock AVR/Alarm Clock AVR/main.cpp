@@ -20,7 +20,7 @@ int main()
 	ds1307_init();
 	int clocktime[6] = {21,05,4,12,8,35};
 	setClockTime(clocktime);
-	setAlarm(1209);
+	//setAlarm(1209);
 	int menu = 0;
 	char key;
 	while(1){

@@ -116,15 +116,27 @@ int getDay(int y, int m, int d){
 	}
 	return (days+d+5)%7;
 }
+void displayZero(uint8_t digit){
+	if (digit<10){
+		LCD_String("0");
+	}
+}
 void displayTime(){
 	ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
-	char secondS[10];char minuteS[10];char hourS[10];
-	itoa(second,secondS,10);itoa(minute,minuteS,10);itoa(hour,hourS,10);
-	LCD_Home(0);
+	char secondS[10];char minuteS[10];char hourS[10];char yearS[10];char monthS[10];char dayS[10];
+	itoa(second,secondS,10);itoa(minute,minuteS,10);itoa(hour,hourS,10);itoa(year,yearS,10);itoa(month,monthS,10);itoa(day,dayS,10);
+	LCD_Home(0);LCD_String("   20");
+	displayZero(year);LCD_String(yearS);LCD_String("-");
+	displayZero(month);LCD_String(monthS);LCD_String("-");
+	displayZero(day);LCD_String(dayS);
+	LCD_Home(1);LCD_String("    ");
+	displayZero(hour);
 	LCD_String(hourS);
 	LCD_String(":");
+	displayZero(minute);
 	LCD_String(minuteS);
 	LCD_String(":");
+	displayZero(second);
 	LCD_String(secondS);
 	//_delay_ms(1);
 

@@ -38,5 +38,5 @@ extern void updateAlarmArray(int removeAlarm);
 extern void setClockTime(int clockTime[6]);
 extern int getDay(int y, int m, int d);
 extern void displayTime();
-
+extern void displayZero(uint8_t digit);
 #endif //__ALARM_H__
