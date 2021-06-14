@@ -135,7 +135,34 @@ void LCD_SetAlarm(char key,int state){
 
 
 }
-
+int clockTime[6];
+int ClockState = 0;
+int temp = 0;
+int data = 0;
+char dataS[10];
+void LCD_SetDate(int key, int state){
+	LCD_Home(0);
+	if (int(key)>47 & int(key)<58 & state ==2){
+		data+=(int(key)-48);
+		itoa(data,dataS,10);
+		LCD_String(dataS);
+		_delay_ms(800);
+		if (temp == 0){
+			data*=10;
+			temp = 1;
+		}
+		else{
+			clockTime[ClockState] = data;
+			ClockState++;
+			data=0;
+			temp = 0;
+		}
+	}
+	if (ClockState == 6 & state==3){
+		setClockTime(clockTime);
+		ClockState = 0;
+	}
+}
 char menu_List[3][10] = {"SET ALARM","SET TIME ","SET TONE "};
 int menu_Var = 0;
 void LCD_Menu(char key,int state){
@@ -164,5 +191,8 @@ void LCD_Menu(char key,int state){
 	}
 	if ((state >1) & (menu_Var==0)){
 		LCD_SetAlarm(key,state);
+	}
+	if ((state >1) & (menu_Var==1)){
+		LCD_SetDate(key,state);
 	}
 }
