@@ -37,7 +37,7 @@ int main()
 		if (menu>0){
 			LCD_Menu(key,menu);
 		}
-		if (menu==3){
+		if (menu==3 | menu==-1){
 			menu = 0;
 		}
 		if (key=='#'){
