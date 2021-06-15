@@ -108,12 +108,12 @@ void LCD_Blink(char ch[10]){
 	if (blink_var==0){
 		LCD_String(ch);
 		blink_var=1;
-		_delay_ms(500);
+		_delay_ms(100);
 	}
 	else{
 		LCD_String(" ");
 		blink_var=0;
-		_delay_ms(500);
+		_delay_ms(100);
 	}
 }
 void displayTyping(int val,int pos){
@@ -123,37 +123,35 @@ void displayTyping(int val,int pos){
 		LCD_Blink(val0S);
 		LCD_String(val1S);
 	}
-	if (pos==1){
+	else if (pos==1){
 		LCD_String(val0S);
 		LCD_Blink(val1S);
-		
+	}
+	else{
+		LCD_String(val0S);LCD_String(val1S);
 	}
 }
-
 int clkTime = 0;
 int num = 0;
 signed int p = 3;
-char clkTimeS[10];
 void LCD_SetAlarm(char key,int state){
 	LCD_Home(0);
-	if (clkTime==0){
-		LCD_String("0000");
-	}
+	displayTyping(clkTime/100,3-p);
+	LCD_String(":");
+	displayTyping(clkTime%100,1-p);
+	
 	//LCD_String("0000");
 	if (int(key)>47 & int(key)<58 & state ==2 & p!=-1){
-		LCD_Home(0);
 		clkTime += (int(key)-48)*powerOf(10,p);
-		itoa(clkTime,clkTimeS,10);
-		LCD_String(clkTimeS);
 		p--;
-		_delay_ms(800);
+		_delay_ms(600);
 	}
 	if (state==3){
 		setAlarm(clkTime);
 		LCD_Home(0);
 		LCD_String("ALARM IS SET TO");
 		LCD_Home(1);
-		LCD_String(clkTimeS);
+		displayTyping(clkTime/100,3);LCD_String(":");displayTyping(clkTime%100,3);
 		clkTime=0;num=0;p=3;
 		_delay_ms(2000);
 		LCD_Clear();
