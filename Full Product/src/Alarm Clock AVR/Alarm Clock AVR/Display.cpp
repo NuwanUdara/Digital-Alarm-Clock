@@ -103,6 +103,32 @@ void LCD_Home(int r){
 		LCD_Command (0xC0);
 	}
 }
+int blink_var=0;
+void LCD_Blink(char ch[10]){
+	if (blink_var==0){
+		LCD_String(ch);
+		blink_var=1;
+		_delay_ms(500);
+	}
+	else{
+		LCD_String(" ");
+		blink_var=0;
+		_delay_ms(500);
+	}
+}
+void displayTyping(int val,int pos){
+	char val0S[2];char val1S[2];
+	itoa(val/10,val0S,10);itoa(val%10,val1S,10);
+	if (pos==0){
+		LCD_Blink(val0S);
+		LCD_String(val1S);
+	}
+	if (pos==1){
+		LCD_String(val0S);
+		LCD_Blink(val1S);
+		
+	}
+}
 
 int clkTime = 0;
 int num = 0;
@@ -142,7 +168,7 @@ int data = 0;
 char dataS[10];
 void LCD_SetDate(int key, int state){
 	LCD_Home(0);
-	LCD_String("20");
+	LCD_String("2");displayTyping(45,1);
 	if (int(key)>47 & int(key)<58 & state ==2){
 		data+=(int(key)-48);
 		itoa(data,dataS,10);

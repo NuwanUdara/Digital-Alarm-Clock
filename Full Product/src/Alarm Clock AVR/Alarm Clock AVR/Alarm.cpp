@@ -51,7 +51,7 @@ void ringAlarm(){
 	LCD_Clear();
 	LCD_String("RING!!");
 	play(0);				//Trigger buzzer. Can be interrupted by the int1 button.
-	_delay_ms(2000);
+	//_delay_ms(2000);
 }
 void setAlarm(int alarm_time){
 	if (alarm_time<2400){
