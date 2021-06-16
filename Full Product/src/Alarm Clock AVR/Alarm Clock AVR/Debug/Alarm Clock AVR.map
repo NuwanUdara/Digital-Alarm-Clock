@@ -909,22 +909,22 @@ END GROUP
  .debug_frame   0x000005a8       0x44 Keypad.o
  .debug_frame   0x000005ec       0x34 main.o
 
-.debug_str      0x00000000      0xcd5
+.debug_str      0x00000000      0xc74
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x489 Alarm.o
                                 0x4d9 (size before relaxing)
- .debug_str     0x00000691      0x185 Buzzer.o
-                                0x2ed (size before relaxing)
- .debug_str     0x00000816      0x23c Display.o
+ .debug_str     0x00000691      0x124 Buzzer.o
+                                0x2e5 (size before relaxing)
+ .debug_str     0x000007b5      0x23c Display.o
                                 0x4ea (size before relaxing)
- .debug_str     0x00000a52      0x18f ds1307.o
+ .debug_str     0x000009f1      0x18f ds1307.o
                                 0x3a6 (size before relaxing)
- .debug_str     0x00000be1       0x38 i2cmaster.o
+ .debug_str     0x00000b80       0x38 i2cmaster.o
                                 0x2a4 (size before relaxing)
- .debug_str     0x00000c19       0x9a Keypad.o
+ .debug_str     0x00000bb8       0x9a Keypad.o
                                 0x26d (size before relaxing)
- .debug_str     0x00000cb3       0x22 main.o
+ .debug_str     0x00000c52       0x22 main.o
                                 0x320 (size before relaxing)
 
 .debug_loc      0x00000000     0x21f5

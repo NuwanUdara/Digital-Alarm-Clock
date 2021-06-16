@@ -50,7 +50,7 @@ bool isPress(uint8_t prt){
 void ringAlarm(){
 	LCD_Clear();
 	LCD_String("RING!!");
-	play(0);				//Trigger buzzer. Can be interrupted by the int1 button.
+	play(1);				//Trigger buzzer. Can be interrupted by the int1 button.
 	//_delay_ms(2000);
 }
 void setAlarm(int alarm_time){

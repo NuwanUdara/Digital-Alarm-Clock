@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000620  00000000  00000000  00008a80  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000cd5  00000000  00000000  000090a0  2**0
+ 10 .debug_str    00000c74  00000000  00000000  000090a0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000021f5  00000000  00000000  00009d75  2**0
+ 11 .debug_loc    000021f5  00000000  00000000  00009d14  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001f0  00000000  00000000  0000bf6a  2**0
+ 12 .debug_ranges 000001f0  00000000  00000000  0000bf09  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1207,8 +1207,8 @@ void ringAlarm(){
     106e:	8b e8       	ldi	r24, 0x8B	; 139
     1070:	91 e0       	ldi	r25, 0x01	; 1
     1072:	0e 94 2c 0d 	call	0x1a58	; 0x1a58 <_Z10LCD_StringPc>
-	play(0);				//Trigger buzzer. Can be interrupted by the int1 button.
-    1076:	80 e0       	ldi	r24, 0x00	; 0
+	play(1);				//Trigger buzzer. Can be interrupted by the int1 button.
+    1076:	81 e0       	ldi	r24, 0x01	; 1
     1078:	90 e0       	ldi	r25, 0x00	; 0
     107a:	0e 94 bf 0b 	call	0x177e	; 0x177e <_Z4playi>
     107e:	08 95       	ret
@@ -1873,21 +1873,36 @@ void displayTime(){
     14e0:	08 95       	ret
 
 000014e2 <_Z11init_buzzerv>:
+ 
+ volatile int sp = 1;    // This is a reference to stop the alarm with a button press
+ 
+ void init_buzzer(){
+	 // pins ports declaration
+	 buzzer_DDR |= _BV(buzzer_PIN) ;			// make buzzer pin output
     14e2:	84 b1       	in	r24, 0x04	; 4
     14e4:	84 60       	ori	r24, 0x04	; 4
     14e6:	84 b9       	out	0x04, r24	; 4
+	 	
+	 EICRA |= _BV(ISC01) | _BV(ISC00);		  // set rising edge method
     14e8:	e9 e6       	ldi	r30, 0x69	; 105
     14ea:	f0 e0       	ldi	r31, 0x00	; 0
     14ec:	80 81       	ld	r24, Z
     14ee:	83 60       	ori	r24, 0x03	; 3
     14f0:	80 83       	st	Z, r24
+	 EIMSK |= _BV(INT0);					 // enable pin PD1 External interrupt
     14f2:	8d b3       	in	r24, 0x1d	; 29
     14f4:	81 60       	ori	r24, 0x01	; 1
     14f6:	8d bb       	out	0x1d, r24	; 29
+	 	
+	 sei();								   //  this Enables the Global Interrupt Enable (I-bit) in the Status Register (SREG)
     14f8:	78 94       	sei
     14fa:	08 95       	ret
 
 000014fc <_Z9Play_Noteff>:
+	 
+ }
+ 
+ void Play_Note(float freq,float dur){
     14fc:	4f 92       	push	r4
     14fe:	5f 92       	push	r5
     1500:	6f 92       	push	r6
@@ -1910,6 +1925,11 @@ void displayTime(){
     1522:	7c 01       	movw	r14, r24
     1524:	49 01       	movw	r8, r18
     1526:	5a 01       	movw	r10, r20
+	 // variables
+	 long int i,cycles;
+	 float half_period,period;
+	 
+	 if (freq != 0){
     1528:	20 e0       	ldi	r18, 0x00	; 0
     152a:	30 e0       	ldi	r19, 0x00	; 0
     152c:	a9 01       	movw	r20, r18
@@ -1917,6 +1937,7 @@ void displayTime(){
     1532:	88 23       	and	r24, r24
     1534:	09 f4       	brne	.+2      	; 0x1538 <_Z9Play_Noteff+0x3c>
     1536:	ad c0       	rjmp	.+346    	; 0x1692 <_Z9Play_Noteff+0x196>
+		 period=(1/freq)*1000;
     1538:	a7 01       	movw	r20, r14
     153a:	96 01       	movw	r18, r12
     153c:	60 e0       	ldi	r22, 0x00	; 0
@@ -1931,6 +1952,7 @@ void displayTime(){
     1550:	0e 94 d3 13 	call	0x27a6	; 0x27a6 <__mulsf3>
     1554:	6b 01       	movw	r12, r22
     1556:	7c 01       	movw	r14, r24
+		 cycles=dur/period;
     1558:	9b 01       	movw	r18, r22
     155a:	ac 01       	movw	r20, r24
     155c:	c5 01       	movw	r24, r10
@@ -1939,6 +1961,7 @@ void displayTime(){
     1564:	0e 94 e6 12 	call	0x25cc	; 0x25cc <__fixsfsi>
     1568:	2b 01       	movw	r4, r22
     156a:	3c 01       	movw	r6, r24
+		 half_period = period/2;
     156c:	20 e0       	ldi	r18, 0x00	; 0
     156e:	30 e0       	ldi	r19, 0x00	; 0
     1570:	40 e0       	ldi	r20, 0x00	; 0
@@ -1950,6 +1973,8 @@ void displayTime(){
     157e:	7a 83       	std	Y+2, r23	; 0x02
     1580:	8b 83       	std	Y+3, r24	; 0x03
     1582:	9c 83       	std	Y+4, r25	; 0x04
+
+		 for (i=0;i<cycles;i++)
     1584:	81 2c       	mov	r8, r1
     1586:	91 2c       	mov	r9, r1
     1588:	54 01       	movw	r10, r8
@@ -2049,6 +2074,10 @@ void displayTime(){
     160c:	cb 01       	movw	r24, r22
     160e:	01 97       	sbiw	r24, 0x01	; 1
     1610:	f1 f7       	brne	.-4      	; 0x160e <_Z9Play_Noteff+0x112>
+		 {
+			 //50% duty cycle
+			 _delay_ms(half_period);
+			 buzzer_PORT |= _BV(buzzer_PIN);
     1612:	85 b1       	in	r24, 0x05	; 5
     1614:	84 60       	ori	r24, 0x04	; 4
     1616:	85 b9       	out	0x05, r24	; 5
@@ -2126,9 +2155,17 @@ void displayTime(){
     167a:	cb 01       	movw	r24, r22
     167c:	01 97       	sbiw	r24, 0x01	; 1
     167e:	f1 f7       	brne	.-4      	; 0x167c <_Z9Play_Noteff+0x180>
+			 _delay_ms(half_period);
+			 buzzer_PORT &= ~ _BV(buzzer_PIN);
     1680:	85 b1       	in	r24, 0x05	; 5
     1682:	8b 7f       	andi	r24, 0xFB	; 251
     1684:	85 b9       	out	0x05, r24	; 5
+	 if (freq != 0){
+		 period=(1/freq)*1000;
+		 cycles=dur/period;
+		 half_period = period/2;
+
+		 for (i=0;i<cycles;i++)
     1686:	8f ef       	ldi	r24, 0xFF	; 255
     1688:	88 1a       	sub	r8, r24
     168a:	98 0a       	sbc	r9, r24
@@ -2215,6 +2252,12 @@ void displayTime(){
     1700:	cb 01       	movw	r24, r22
     1702:	01 97       	sbiw	r24, 0x01	; 1
     1704:	f1 f7       	brne	.-4      	; 0x1702 <_Z9Play_Noteff+0x206>
+	 }
+	 else {
+		 _delay_ms(dur);   // rest
+	 }
+	 return;
+ }
     1706:	0f 90       	pop	r0
     1708:	0f 90       	pop	r0
     170a:	0f 90       	pop	r0
@@ -2236,6 +2279,12 @@ void displayTime(){
     172a:	08 95       	ret
 
 0000172c <__vector_1>:
+ 
+ /** External interrupt for INT0 (PD2) pin ISR function
+ We will use this to stop currently playing melody **/
+
+ ISR (INT0_vect)          //External interrupt Stop button ISR
+ {
     172c:	1f 92       	push	r1
     172e:	0f 92       	push	r0
     1730:	0f b6       	in	r0, 0x3f	; 63
@@ -2243,12 +2292,15 @@ void displayTime(){
     1734:	11 24       	eor	r1, r1
     1736:	8f 93       	push	r24
     1738:	9f 93       	push	r25
+	 sp=0;
     173a:	10 92 19 01 	sts	0x0119, r1	; 0x800119 <sp+0x1>
     173e:	10 92 18 01 	sts	0x0118, r1	; 0x800118 <sp>
     1742:	88 ea       	ldi	r24, 0xA8	; 168
     1744:	91 e6       	ldi	r25, 0x61	; 97
     1746:	01 97       	sbiw	r24, 0x01	; 1
     1748:	f1 f7       	brne	.-4      	; 0x1746 <__vector_1+0x1a>
+	 _delay_ms(100);
+ }
     174a:	9f 91       	pop	r25
     174c:	8f 91       	pop	r24
     174e:	0f 90       	pop	r0
@@ -2258,27 +2310,47 @@ void displayTime(){
     1756:	18 95       	reti
 
 00001758 <_Z11tempochoosei>:
+
+int tempochoose(int number){
+	if (number==0){return tempos[0];}
     1758:	00 97       	sbiw	r24, 0x00	; 0
     175a:	41 f0       	breq	.+16     	; 0x176c <_Z11tempochoosei+0x14>
+	else if (number==1){return tempos[1];}
     175c:	81 30       	cpi	r24, 0x01	; 1
     175e:	91 05       	cpc	r25, r1
     1760:	41 f0       	breq	.+16     	; 0x1772 <_Z11tempochoosei+0x1a>
+	else if (number==2){return tempos[2];}
     1762:	02 97       	sbiw	r24, 0x02	; 2
     1764:	49 f4       	brne	.+18     	; 0x1778 <_Z11tempochoosei+0x20>
     1766:	85 e5       	ldi	r24, 0x55	; 85
     1768:	90 e0       	ldi	r25, 0x00	; 0
     176a:	08 95       	ret
+	 sp=0;
+	 _delay_ms(100);
+ }
+
+int tempochoose(int number){
+	if (number==0){return tempos[0];}
     176c:	81 ee       	ldi	r24, 0xE1	; 225
     176e:	90 e0       	ldi	r25, 0x00	; 0
     1770:	08 95       	ret
+	else if (number==1){return tempos[1];}
     1772:	88 e7       	ldi	r24, 0x78	; 120
     1774:	90 e0       	ldi	r25, 0x00	; 0
     1776:	08 95       	ret
+	else if (number==2){return tempos[2];}
+	else{return tempos[3];}
     1778:	88 e7       	ldi	r24, 0x78	; 120
     177a:	90 e0       	ldi	r25, 0x00	; 0
     177c:	08 95       	ret
 
 0000177e <_Z4playi>:
+		 _delay_ms(dur);   // rest
+	 }
+	 return;
+ }
+ 
+ void play(int number){
     177e:	2f 92       	push	r2
     1780:	3f 92       	push	r3
     1782:	4f 92       	push	r4
@@ -2302,7 +2374,10 @@ void displayTime(){
     17a6:	cd b7       	in	r28, 0x3d	; 61
     17a8:	de b7       	in	r29, 0x3e	; 62
     17aa:	1c 01       	movw	r2, r24
+	 int tempo=tempochoose(number); // choose the right tempo from the list using the function
     17ac:	0e 94 ac 0b 	call	0x1758	; 0x1758 <_Z11tempochoosei>
+	 int notes = sizeof(melody0[number])/sizeof(melody0[number][0])/2;
+	 int wholenote = (60000 * 2.5) / tempo;
     17b0:	bc 01       	movw	r22, r24
     17b2:	99 0f       	add	r25, r25
     17b4:	88 0b       	sbc	r24, r24
@@ -2318,21 +2393,35 @@ void displayTime(){
     17cc:	0e 94 e6 12 	call	0x25cc	; 0x25cc <__fixsfsi>
     17d0:	7a 83       	std	Y+2, r23	; 0x02
     17d2:	69 83       	std	Y+1, r22	; 0x01
+	 int divider = 0;
+	 int noteDuration = 0;
+	 
+	 for (int thisNote = 0; thisNote < notes *2 ; thisNote = thisNote + 2) {
     17d4:	1c 82       	std	Y+4, r1	; 0x04
     17d6:	1b 82       	std	Y+3, r1	; 0x03
+ void play(int number){
+	 int tempo=tempochoose(number); // choose the right tempo from the list using the function
+	 int notes = sizeof(melody0[number])/sizeof(melody0[number][0])/2;
+	 int wholenote = (60000 * 2.5) / tempo;
+	 int divider = 0;
+	 int noteDuration = 0;
     17d8:	e1 2c       	mov	r14, r1
     17da:	f1 2c       	mov	r15, r1
+	 
+	 for (int thisNote = 0; thisNote < notes *2 ; thisNote = thisNote + 2) {
     17dc:	8b 81       	ldd	r24, Y+3	; 0x03
     17de:	9c 81       	ldd	r25, Y+4	; 0x04
     17e0:	80 39       	cpi	r24, 0x90	; 144
     17e2:	91 40       	sbci	r25, 0x01	; 1
     17e4:	0c f0       	brlt	.+2      	; 0x17e8 <_Z4playi+0x6a>
     17e6:	ad c0       	rjmp	.+346    	; 0x1942 <_Z4playi+0x1c4>
+		 if (sp==1){
     17e8:	80 91 18 01 	lds	r24, 0x0118	; 0x800118 <sp>
     17ec:	90 91 19 01 	lds	r25, 0x0119	; 0x800119 <sp+0x1>
     17f0:	01 97       	sbiw	r24, 0x01	; 1
     17f2:	09 f0       	breq	.+2      	; 0x17f6 <_Z4playi+0x78>
     17f4:	a2 c0       	rjmp	.+324    	; 0x193a <_Z4playi+0x1bc>
+			 divider = pgm_read_word_near(melody0[number]+thisNote + 1);
     17f6:	80 e2       	ldi	r24, 0x20	; 32
     17f8:	93 e0       	ldi	r25, 0x03	; 3
     17fa:	28 9e       	mul	r2, r24
@@ -2354,19 +2443,27 @@ void displayTime(){
     181a:	f1 1f       	adc	r31, r17
     181c:	65 91       	lpm	r22, Z+
     181e:	74 91       	lpm	r23, Z
+			 
+			 if (divider > 0) { //positive divider ( positive duration)
     1820:	16 16       	cp	r1, r22
     1822:	17 06       	cpc	r1, r23
     1824:	34 f4       	brge	.+12     	; 0x1832 <_Z4playi+0xb4>
+				 // it is a regular note
+			 noteDuration = (wholenote) / divider;}
     1826:	89 81       	ldd	r24, Y+1	; 0x01
     1828:	9a 81       	ldd	r25, Y+2	; 0x02
     182a:	0e 94 40 14 	call	0x2880	; 0x2880 <__divmodhi4>
     182e:	7b 01       	movw	r14, r22
     1830:	1c c0       	rjmp	.+56     	; 0x186a <_Z4playi+0xec>
+			 
+			 else if (divider<0){
     1832:	77 23       	and	r23, r23
     1834:	bc f4       	brge	.+46     	; 0x1864 <_Z4playi+0xe6>
+				 noteDuration=(wholenote)/(divider);// negative durations need to be increased and made positive
     1836:	89 81       	ldd	r24, Y+1	; 0x01
     1838:	9a 81       	ldd	r25, Y+2	; 0x02
     183a:	0e 94 40 14 	call	0x2880	; 0x2880 <__divmodhi4>
+				 noteDuration=noteDuration*1.5;
     183e:	07 2e       	mov	r0, r23
     1840:	00 0c       	add	r0, r0
     1842:	88 0b       	sbc	r24, r24
@@ -2378,14 +2475,18 @@ void displayTime(){
     1850:	5f e3       	ldi	r21, 0x3F	; 63
     1852:	0e 94 d3 13 	call	0x27a6	; 0x27a6 <__mulsf3>
     1856:	0e 94 e6 12 	call	0x25cc	; 0x25cc <__fixsfsi>
+				 noteDuration=-noteDuration;
     185a:	ee 24       	eor	r14, r14
     185c:	ff 24       	eor	r15, r15
     185e:	e6 1a       	sub	r14, r22
     1860:	f7 0a       	sbc	r15, r23
     1862:	03 c0       	rjmp	.+6      	; 0x186a <_Z4playi+0xec>
+			 }
+			 else if(divider==0){return;} // this will be used to stop playing
     1864:	67 2b       	or	r22, r23
     1866:	09 f4       	brne	.+2      	; 0x186a <_Z4playi+0xec>
     1868:	6c c0       	rjmp	.+216    	; 0x1942 <_Z4playi+0x1c4>
+			 Play_Note((pgm_read_word_near(melody0[number]+thisNote)), noteDuration*0.9 ); // play the selected pitch
     186a:	b7 01       	movw	r22, r14
     186c:	0f 2c       	mov	r0, r15
     186e:	00 0c       	add	r0, r0
@@ -2414,6 +2515,7 @@ void displayTime(){
     18a2:	a5 01       	movw	r20, r10
     18a4:	94 01       	movw	r18, r8
     18a6:	0e 94 7e 0a 	call	0x14fc	; 0x14fc <_Z9Play_Noteff>
+			 _delay_ms(noteDuration*0.5);
     18aa:	20 e0       	ldi	r18, 0x00	; 0
     18ac:	30 e0       	ldi	r19, 0x00	; 0
     18ae:	40 e0       	ldi	r20, 0x00	; 0
@@ -2501,14 +2603,30 @@ void displayTime(){
     1928:	cb 01       	movw	r24, r22
     192a:	01 97       	sbiw	r24, 0x01	; 1
     192c:	f1 f7       	brne	.-4      	; 0x192a <_Z4playi+0x1ac>
+	 int notes = sizeof(melody0[number])/sizeof(melody0[number][0])/2;
+	 int wholenote = (60000 * 2.5) / tempo;
+	 int divider = 0;
+	 int noteDuration = 0;
+	 
+	 for (int thisNote = 0; thisNote < notes *2 ; thisNote = thisNote + 2) {
     192e:	8b 81       	ldd	r24, Y+3	; 0x03
     1930:	9c 81       	ldd	r25, Y+4	; 0x04
     1932:	02 96       	adiw	r24, 0x02	; 2
     1934:	9c 83       	std	Y+4, r25	; 0x04
     1936:	8b 83       	std	Y+3, r24	; 0x03
     1938:	51 cf       	rjmp	.-350    	; 0x17dc <_Z4playi+0x5e>
+			 else if(divider==0){return;} // this will be used to stop playing
+			 Play_Note((pgm_read_word_near(melody0[number]+thisNote)), noteDuration*0.9 ); // play the selected pitch
+			 _delay_ms(noteDuration*0.5);
+		 }
+		 else{
+			 sp=0;
     193a:	10 92 19 01 	sts	0x0119, r1	; 0x800119 <sp+0x1>
     193e:	10 92 18 01 	sts	0x0118, r1	; 0x800118 <sp>
+			 break;
+		 }
+	 }
+ }
     1942:	0f 90       	pop	r0
     1944:	0f 90       	pop	r0
     1946:	0f 90       	pop	r0
