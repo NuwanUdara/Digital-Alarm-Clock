@@ -34,8 +34,8 @@ Disassembly of section .text:
 
 00000000 <__vectors>:
        0:	0c 94 04 08 	jmp	0x1008	; 0x1008 <__ctors_end>
-       4:	0c 94 96 0b 	jmp	0x172c	; 0x172c <__vector_1>
-       8:	0c 94 21 08 	jmp	0x1042	; 0x1042 <__bad_interrupt>
+       4:	0c 94 21 08 	jmp	0x1042	; 0x1042 <__bad_interrupt>
+       8:	0c 94 96 0b 	jmp	0x172c	; 0x172c <__vector_2>
        c:	0c 94 21 08 	jmp	0x1042	; 0x1042 <__bad_interrupt>
       10:	0c 94 21 08 	jmp	0x1042	; 0x1042 <__bad_interrupt>
       14:	0c 94 21 08 	jmp	0x1042	; 0x1042 <__bad_interrupt>
@@ -1883,15 +1883,15 @@ void displayTime(){
     14e4:	84 60       	ori	r24, 0x04	; 4
     14e6:	84 b9       	out	0x04, r24	; 4
 	 	
-	 EICRA |= _BV(ISC01) | _BV(ISC00);		  // set rising edge method
+	 EICRA |= _BV(ISC11) | _BV(ISC10);		  // set rising edge method
     14e8:	e9 e6       	ldi	r30, 0x69	; 105
     14ea:	f0 e0       	ldi	r31, 0x00	; 0
     14ec:	80 81       	ld	r24, Z
-    14ee:	83 60       	ori	r24, 0x03	; 3
+    14ee:	8c 60       	ori	r24, 0x0C	; 12
     14f0:	80 83       	st	Z, r24
-	 EIMSK |= _BV(INT0);					 // enable pin PD1 External interrupt
+	 EIMSK |= _BV(INT1);					 // enable pin PD1 External interrupt
     14f2:	8d b3       	in	r24, 0x1d	; 29
-    14f4:	81 60       	ori	r24, 0x01	; 1
+    14f4:	82 60       	ori	r24, 0x02	; 2
     14f6:	8d bb       	out	0x1d, r24	; 29
 	 	
 	 sei();								   //  this Enables the Global Interrupt Enable (I-bit) in the Status Register (SREG)
@@ -2278,12 +2278,12 @@ void displayTime(){
     1728:	4f 90       	pop	r4
     172a:	08 95       	ret
 
-0000172c <__vector_1>:
+0000172c <__vector_2>:
  
  /** External interrupt for INT0 (PD2) pin ISR function
  We will use this to stop currently playing melody **/
 
- ISR (INT0_vect)          //External interrupt Stop button ISR
+ ISR (INT1_vect)          //External interrupt Stop button ISR
  {
     172c:	1f 92       	push	r1
     172e:	0f 92       	push	r0
@@ -2298,7 +2298,7 @@ void displayTime(){
     1742:	88 ea       	ldi	r24, 0xA8	; 168
     1744:	91 e6       	ldi	r25, 0x61	; 97
     1746:	01 97       	sbiw	r24, 0x01	; 1
-    1748:	f1 f7       	brne	.-4      	; 0x1746 <__vector_1+0x1a>
+    1748:	f1 f7       	brne	.-4      	; 0x1746 <__vector_2+0x1a>
 	 _delay_ms(100);
  }
     174a:	9f 91       	pop	r25

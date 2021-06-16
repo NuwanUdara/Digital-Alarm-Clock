@@ -28,8 +28,8 @@
 	 // pins ports declaration
 	 buzzer_DDR |= _BV(buzzer_PIN) ;			// make buzzer pin output
 	 	
-	 EICRA |= _BV(ISC01) | _BV(ISC00);		  // set rising edge method
-	 EIMSK |= _BV(INT0);					 // enable pin PD1 External interrupt
+	 EICRA |= _BV(ISC11) | _BV(ISC10);		  // set rising edge method
+	 EIMSK |= _BV(INT1);					 // enable pin PD1 External interrupt
 	 	
 	 sei();								   //  this Enables the Global Interrupt Enable (I-bit) in the Status Register (SREG)
 	 
@@ -94,7 +94,7 @@
  /** External interrupt for INT0 (PD2) pin ISR function
  We will use this to stop currently playing melody **/
 
- ISR (INT0_vect)          //External interrupt Stop button ISR
+ ISR (INT1_vect)          //External interrupt Stop button ISR
  {
 	 sp=0;
 	 _delay_ms(100);

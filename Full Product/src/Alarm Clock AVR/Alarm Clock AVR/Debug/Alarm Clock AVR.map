@@ -425,6 +425,7 @@ END GROUP
  *(.text)
  .text          0x00001042        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00001042                __vector_22
+                0x00001042                __vector_1
                 0x00001042                __vector_24
                 0x00001042                __vector_12
                 0x00001042                __bad_interrupt
@@ -440,7 +441,6 @@ END GROUP
                 0x00001042                __vector_5
                 0x00001042                __vector_4
                 0x00001042                __vector_9
-                0x00001042                __vector_2
                 0x00001042                __vector_21
                 0x00001042                __vector_15
                 0x00001042                __vector_8
@@ -484,9 +484,9 @@ END GROUP
  .text._Z9Play_Noteff
                 0x000014fc      0x230 Buzzer.o
                 0x000014fc                _Z9Play_Noteff
- .text.__vector_1
+ .text.__vector_2
                 0x0000172c       0x2c Buzzer.o
-                0x0000172c                __vector_1
+                0x0000172c                __vector_2
  .text._Z11tempochoosei
                 0x00001758       0x26 Buzzer.o
                 0x00001758                _Z11tempochoosei
