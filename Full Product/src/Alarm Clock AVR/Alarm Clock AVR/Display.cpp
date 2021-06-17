@@ -9,8 +9,8 @@
 #include "Keypad.h"
 #include "stdlib.h"
 #include "Alarm.h"
-#define LCD_Dir  DDRB			/* Define LCD data port direction */
-#define LCD_Port PORTB			/* Define LCD data port */
+#define LCD_Dir  DDRD			/* Define LCD data port direction */
+#define LCD_Port PORTD			/* Define LCD data port */
 #define RS PB0				/* Define Register Select pin */
 #define EN PB1 				/* Define Enable signal pin */
 // default constructor

@@ -15,9 +15,9 @@
 #include "Buzzer.h"				   // The Include File for the main
 
  //Buzzer declaration
- #define buzzer_DDR DDRB
- #define buzzer_PORT PORTB
- #define buzzer_PIN PORTB2
+ #define buzzer_DDR DDRD
+ #define buzzer_PORT PORTD
+ #define buzzer_PIN PORTD2
 
  // interrupt button declaration
  #define interruptDDR DDRD
