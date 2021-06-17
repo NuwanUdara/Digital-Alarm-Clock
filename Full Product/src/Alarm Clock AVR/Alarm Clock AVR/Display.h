@@ -37,4 +37,5 @@ extern void LCD_Home(int r);
 extern void LCD_Menu(char key,int state);
 extern void LCD_SetAlarm(char key,int state);
 extern void LCD_SetDate(int key, int state);
+extern void LCD_Tone(char key,int state);
 #endif //__DISPLAY_H__

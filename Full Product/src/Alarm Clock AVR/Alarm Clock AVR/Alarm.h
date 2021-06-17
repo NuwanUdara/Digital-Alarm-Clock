@@ -31,7 +31,7 @@ private:
 extern bool isPress(uint8_t prt);
 extern int powerOf(int base, int power);
 //extern void getAlarmTime();
-extern void ringAlarm();
+extern void ringAlarm(int tone);
 extern void setAlarm(int alarm_time);
 extern void checkAlarm();
 extern void updateAlarmArray(int removeAlarm);
@@ -39,4 +39,5 @@ extern void setClockTime(int clockTime[6]);
 extern int getDay(int y, int m, int d);
 extern void displayTime();
 extern void displayZero(uint8_t digit);
+extern void setTone(int t);
 #endif //__ALARM_H__

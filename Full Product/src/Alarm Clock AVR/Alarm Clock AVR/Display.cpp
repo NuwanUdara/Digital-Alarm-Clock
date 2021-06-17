@@ -135,16 +135,29 @@ int clkTime = 0;
 int num = 0;
 signed int p = 3;
 void LCD_SetAlarm(char key,int state){
-	LCD_Home(0);
-	displayTyping(clkTime/100,3-p);
-	LCD_String(":");
-	displayTyping(clkTime%100,1-p);
-	
+	if (p!=-1){
+		LCD_Home(0);
+		displayTyping(clkTime/100,3-p);
+		LCD_String(":");
+		displayTyping(clkTime%100,1-p);
+	}
 	//LCD_String("0000");
 	if (int(key)>47 & int(key)<58 & state ==2 & p!=-1){
 		clkTime += (int(key)-48)*powerOf(10,p);
 		p--;
 		_delay_ms(600);
+		if (p==-1){
+			LCD_Home(0);
+			displayTyping(clkTime/100,3);LCD_String(":");displayTyping(clkTime%100,3);
+			_delay_ms(1000);
+			LCD_Home(0);
+			LCD_String("SELECT THE TONE");
+			_delay_ms(2000);
+			LCD_Clear();
+		}
+	}
+	if (p==-1){
+		LCD_Tone(key,state);
 	}
 	if (state==3){
 		setAlarm(clkTime);
@@ -156,8 +169,6 @@ void LCD_SetAlarm(char key,int state){
 		_delay_ms(2000);
 		LCD_Clear();
 	}
-
-
 }
 int clockTime[6];
 int ClockState = 0;
@@ -206,7 +217,7 @@ void LCD_SetDate(int key, int state){
 		LCD_Clear();
 	}
 }
-char tone_List[5][10] = {"GOT      ","STAR WARS","PINK     ","TONE4    ","TONE5    "};
+char tone_List[5][10] = {"DOOM     ","STAR WARS","GOT      ","PANTHER  ","GODFATHER"};
 int tone_Var = 0;
 void LCD_Tone(char key,int state){
 	LCD_Home(0);
@@ -232,6 +243,9 @@ void LCD_Tone(char key,int state){
 		// 	LCD_Home(1);
 		// 	LCD_String(menu_List[(menu_Var+1)%3]);
 	}
+	 if (state==3){
+		 setTone(tone_Var);
+	 }
 
 }
 char menu_List[3][10] = {"SET ALARM","SET TIME ","SET TONE "};

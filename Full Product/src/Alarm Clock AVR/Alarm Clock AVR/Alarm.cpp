@@ -23,6 +23,7 @@ Alarm::~Alarm()
 } //~Alarm
 int numberOfAlarms = 0;
 int alarmArray[10];
+int toneArray[10];
 int monthsDays[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 uint8_t year = 0;
 uint8_t month = 0;
@@ -47,10 +48,10 @@ bool isPress(uint8_t prt){
 		return false;
 	}
 }
-void ringAlarm(){
+void ringAlarm(int tone){
 	LCD_Clear();
 	LCD_String("RING!!");
-	play(1);				//Trigger buzzer. Can be interrupted by the int1 button.
+	play(tone);				//Trigger buzzer. Can be interrupted by the int1 button.
 	//_delay_ms(2000);
 }
 void setAlarm(int alarm_time){
@@ -59,13 +60,18 @@ void setAlarm(int alarm_time){
 		numberOfAlarms++;
 	}
 }
+void setTone(int t){
+	toneArray[numberOfAlarms] = t;
+}
 void updateAlarmArray(int removeAlarm){
 	for (int i=0;i<numberOfAlarms;i++){
 		if (i<removeAlarm){
 			alarmArray[i] = alarmArray[i];
+			toneArray[i] = toneArray[i];
 		}
 		else{
 			alarmArray[i] = alarmArray[i+1];
+			toneArray[i] = toneArray[i+1];
 		}
 	}
 }
@@ -74,7 +80,7 @@ void checkAlarm(){
 		ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
 		for (int i = 0; i <= numberOfAlarms;i++){
 			if (alarmArray[i]/100 == hour && alarmArray[i]%100 == minute){
-				ringAlarm();
+				ringAlarm(toneArray[i]);
 				updateAlarmArray(i);
 				numberOfAlarms--;
 			}
