@@ -166,15 +166,29 @@ int data = 0;
 char dataS[10];
 void LCD_SetDate(int key, int state){
 	LCD_Home(0);
-	LCD_String("2");displayTyping(45,1);
+	LCD_String("   20");
+	for (int i=0;i<6;i++){
+		if (i==3){
+			LCD_Home(1);
+			LCD_String("    ");
+		}
+		if ((i!=3) & (i!=0)){
+			LCD_String(":");
+		}
+		if (i==ClockState){
+			displayTyping(clockTime[i],temp);
+		}
+		else{
+			displayTyping(clockTime[i],3);
+		}
+	}
 	if (int(key)>47 & int(key)<58 & state ==2){
 		data+=(int(key)-48);
-		itoa(data,dataS,10);
-		LCD_String(dataS);
 		_delay_ms(800);
 		if (temp == 0){
 			data*=10;
 			temp = 1;
+			clockTime[ClockState] = data;
 		}
 		else{
 			clockTime[ClockState] = data;
@@ -186,10 +200,8 @@ void LCD_SetDate(int key, int state){
 	if (ClockState == 6 & state==3){
 		setClockTime(clockTime);
 		ClockState = 0;
-		LCD_Home(0);
-		LCD_String("DATE AND TIME IS SET TO");
-// 		LCD_Home(1);
-// 		LCD_String(clkTimeS);
+		LCD_Home(0);LCD_Clear();
+		LCD_String("      DONE!");
 		_delay_ms(2000);
 		LCD_Clear();
 	}
