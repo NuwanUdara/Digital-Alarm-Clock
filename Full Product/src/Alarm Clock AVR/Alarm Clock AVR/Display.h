@@ -38,4 +38,8 @@ extern void LCD_Menu(char key,int state);
 extern void LCD_SetAlarm(char key,int state);
 extern void LCD_SetDate(int key, int state);
 extern void LCD_Tone(char key,int state);
+extern void resetVariables();
+extern void showAlarms(char key,int state);
+extern void displayTyping(int val,int pos);
+extern void displayValue(int val);
 #endif //__DISPLAY_H__

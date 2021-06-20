@@ -8,6 +8,7 @@ using namespace std;
 #include <avr/io.h>
 #include "ds1307.h"
 #include "Buzzer.h" //This is used to play the tone with the speaker
+#define BUTTON_DELAY 600
 #ifndef F_CPU
 #define F_CPU 1000000UL
 #endif
@@ -122,6 +123,11 @@ int getDay(int y, int m, int d){
 	}
 	return (days+d+5)%7;
 }
+void displayValue(int val){
+	char valS[10];
+	itoa(val,valS,10);
+	LCD_String(valS);
+}
 void displayZero(uint8_t digit){
 	if (digit<10){
 		LCD_String("0");
@@ -129,21 +135,56 @@ void displayZero(uint8_t digit){
 }
 void displayTime(){
 	ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
-	char secondS[10];char minuteS[10];char hourS[10];char yearS[10];char monthS[10];char dayS[10];
-	itoa(second,secondS,10);itoa(minute,minuteS,10);itoa(hour,hourS,10);itoa(year,yearS,10);itoa(month,monthS,10);itoa(day,dayS,10);
+// 	char secondS[10];char minuteS[10];char hourS[10];char yearS[10];char monthS[10];char dayS[10];
+// 	itoa(second,secondS,10);itoa(minute,minuteS,10);itoa(hour,hourS,10);itoa(year,yearS,10);itoa(month,monthS,10);itoa(day,dayS,10);
 	LCD_Home(0);LCD_String("   20");
-	displayZero(year);LCD_String(yearS);LCD_String("-");
-	displayZero(month);LCD_String(monthS);LCD_String("-");
-	displayZero(day);LCD_String(dayS);
+	displayZero(year);displayValue(year);LCD_String("-");
+	displayZero(month);displayValue(month);LCD_String("-");
+	displayZero(day);displayValue(day);
 	LCD_Home(1);LCD_String("    ");
 	displayZero(hour);
-	LCD_String(hourS);
+	displayValue(hour);
 	LCD_String(":");
 	displayZero(minute);
-	LCD_String(minuteS);
+	displayValue(minute);
 	LCD_String(":");
 	displayZero(second);
-	LCD_String(secondS);
+	displayValue(second);
 	//_delay_ms(1);
 
+}
+
+int alarm_var = 0;
+char alarms[10];
+void showAlarms(char key,int state){
+	LCD_Home(0);
+	if ((key=='8') & (state==2)){
+		alarm_var++;
+		//LCD_Clear();
+		_delay_ms(BUTTON_DELAY);
+	}
+	if ((key=='2') & (state ==2)){
+		alarm_var--;
+		//LCD_Clear();
+		_delay_ms(BUTTON_DELAY);
+	}
+	if (alarm_var>=numberOfAlarms){
+		alarm_var=0;
+	}
+	if (alarm_var<0){
+		alarm_var=numberOfAlarms-1;
+	}
+	if (state==2){
+		LCD_Home(0);
+		if (numberOfAlarms==0){
+			LCD_String("NO ALARMS");
+		}
+		else{
+			LCD_String(">>");
+			displayValue(alarmArray[alarm_var]/100);LCD_String(":");displayValue(alarmArray[alarm_var]%100);
+			LCD_Home(1);
+			displayValue(alarmArray[(alarm_var+1)%numberOfAlarms]/100);LCD_String(":");
+			displayValue(alarmArray[(alarm_var+1)%numberOfAlarms]%100);
+		}
+	}
 }

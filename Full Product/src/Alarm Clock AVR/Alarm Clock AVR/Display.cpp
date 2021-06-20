@@ -4,7 +4,7 @@
 #endif
 #include <avr/io.h>			/* Include AVR std. library file */
 #include <util/delay.h>
-
+#define BUTTON_DELAY 600
 #include "Display.h"
 #include "Keypad.h"
 #include "stdlib.h"
@@ -142,10 +142,10 @@ void LCD_SetAlarm(char key,int state){
 		displayTyping(clkTime%100,1-p);
 	}
 	//LCD_String("0000");
-	if (int(key)>47 & int(key)<58 & state ==2 & p!=-1){
+	if ((int(key)>47) & (int(key)<58) & (state ==2) & (p!=-1)){
 		clkTime += (int(key)-48)*powerOf(10,p);
 		p--;
-		_delay_ms(600);
+		_delay_ms(BUTTON_DELAY);
 		if (p==-1){
 			LCD_Home(0);
 			displayTyping(clkTime/100,3);LCD_String(":");displayTyping(clkTime%100,3);
@@ -193,9 +193,9 @@ void LCD_SetDate(int key, int state){
 			displayTyping(clockTime[i],3);
 		}
 	}
-	if (int(key)>47 & int(key)<58 & state ==2){
+	if ((int(key)>47) & (int(key)<58) & (state ==2)){
 		data+=(int(key)-48);
-		_delay_ms(800);
+		_delay_ms(BUTTON_DELAY);
 		if (temp == 0){
 			data*=10;
 			temp = 1;
@@ -208,7 +208,7 @@ void LCD_SetDate(int key, int state){
 			temp = 0;
 		}
 	}
-	if (ClockState == 6 & state==3){
+	if ((ClockState == 6) & (state==3)){
 		setClockTime(clockTime);
 		ClockState = 0;
 		LCD_Home(0);LCD_Clear();
@@ -221,15 +221,15 @@ char tone_List[5][10] = {"DOOM     ","STAR WARS","GOT      ","PANTHER  ","GODFAT
 int tone_Var = 0;
 void LCD_Tone(char key,int state){
 	LCD_Home(0);
-	if (key=='8' & state==2){
+	if ((key=='8') & (state==2)){
 		tone_Var++;
 		//LCD_Clear();
-		_delay_ms(800);
+		_delay_ms(BUTTON_DELAY);
 	}
-	if (key=='2' & state ==2){
+	if ((key=='2') & (state ==2)){
 		tone_Var--;
 		//LCD_Clear();
-		_delay_ms(800);
+		_delay_ms(BUTTON_DELAY);
 	}
 	if (tone_Var>4){
 		tone_Var=0;
@@ -248,19 +248,19 @@ void LCD_Tone(char key,int state){
 	 }
 
 }
-char menu_List[3][10] = {"SET ALARM","SET TIME ","SET TONE "};
+char menu_List[3][10] = {"SET ALARM","SET TIME ","ALARMS   "};
 int menu_Var = 0;
 void LCD_Menu(char key,int state){
 	LCD_Home(0);
-	if (key=='8' & state==1){
+	if ((key=='8') & (state==1)){
 		menu_Var++;
 		//LCD_Clear();
-		_delay_ms(800);
+		_delay_ms(BUTTON_DELAY);
 	}
-	if (key=='2' & state ==1){
+	if ((key=='2') & (state ==1)){
 		menu_Var--;
 		//LCD_Clear();
-		_delay_ms(800);
+		_delay_ms(BUTTON_DELAY);
 	}
 	if (menu_Var>2){
 		menu_Var=0;
@@ -271,6 +271,7 @@ void LCD_Menu(char key,int state){
 	if (state==1){
 		LCD_Home(0);LCD_String(">>");
 		LCD_String(menu_List[menu_Var%3]);
+		resetVariables();
 	// 	LCD_Home(1);
 	// 	LCD_String(menu_List[(menu_Var+1)%3]);
 	}
@@ -281,6 +282,16 @@ void LCD_Menu(char key,int state){
 		LCD_SetDate(key,state);
 	}
 	if ((state >1) & (menu_Var==2)){
-		LCD_Tone(key,state);
+		showAlarms(key,state);
 	}
+}
+void resetVariables(){
+	tone_Var=0;
+	clockTime[0]=0;clockTime[1]=0;clockTime[2]=0;clockTime[3]=0;clockTime[4]=0;clockTime[5]=0;
+	ClockState = 0;
+	temp = 0;
+	data = 0;
+	clkTime = 0;
+	num = 0;
+	p = 3;
 }
