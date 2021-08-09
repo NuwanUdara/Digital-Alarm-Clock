@@ -8,7 +8,7 @@ using namespace std;
 #include <avr/io.h>
 #include "ds1307.h"
 #include "Buzzer.h" //This is used to play the tone with the speaker
-#define BUTTON_DELAY 300
+#define BUTTON_DELAY 500
 #ifndef F_CPU
 #define F_CPU 1000000UL
 #endif

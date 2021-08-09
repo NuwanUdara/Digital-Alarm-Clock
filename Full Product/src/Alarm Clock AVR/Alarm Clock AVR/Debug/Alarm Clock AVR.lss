@@ -1930,9 +1930,9 @@ void showAlarms(char key,int state){
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-    1520:	2f e5       	ldi	r18, 0x5F	; 95
-    1522:	3a ee       	ldi	r19, 0xEA	; 234
-    1524:	90 e0       	ldi	r25, 0x00	; 0
+    1520:	2f e9       	ldi	r18, 0x9F	; 159
+    1522:	36 e8       	ldi	r19, 0x86	; 134
+    1524:	91 e0       	ldi	r25, 0x01	; 1
     1526:	21 50       	subi	r18, 0x01	; 1
     1528:	30 40       	sbci	r19, 0x00	; 0
     152a:	90 40       	sbci	r25, 0x00	; 0
@@ -1957,9 +1957,9 @@ void showAlarms(char key,int state){
     154a:	01 97       	sbiw	r24, 0x01	; 1
     154c:	90 93 6d 02 	sts	0x026D, r25	; 0x80026d <alarm_var+0x1>
     1550:	80 93 6c 02 	sts	0x026C, r24	; 0x80026c <alarm_var>
-    1554:	2f e5       	ldi	r18, 0x5F	; 95
-    1556:	3a ee       	ldi	r19, 0xEA	; 234
-    1558:	80 e0       	ldi	r24, 0x00	; 0
+    1554:	2f e9       	ldi	r18, 0x9F	; 159
+    1556:	36 e8       	ldi	r19, 0x86	; 134
+    1558:	81 e0       	ldi	r24, 0x01	; 1
     155a:	21 50       	subi	r18, 0x01	; 1
     155c:	30 40       	sbci	r19, 0x00	; 0
     155e:	80 40       	sbci	r24, 0x00	; 0
@@ -2053,9 +2053,9 @@ void showAlarms(char key,int state){
     1622:	01 97       	sbiw	r24, 0x01	; 1
     1624:	90 93 9e 02 	sts	0x029E, r25	; 0x80029e <numberOfAlarms+0x1>
     1628:	80 93 9d 02 	sts	0x029D, r24	; 0x80029d <numberOfAlarms>
-    162c:	8f e5       	ldi	r24, 0x5F	; 95
-    162e:	9a ee       	ldi	r25, 0xEA	; 234
-    1630:	20 e0       	ldi	r18, 0x00	; 0
+    162c:	8f e9       	ldi	r24, 0x9F	; 159
+    162e:	96 e8       	ldi	r25, 0x86	; 134
+    1630:	21 e0       	ldi	r18, 0x01	; 1
     1632:	81 50       	subi	r24, 0x01	; 1
     1634:	90 40       	sbci	r25, 0x00	; 0
     1636:	20 40       	sbci	r18, 0x00	; 0
@@ -2508,9 +2508,9 @@ void timer(char key, int state){
     196e:	93 1f       	adc	r25, r19
     1970:	90 93 61 02 	sts	0x0261, r25	; 0x800261 <data1+0x1>
     1974:	80 93 60 02 	sts	0x0260, r24	; 0x800260 <data1>
-    1978:	8f e5       	ldi	r24, 0x5F	; 95
-    197a:	9a ee       	ldi	r25, 0xEA	; 234
-    197c:	20 e0       	ldi	r18, 0x00	; 0
+    1978:	8f e9       	ldi	r24, 0x9F	; 159
+    197a:	96 e8       	ldi	r25, 0x86	; 134
+    197c:	21 e0       	ldi	r18, 0x01	; 1
     197e:	81 50       	subi	r24, 0x01	; 1
     1980:	90 40       	sbci	r25, 0x00	; 0
     1982:	20 40       	sbci	r18, 0x00	; 0
@@ -3848,9 +3848,9 @@ void LCD_SetDate(int key, int state){
     21e4:	19 1f       	adc	r17, r25
     21e6:	10 93 a4 02 	sts	0x02A4, r17	; 0x8002a4 <data+0x1>
     21ea:	00 93 a3 02 	sts	0x02A3, r16	; 0x8002a3 <data>
-    21ee:	2f e5       	ldi	r18, 0x5F	; 95
-    21f0:	8a ee       	ldi	r24, 0xEA	; 234
-    21f2:	90 e0       	ldi	r25, 0x00	; 0
+    21ee:	2f e9       	ldi	r18, 0x9F	; 159
+    21f0:	86 e8       	ldi	r24, 0x86	; 134
+    21f2:	91 e0       	ldi	r25, 0x01	; 1
     21f4:	21 50       	subi	r18, 0x01	; 1
     21f6:	80 40       	sbci	r24, 0x00	; 0
     21f8:	90 40       	sbci	r25, 0x00	; 0
@@ -4010,9 +4010,9 @@ void LCD_Tone(char key,int state){
     2330:	3f 4f       	sbci	r19, 0xFF	; 255
     2332:	30 93 a2 02 	sts	0x02A2, r19	; 0x8002a2 <tone_Var+0x1>
     2336:	20 93 a1 02 	sts	0x02A1, r18	; 0x8002a1 <tone_Var>
-    233a:	2f e5       	ldi	r18, 0x5F	; 95
-    233c:	3a ee       	ldi	r19, 0xEA	; 234
-    233e:	90 e0       	ldi	r25, 0x00	; 0
+    233a:	2f e9       	ldi	r18, 0x9F	; 159
+    233c:	36 e8       	ldi	r19, 0x86	; 134
+    233e:	91 e0       	ldi	r25, 0x01	; 1
     2340:	21 50       	subi	r18, 0x01	; 1
     2342:	30 40       	sbci	r19, 0x00	; 0
     2344:	90 40       	sbci	r25, 0x00	; 0
@@ -4037,9 +4037,9 @@ void LCD_Tone(char key,int state){
     2364:	01 97       	sbiw	r24, 0x01	; 1
     2366:	90 93 a2 02 	sts	0x02A2, r25	; 0x8002a2 <tone_Var+0x1>
     236a:	80 93 a1 02 	sts	0x02A1, r24	; 0x8002a1 <tone_Var>
-    236e:	2f e5       	ldi	r18, 0x5F	; 95
-    2370:	3a ee       	ldi	r19, 0xEA	; 234
-    2372:	80 e0       	ldi	r24, 0x00	; 0
+    236e:	2f e9       	ldi	r18, 0x9F	; 159
+    2370:	36 e8       	ldi	r19, 0x86	; 134
+    2372:	81 e0       	ldi	r24, 0x01	; 1
     2374:	21 50       	subi	r18, 0x01	; 1
     2376:	30 40       	sbci	r19, 0x00	; 0
     2378:	80 40       	sbci	r24, 0x00	; 0
@@ -4238,9 +4238,9 @@ void LCD_SetAlarm(char key,int state){
     2502:	01 97       	sbiw	r24, 0x01	; 1
     2504:	90 93 7b 01 	sts	0x017B, r25	; 0x80017b <p+0x1>
     2508:	80 93 7a 01 	sts	0x017A, r24	; 0x80017a <p>
-    250c:	3f e5       	ldi	r19, 0x5F	; 95
-    250e:	8a ee       	ldi	r24, 0xEA	; 234
-    2510:	90 e0       	ldi	r25, 0x00	; 0
+    250c:	3f e9       	ldi	r19, 0x9F	; 159
+    250e:	86 e8       	ldi	r24, 0x86	; 134
+    2510:	91 e0       	ldi	r25, 0x01	; 1
     2512:	31 50       	subi	r19, 0x01	; 1
     2514:	80 40       	sbci	r24, 0x00	; 0
     2516:	90 40       	sbci	r25, 0x00	; 0
@@ -4485,9 +4485,9 @@ void LCD_Menu(char key,int state){
     2700:	3f 4f       	sbci	r19, 0xFF	; 255
     2702:	30 93 a0 02 	sts	0x02A0, r19	; 0x8002a0 <menu_Var+0x1>
     2706:	20 93 9f 02 	sts	0x029F, r18	; 0x80029f <menu_Var>
-    270a:	2f e5       	ldi	r18, 0x5F	; 95
-    270c:	3a ee       	ldi	r19, 0xEA	; 234
-    270e:	90 e0       	ldi	r25, 0x00	; 0
+    270a:	2f e9       	ldi	r18, 0x9F	; 159
+    270c:	36 e8       	ldi	r19, 0x86	; 134
+    270e:	91 e0       	ldi	r25, 0x01	; 1
     2710:	21 50       	subi	r18, 0x01	; 1
     2712:	30 40       	sbci	r19, 0x00	; 0
     2714:	90 40       	sbci	r25, 0x00	; 0
@@ -4512,9 +4512,9 @@ void LCD_Menu(char key,int state){
     2734:	01 97       	sbiw	r24, 0x01	; 1
     2736:	90 93 a0 02 	sts	0x02A0, r25	; 0x8002a0 <menu_Var+0x1>
     273a:	80 93 9f 02 	sts	0x029F, r24	; 0x80029f <menu_Var>
-    273e:	2f e5       	ldi	r18, 0x5F	; 95
-    2740:	3a ee       	ldi	r19, 0xEA	; 234
-    2742:	80 e0       	ldi	r24, 0x00	; 0
+    273e:	2f e9       	ldi	r18, 0x9F	; 159
+    2740:	36 e8       	ldi	r19, 0x86	; 134
+    2742:	81 e0       	ldi	r24, 0x01	; 1
     2744:	21 50       	subi	r18, 0x01	; 1
     2746:	30 40       	sbci	r19, 0x00	; 0
     2748:	80 40       	sbci	r24, 0x00	; 0
@@ -5280,9 +5280,9 @@ int main()
 		if (key=='*'){
     2b9a:	1a 32       	cpi	r17, 0x2A	; 42
     2b9c:	61 f4       	brne	.+24     	; 0x2bb6 <main+0x58>
-    2b9e:	2f e5       	ldi	r18, 0x5F	; 95
-    2ba0:	8a ee       	ldi	r24, 0xEA	; 234
-    2ba2:	90 e0       	ldi	r25, 0x00	; 0
+    2b9e:	2f e9       	ldi	r18, 0x9F	; 159
+    2ba0:	86 e8       	ldi	r24, 0x86	; 134
+    2ba2:	91 e0       	ldi	r25, 0x01	; 1
     2ba4:	21 50       	subi	r18, 0x01	; 1
     2ba6:	80 40       	sbci	r24, 0x00	; 0
     2ba8:	90 40       	sbci	r25, 0x00	; 0
@@ -5327,9 +5327,9 @@ int main()
 		if (key=='#'){
     2be6:	13 32       	cpi	r17, 0x23	; 35
     2be8:	79 f6       	brne	.-98     	; 0x2b88 <main+0x2a>
-    2bea:	8f e5       	ldi	r24, 0x5F	; 95
-    2bec:	9a ee       	ldi	r25, 0xEA	; 234
-    2bee:	20 e0       	ldi	r18, 0x00	; 0
+    2bea:	8f e9       	ldi	r24, 0x9F	; 159
+    2bec:	96 e8       	ldi	r25, 0x86	; 134
+    2bee:	21 e0       	ldi	r18, 0x01	; 1
     2bf0:	81 50       	subi	r24, 0x01	; 1
     2bf2:	90 40       	sbci	r25, 0x00	; 0
     2bf4:	20 40       	sbci	r18, 0x00	; 0
