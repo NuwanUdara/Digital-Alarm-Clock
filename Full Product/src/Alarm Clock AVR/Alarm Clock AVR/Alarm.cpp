@@ -8,7 +8,7 @@ using namespace std;
 #include <avr/io.h>
 #include "ds1307.h"
 #include "Buzzer.h" //This is used to play the tone with the speaker
-#define BUTTON_DELAY 600
+#define BUTTON_DELAY 300
 #ifndef F_CPU
 #define F_CPU 1000000UL
 #endif
@@ -168,6 +168,18 @@ void showAlarms(char key,int state){
 		//LCD_Clear();
 		_delay_ms(BUTTON_DELAY);
 	}
+	if ((key=='5') & (numberOfAlarms!=0)){
+		LCD_Clear();
+		displayTyping(alarmArray[alarm_var]/100,3);LCD_String(":");displayTyping(alarmArray[alarm_var]%100,3);
+		LCD_String(" DELETED");LCD_Home(1);LCD_String("SUCCESSFULLY");
+		_delay_ms(3000);
+		LCD_Clear();
+		updateAlarmArray(alarm_var);
+		numberOfAlarms--;
+		_delay_ms(BUTTON_DELAY);
+		
+		
+	}
 	if (alarm_var>=numberOfAlarms){
 		alarm_var=0;
 	}
@@ -177,14 +189,18 @@ void showAlarms(char key,int state){
 	if (state==2){
 		LCD_Home(0);
 		if (numberOfAlarms==0){
-			LCD_String("NO ALARMS");
+			LCD_String("   NO ALARMS");
+			LCD_Home(1);
+			LCD_String("    ARE SET");
 		}
 		else{
-			LCD_String(">>");
-			displayValue(alarmArray[alarm_var]/100);LCD_String(":");displayValue(alarmArray[alarm_var]%100);
+			LCD_String("PRESS 5 TO DEL");
 			LCD_Home(1);
-			displayValue(alarmArray[(alarm_var+1)%numberOfAlarms]/100);LCD_String(":");
-			displayValue(alarmArray[(alarm_var+1)%numberOfAlarms]%100);
+			LCD_String(">>");
+			displayTyping(alarmArray[alarm_var]/100,3);LCD_String(":");displayTyping(alarmArray[alarm_var]%100,3);
+			
+// 			displayTyping(alarmArray[(alarm_var+1)%numberOfAlarms]/100,3);LCD_String(":");
+// 			displayTyping(alarmArray[(alarm_var+1)%numberOfAlarms]%100,3);
 		}
 	}
 }

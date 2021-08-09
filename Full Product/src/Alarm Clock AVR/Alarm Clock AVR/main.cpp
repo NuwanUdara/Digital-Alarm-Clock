@@ -6,7 +6,7 @@
 #include "Keypad.h"
 #include "util/delay.h"
 #include "Buzzer.h"
-#define BUTTON_DELAY 600
+#define BUTTON_DELAY 300
 
 #ifndef F_CPU
 #define F_CPU 1000000UL
@@ -19,9 +19,9 @@ int main()
 	_delay_ms(1000);
 	LCD_Clear();
 	ds1307_init();
-	int clocktime[6] = {21,05,4,12,8,35};
-	setClockTime(clocktime);
-	setAlarm(1222);setAlarm(1233);setAlarm(1244);setAlarm(1255);
+	//int clocktime[6] = {21,05,4,12,8,35};
+	//setClockTime(clocktime);
+	//setAlarm(1209);setAlarm(1223);
 	int menu = 0;
 	char key;
 	while(1){

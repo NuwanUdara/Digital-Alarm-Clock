@@ -64,11 +64,17 @@ void getClockTime(){
 		_delay_ms(button_delay);
 	}
 }
+int te[6]={21,11,23,16,33,50};
 int main(void)
 {	
+	setClockTime(te);
+	
+	setAlarm(1634);
+	
 	ds1307_init();
+	
     while (1) 
-    {
+    {	
 		checkAlarm();
 		if (isPress(PIND0)){
 			mode++;

@@ -1,0 +1,32 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [Alarm_Clock.PrjPcb]
+   Generated File[Alarm_Clock.GTO]
+   Generated File[Alarm_Clock.GTS]
+   Generated File[Alarm_Clock.GTL]
+   Generated File[Alarm_Clock.GBL]
+   Generated File[Alarm_Clock.GBS]
+   Generated File[Alarm_Clock.GBO]
+   Generated File[Alarm_Clock.GM1]
+   Generated File[Alarm_Clock.GM2]
+   Generated File[Alarm_Clock.GM3]
+   Generated File[Alarm_Clock.GM5]
+   Generated File[Alarm_Clock.GM13]
+   Generated File[Alarm_Clock.GM15]
+   Generated File[Alarm_Clock.GM16]
+   Generated File[Alarm_Clock.GM20]
+   Generated File[Alarm_Clock.GM21]
+   Generated File[Alarm_Clock.GM23]
+   Generated File[Alarm_Clock.GM24]
+   Generated File[Alarm_Clock.GKO]
+   Generated File[Alarm_Clock.GPT]
+   Generated File[Alarm_Clock.GPB]
+   Generated File[Alarm_Clock.RUL]
+   Generated File[Alarm_Clock.EXTREP]
+   Generated File[Alarm_Clock.REP]
+
+
+Files Generated   : 23
+Documents Printed : 0
+
+Finished Output Generation At 10:55:46 AM On 7/7/2021

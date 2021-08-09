@@ -4,7 +4,7 @@
 #endif
 #include <avr/io.h>			/* Include AVR std. library file */
 #include <util/delay.h>
-#define BUTTON_DELAY 600
+#define BUTTON_DELAY 300
 #include "Display.h"
 #include "Keypad.h"
 #include "stdlib.h"

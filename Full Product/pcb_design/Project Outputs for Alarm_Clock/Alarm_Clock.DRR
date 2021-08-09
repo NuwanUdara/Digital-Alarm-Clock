@@ -1,0 +1,25 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Alarm_Clock.PcbDoc   7/6/2021  8:37:48 PM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Alarm_Clock.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      28mil (0.7mm)                                             Round             4         PTH        0.00inch (0.00mm)
+T2      28mil (0.711mm)                                           Round             7         PTH        0.00inch (0.00mm)
+T3      32mil (0.8mm)                                             Round             4         PTH        0.00inch (0.00mm)
+T4      35mil (0.9mm)                                             Round             34        PTH        0.00inch (0.00mm)
+T5      37mil (0.95mm)                                            Round             2         PTH        0.00inch (0.00mm)
+T6      39mil (0.99mm)                                            Round             4         PTH        0.00inch (0.00mm)
+T7      40mil (1.02mm)          +/-2mil (0.05mm)                  Round             29        PTH        0.00inch (0.00mm)
+T8      41mil (1.05mm)                                            Round             3         PTH        0.00inch (0.00mm)
+T9      43mil (1.1mm)                                             Round             17        PTH        0.00inch (0.00mm)
+T10     47mil (1.19mm)                                            Round             4         PTH        0.00inch (0.00mm)
+T11     157mil (4mm)                                              Round             4         PTH        0.00inch (0.00mm)
+T12     50mil (1.27mm)          +/-2mil (0.05mm)                  Round             8         NPTH       0.00inch (0.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              120
+
+Total Processing Time (hh:mm:ss) : 00:00:00
