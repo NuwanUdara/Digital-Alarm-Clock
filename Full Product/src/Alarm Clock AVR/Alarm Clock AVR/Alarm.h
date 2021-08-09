@@ -41,4 +41,5 @@ extern void displayZero(uint8_t digit);
 extern void setTone(int t);
 extern void timer(char key,int state);
 extern void timerCountDown();
+extern void resetAlarmVariables();
 #endif //__ALARM_H__

@@ -6,7 +6,7 @@
 #include "Keypad.h"
 #include "util/delay.h"
 #include "Buzzer.h"
-#define BUTTON_DELAY 500
+#define BUTTON_DELAY 300
 
 #ifndef F_CPU
 #define F_CPU 1000000UL

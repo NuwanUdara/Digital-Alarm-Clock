@@ -4,7 +4,7 @@
 #endif
 #include <avr/io.h>			/* Include AVR std. library file */
 #include <util/delay.h>
-#define BUTTON_DELAY 500
+#define BUTTON_DELAY 300
 #include "Display.h"
 #include "Keypad.h"
 #include "stdlib.h"
@@ -250,7 +250,7 @@ void LCD_Tone(char key,int state){
 	 }
 
 }
-char menu_List[4][10] = {"SET ALARM","SET TIME ","ALARMS   ","TIMER    "};
+char menu_List[4][11] = {"SET ALARM ","SET TIME  ","SEE ALARMS","TIMER     "};
 int menu_Var = 0;
 void LCD_Menu(char key,int state){
 	LCD_Home(0);
@@ -291,6 +291,7 @@ void LCD_Menu(char key,int state){
 	}
 }
 void resetVariables(){
+	resetAlarmVariables();
 	tone_Var=0;
 	clockTime[0]=0;clockTime[1]=0;clockTime[2]=0;clockTime[3]=0;clockTime[4]=0;clockTime[5]=0;
 	ClockState = 0;
