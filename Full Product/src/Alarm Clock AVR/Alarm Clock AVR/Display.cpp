@@ -4,7 +4,7 @@
 #endif
 #include <avr/io.h>			/* Include AVR std. library file */
 #include <util/delay.h>
-#define BUTTON_DELAY 300
+#define BUTTON_DELAY 500
 #include "Display.h"
 #include "Keypad.h"
 #include "stdlib.h"
@@ -137,6 +137,7 @@ signed int p = 3;
 void LCD_SetAlarm(char key,int state){
 	if (p!=-1){
 		LCD_Home(0);
+		LCD_String("     ");
 		displayTyping(clkTime/100,3-p);
 		LCD_String(":");
 		displayTyping(clkTime%100,1-p);
@@ -148,6 +149,7 @@ void LCD_SetAlarm(char key,int state){
 		_delay_ms(BUTTON_DELAY);
 		if (p==-1){
 			LCD_Home(0);
+			LCD_String("     ");
 			displayTyping(clkTime/100,3);LCD_String(":");displayTyping(clkTime%100,3);
 			_delay_ms(1000);
 			LCD_Home(0);
@@ -248,7 +250,7 @@ void LCD_Tone(char key,int state){
 	 }
 
 }
-char menu_List[3][10] = {"SET ALARM","SET TIME ","ALARMS   "};
+char menu_List[4][10] = {"SET ALARM","SET TIME ","ALARMS   ","TIMER    "};
 int menu_Var = 0;
 void LCD_Menu(char key,int state){
 	LCD_Home(0);
@@ -262,15 +264,15 @@ void LCD_Menu(char key,int state){
 		//LCD_Clear();
 		_delay_ms(BUTTON_DELAY);
 	}
-	if (menu_Var>2){
+	if (menu_Var>3){
 		menu_Var=0;
 	}
 	if (menu_Var<0){
-		menu_Var=2;
+		menu_Var=3;
 	}
 	if (state==1){
 		LCD_Home(0);LCD_String(">>");
-		LCD_String(menu_List[menu_Var%3]);
+		LCD_String(menu_List[menu_Var%4]);
 		resetVariables();
 	// 	LCD_Home(1);
 	// 	LCD_String(menu_List[(menu_Var+1)%3]);
@@ -283,6 +285,9 @@ void LCD_Menu(char key,int state){
 	}
 	if ((state >1) & (menu_Var==2)){
 		showAlarms(key,state);
+	}
+	if ((state >1) & (menu_Var==3)){
+		timer(key,state);
 	}
 }
 void resetVariables(){

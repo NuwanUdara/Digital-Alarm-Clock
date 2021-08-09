@@ -39,4 +39,6 @@ extern int getDay(int y, int m, int d);
 extern void displayTime();
 extern void displayZero(uint8_t digit);
 extern void setTone(int t);
+extern void timer(char key,int state);
+extern void timerCountDown();
 #endif //__ALARM_H__

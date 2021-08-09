@@ -8,7 +8,7 @@ using namespace std;
 #include <avr/io.h>
 #include "ds1307.h"
 #include "Buzzer.h" //This is used to play the tone with the speaker
-#define BUTTON_DELAY 300
+#define BUTTON_DELAY 500
 #ifndef F_CPU
 #define F_CPU 1000000UL
 #endif
@@ -203,4 +203,78 @@ void showAlarms(char key,int state){
 // 			displayTyping(alarmArray[(alarm_var+1)%numberOfAlarms]%100,3);
 		}
 	}
+}
+unsigned int timerTime[3];
+int timerState = 0;
+int temp1 = 0;
+int data1 = 0;
+int start=0;
+void timer(char key, int state){
+	if (timerState==3){
+		LCD_Home(0);
+		LCD_String("PRESS 5 to START");
+		if (key=='5'){
+			start=1;
+		}
+		if (start==1){
+			timerCountDown();
+		}
+		if ((timerTime[2]==0) & (timerTime[1]==0) & (timerTime[0]==0) ){
+			start = 0;
+			LCD_Clear();
+			LCD_String("TIMES UP!!!");
+		}
+	}
+	else{
+		LCD_Home(0);
+		LCD_String("ENTER THE TIME");
+	}
+	LCD_Home(1);
+	for (int i=0;i<3;i++){
+		if ((i!=3) & (i!=0)){
+			LCD_String(":");
+		}
+		if (i==timerState){
+			displayTyping(timerTime[i],temp1);
+		}
+		else{
+			displayTyping(timerTime[i],3);
+		}
+	}
+	if ((int(key)>47) & (int(key)<58) & (state ==2) & (timerState!=3)){
+		data1+=(int(key)-48);
+		_delay_ms(BUTTON_DELAY);
+		if (temp1 == 0){
+			data1*=10;
+			temp1 = 1;
+			timerTime[timerState] = data1;
+		}
+		else{
+			timerTime[timerState] = data1;
+			timerState++;
+			data1=0;
+			temp1 = 0;
+		}
+	}
+	
+}
+
+int tempSec=60;
+void timerCountDown(){
+	ds1307_getdate(&year, &month, &day, &dayofweek, &hour, &minute, &second);
+	
+	if (tempSec!=second){
+		timerTime[2]-=1;
+		tempSec=second;
+	}
+	if (timerTime[2]==-1){
+		if (timerTime[1]==0){
+			if (timerTime[0]!=0){
+				timerTime[1]=59;timerTime[0]-=1;
+			}
+		}
+		else{
+		timerTime[2]=59;timerTime[1]-=1;	
+	}
+}
 }

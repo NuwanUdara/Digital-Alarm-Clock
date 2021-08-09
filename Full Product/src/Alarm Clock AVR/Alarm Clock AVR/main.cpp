@@ -6,7 +6,7 @@
 #include "Keypad.h"
 #include "util/delay.h"
 #include "Buzzer.h"
-#define BUTTON_DELAY 300
+#define BUTTON_DELAY 500
 
 #ifndef F_CPU
 #define F_CPU 1000000UL
@@ -16,8 +16,7 @@ int main()
 	init_buzzer();		// Initialize pins used for buzzer and Interrupt button
 	LCD_Init();			/* Initialization of LCD*/
 	LCD_String("   WELCOME!!!");
-	_delay_ms(1000);
-	LCD_Clear();
+	_delay_ms(3000);
 	ds1307_init();
 	//int clocktime[6] = {21,05,4,12,8,35};
 	//setClockTime(clocktime);
