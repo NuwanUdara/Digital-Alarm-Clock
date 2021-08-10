@@ -39,6 +39,7 @@ int main()
 		}
 		if (menu==3 | menu==-1){
 			menu = 0;
+			LCD_Clear();
 		}
 		if (key=='#'){
 			_delay_ms(BUTTON_DELAY);

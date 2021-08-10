@@ -61,6 +61,7 @@
  }
  
  void play(int number){
+	 sp=1;
 	 int tempo=tempochoose(number); // choose the right tempo from the list using the function
 	 int notes = sizeof(melody0[number])/sizeof(melody0[number][0])/2;
 	 int wholenote = (60000 * 2.5) / tempo;
