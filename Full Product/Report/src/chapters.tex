@@ -1,12 +1,12 @@
 \chapter{Introduction}
 
 To utilize what we learned in semester 2 and also with the self-accumulated knowledge throughout the semester, we designed this Digital Alarm clock as a fulfilment for the final assignment of the EN1093 module. It is a fully functional and programmable digital alarm clock with Buzzer as sound output.
-We are using a DS1307 RTC module with a battery backup power input to store and manage time. We are using I2C protocol to manage the RTC module. Apart from that Atmega 328P will handle all other storage, processing and input/output tasks. 16x2 LCD display is used to display time, dates, alarms and other UI components such as menus and tones. A 4x4 keypad is used for the user inputs and UI controls. A separate button is added for the alarm interruptions. There is a Factory reset button located inside the enclosure which requires a pin to click it. RTC module, LCD display, Piezo Buzzer, keypad, reset and Stop buttons are directly connected to the Atmega 328P Micro Controller. For reprogramming the microcontroller, there is a serial input reserved in the PCB.
+We are using a DS1307 RTC module with a battery backup power input to store and manage time. We are using $I2C$ protocol to manage the RTC module. Apart from that Atmega 328P will handle all other storage, processing and input/output tasks. $16\times2$ LCD display is used to display time, dates, alarms and other UI components such as menus and tones. A $4\times3$ keypad is used for the user inputs and UI controls. A separate button is added for the alarm interruptions. There is a Factory reset button located inside the enclosure which requires a pin to click it. RTC module, LCD display, Piezo Buzzer, keypad, reset and Stop buttons are directly connected to the Atmega 328P Micro Controller. For reprogramming the microcontroller, there is a serial input reserved in the PCB.
 
 
 \section{Problem Statement}
 
-A Digital Alarm clock, with all the conventional features and minimalist design to reduce the cost but keeping a good user experience.
+Designing a Digital Alarm clock, with all the conventional features and minimalist design to reduce the cost but keeping a good user experience.
 
 
 
@@ -129,7 +129,7 @@ We are utilizing maximum contrast by grounding the $V_{0}$,$V_{EE}$ pin and 4bit
 \newpage
 \subsection{Keypad input}
 
-We are utilizing a 4x3 matrix keypad for our input purposes. Using number keys as basic number inputs as well as for menu navigation
+We are utilizing a $4\times3$ matrix keypad for our input purposes. Using number keys as basic number inputs as well as for menu navigation
 
 \normalsize
 \begin{itemize}
