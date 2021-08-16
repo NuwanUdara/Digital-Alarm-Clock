@@ -15,7 +15,7 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \usepackage{media9} 
-\usepackage{pdfcomment}
+
 
 
 \lstdefinestyle{mystyle}{
@@ -53,28 +53,7 @@
 \definecolor{clr-constant}{RGB}{111,0,138} % macro color
 \definecolor{clr-comment}{RGB}{0,128,0}
 
-\lstdefinestyle{VS2017}{
-	backgroundcolor=\color{clr-background},
-	basicstyle=\color{clr-text}, % any text
-	stringstyle=\color{clr-string},
-	identifierstyle=\color{clr-variable}, % just about anything that isn't a directive, comment, string or known type
-	commentstyle=\color{clr-comment},
-	directivestyle=\color{clr-preprocessor}, % preprocessor commands
-	% listings doesn't differentiate between types and keywords (e.g. int vs return)
-	% use the user types color
-	keywordstyle=\color{clr-type},
-	keywordstyle={[2]\color{clr-constant}}, % you'll need to define these or use a custom language
-	breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
+
 
 \lstset{style=mystyle}
 
@@ -89,6 +68,7 @@
 \renewcommand{\lstlistingname}{Algorithm}% Listing -> Algorithm
 \renewcommand{\lstlistlistingname}{List of \lstlistingname s}
 
+\definecolor{deepskyblue}{rgb}{0.0, 0.75, 1.0}
 
 \usepackage{hyperref}
 \usepackage{cleveref}
