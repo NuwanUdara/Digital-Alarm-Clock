@@ -4,7 +4,7 @@ To utilize what we learned in semester 2 and also with the self-accumulated know
 We are using a DS1307 RTC module with a battery backup power input to store and manage time. We are using $I2C$ protocol to manage the RTC module. Apart from that Atmega 328P will handle all other storage, processing and input/output tasks. $16\times2$ LCD display is used to display time, dates, alarms and other UI components such as menus and tones. A $4\times3$ keypad is used for the user inputs and UI controls. A separate button is added for the alarm interruptions. There is a Factory reset button located inside the enclosure which requires a pin to click it. RTC module, LCD display, Piezo Buzzer, keypad, reset and Stop buttons are directly connected to the Atmega 328P Micro Controller. For reprogramming the microcontroller, there is a serial input reserved in the PCB.
 
 
-\section{Problem Statement}
+\section{Goal}
 
 Designing a Digital Alarm clock, with all the conventional features and minimalist design to reduce the cost but keeping a good user experience.
 
@@ -25,7 +25,7 @@ Using teamwork and step by step process, we were able to finish this project. Th
 
 After printing the PCB, the final stage of testings were started. All the components and PCB details is available in the Appendix
 
-\section{COMPONENTS AND THEIR ALGORITHMS}
+\section{Components and their Algorithms}
 
 Here we will look at the main components and how the algorithms and codes work.
 
@@ -251,12 +251,23 @@ Since Alarms usually get abused when stopping alarm, we added a separate, durabl
 Using the inbuilt reset pin, which is also shared with the programmer, the factory resetting
 Will be done. The push button will reset everything except the RTC module because it has a separate memory inside. In the enclosure a pin cutout is provided for the user to push the hidden button with a pin. This will stop accidental button presses.
 
+\subsection{Microcontroller}
+
+ATmega328P is a simple, low-cost,low-powered 28 pin all-rounder. 16$Mhz$ crystal oscillator is connected to provide the clock signals. We are utilising all 28 pins in our product and, for power input a power regulator is available in the PCB.
+A L7805CV power regulator ic accompanied by 0.33$\mu$C and 0.1$\mu$C capacitors provide stable 5V input.
+
+\begin{minipage}{0.97\textwidth}
+ \noindent\makebox[\textwidth]{
+\includegraphics[width=0.4\textwidth]{poweric.png}
+\includegraphics[width=0.6\textwidth]{Atmega.png}}\hfill
+\end{minipage}
+
 \subsection{Programmer}
 
 Since our goal was to create a re-programmable digital alarm clock, there is an inbuilt programmer pin reserved header. Using either a USB to serial/TTL programmer or an Arduino device, user can flash firmware. The source code is available in \href{https://github.com/dakshinatharindu/Digital-Alarm-Clock}{this} GitHub Repository.
 
 \chapter{Results}
-Our PCB design was working as intended but one pin in LCD header was not grounded. The Buzzer had a good volume. The LCD had a contrast issue but was able to fix it by placing a resistor in the pin 3. The current usage was good. The keypad had good responses, the debouncing effect was in an acceptable range. After continuous run over a week, the Time in the RTC module was not affected.
+Our double layer PCB design was working as intended but one pin in LCD header was not grounded. The Buzzer had a good volume. The LCD had a contrast issue but was able to fix it by placing a resistor in the pin 3. The current usage was good. The keypad had good responses, the debouncing effect was in an acceptable range. After continuous run over a week, the Time in the RTC module was not affected.
 
 \begin{minipage}{0.97\textwidth}
  \noindent\makebox[\textwidth]{
@@ -265,20 +276,50 @@ Our PCB design was working as intended but one pin in LCD header was not grounde
 \noindent\makebox[\textwidth]{
 \includegraphics[width=0.5\textwidth]{PCB fabricated/PCB no-solder bottom.jpg}
 \includegraphics[width=0.5\textwidth]{PCB fabricated/PCB solder bottom.jpg}}\hfill
-
 \end{minipage}
 
-As for our enclosure design, we were not able to 3D print it due to quarantine and other issues.\\
+\vspace{3pt}
+\begin{center}
+
+\textbf{Dimensions}\\[3pt]
+\begin{tabular}{|c|c|}
+\hline
+Length & 104 mm \\ \hline
+Width  & 60 mm  \\ \hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+ As for our enclosure design, we were not able to 3D print it due to quarantine and other issues. After a 3D print, the keypad will be relabeled using durable sticker.
+ 
+ 
 \begin{minipage}{0.97\textwidth}
  \noindent\makebox[\textwidth]{
 \includegraphics[width=0.5\textwidth]{Enclosure/Solid.jpg}
 \includegraphics[width=0.5\textwidth]{Enclosure/solid2.jpg}}\hfill
 \end{minipage}
+
+\vspace{3pt}
+\begin{center}
+
+\textbf{Dimensions}\\[3pt]
+\begin{tabular}{|c|c|}
+\hline
+Length & 160 mm \\ \hline
+Width  & 120.39 mm  \\ \hline
+Height(without button) & 60 mm\\ \hline
+Height(with button) & 90.06 mm\\ \hline
+\end{tabular}
+\end{center}
+
 \newpage
+
+
+
 \chapter{Discussion}
 As beginners for the embedded designing, we had to learn all the software such as,
 \begin{itemize}
-
 \item Proteus
 \item Altium designer
 \item Solidworks 
